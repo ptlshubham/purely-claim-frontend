@@ -32,6 +32,15 @@ export class DataService {
       })
     );
   }
+
+  public getTimezoneList(): Observable<apiResultFormat> {
+    return this.http.get<apiResultFormat>('assets/json/timezone-list.json').pipe(
+      map((res: apiResultFormat) => {
+        return res;
+      })
+    );
+  }
+
   public getAppointmentList(): Observable<apiResultFormat> {
     return this.http.get<apiResultFormat>('assets/json/appointment-list.json').pipe(
       map((res: apiResultFormat) => {
@@ -454,7 +463,7 @@ export class DataService {
         //   base: 'chat',
         //   img: 'assets/img/icons/menu-icon-10.svg',
         //   subMenus: [],
-        // },
+        //  },
         // {
         //   menuValue: 'Call',
         //   hasSubRoute: true,
@@ -532,16 +541,26 @@ export class DataService {
         //     },
         //   ],
         // },
-    //     {
-    //       menuValue: 'Assets',
-    //       route: routes.assetsList,
-    //       hasSubRoute: false,
-    //       showSubRoute: false,
-    //       icon: 'fa-cube',
-    //       faIcon: true,
-    //       base: 'assets',
-    //       subMenus: [],
-    //     },
+        // {
+        //   menuValue: 'Assets',
+        //   route: routes.assetsList,
+        //   hasSubRoute: false,
+        //   showSubRoute: false,
+        //   icon: 'fa-cube',
+        //   faIcon: true,
+        //   base: 'assets',
+        //   subMenus: [],
+        // },
+        {
+          menuValue: 'Facility',
+          route: routes.addFacilities,
+          hasSubRoute: false,
+          showSubRoute: false,
+          icon: 'fa-cube',
+          faIcon: true,
+          base: 'company',
+          subMenus: [],
+        },
     //     {
     //       menuValue: 'activities',
     //       route: routes.activities,

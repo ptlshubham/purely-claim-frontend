@@ -1,0 +1,238 @@
+<div class="page-wrapper">
+    <div class="content">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a [routerLink]="routes.addFacilities"> </a></li>
+                        <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
+                        <li class="breadcrumb-item active">Add Facilities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /Page Header -->
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <form [formGroup]="FacilityForm">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-heading">
+                                        <h4>Add Facilities</h4>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-forms">
+                                        <label for="Name">Facility Name <span class="login-danger">*</span></label>
+                                        <input class="form-control" type="text" placeholder="Facility Name" formControlName="name" >
+                                        <!-- <div *ngIf="f.name.touched && f.name.errors" class="invalid-feedback">
+                                            <span *ngIf="f.name.errors['required']">This Field is required.</span>
+                                        </div> -->
+                                        <div class="text-danger"
+                                            *ngIf="FacilityForm.controls['Timezone'].touched">
+                                            <span
+                                                *ngIf="FacilityForm.controls['Timezone'].errors?.['required']">Enter
+                                                name</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-forms">
+                                        <label for="Timezone">Timezone <span class="login-danger">*</span></label>
+                                        <mat-select class="form-control select" placeholder="Select Timezone"
+                                            formControlName="Timezone">
+                                            <mat-option *ngFor="let t of selectedList5" [value]="t.value">
+                                                {{t.value}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <div class="text-danger"
+                                            *ngIf="FacilityForm.controls['Timezone'].touched">
+                                            <span
+                                                *ngIf="FacilityForm.controls['Timezone'].errors?.['required']">Enter
+                                                name</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-forms">
+                                        <label for="NPI">National Provider Information(NPI) </label>
+                                        <input class="form-control" type="number" placeholder="NPI"
+                                            formControlName="NPI">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-forms">
+                                        <label for="POS">Place Of Service(POS) </label>
+                                        <input class="form-control" type="text" placeholder="POS" formControlName="POS">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-forms">
+                                        <label for="Speciality">Speciality </label>
+
+                                        <mat-select class="form-control select" placeholder="Select Speciality"
+                                            formControlName="Speciality">
+                                            <mat-option *ngFor="let data of selectedList1" [value]="data.value">
+                                                {{data.value}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-forms">
+                                        <label for="TaxId">Tax ID </label>
+                                        <input class="form-control" type="text" placeholder="Tax ID"
+                                            formControlName="Taxid">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-6">  
+                                    <div class="form-group local-forms">
+                                        <label for="CLIA">CLIA <span class="login-danger">*</span></label>
+                                        <input class="form-control" type="text" placeholder="CLIA" >
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-top-form">
+                                        <label for="CLIA" class="local-top">CLIA </label>
+                                        <div class="settings-btn upload-files-avator">
+                                            <input type="file" accept="image/*" name="image" id="file"
+                                                onchange="loadFile(event)" class="hide-input" formControlName="CLIA">
+                                            <label for="file" class="upload">Choose File</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-forms">
+                                        <label for="Email">Email </label>
+                                        <input class="form-control" type="email" placeholder="Email"
+                                            formControlName="Email">
+                                        <div class="text-danger" *ngIf="FacilityForm.controls['Email'].touched">
+                                            <span
+                                                *ngIf="FacilityForm.controls['Email'].errors?.['required']">Enter
+                                                name</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-forms">
+                                        <label for="Contact">Contact </label>
+                                        <input class="form-control" type="number" placeholder="Contact no"
+                                            formControlName="Contact">
+                                        <div class="text-danger"
+                                            *ngIf="FacilityForm.controls['Contact'].touched">
+                                            <span
+                                                *ngIf="FacilityForm.controls['Contact'].errors?.['required']">Enter
+                                                name</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div class="col-12 col-md-6 col-xl-6"> 
+                                    <div class="form-group local-forms">
+                                        <label for="avator" class="local-top">Avatar <span class="login-danger">*</span></label>
+                                        <div class="settings-btn upload-files-avator">
+                                            <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" class="hide-input"> -->
+                                            <label for="file" class="upload">Choose File</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-top-form">
+                                        <label for="avator" class="local-top">Avatar </label>
+                                        <div class="settings-btn upload-files-avator">
+                                            <input type="file" accept="image/*" name="image" id="file"
+                                                onchange="loadFile(event)" class="hide-input" formControlName="Avatar">
+                                            <label for="file" class="upload">Choose File</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-12">
+                                    <div class="form-group local-forms">
+                                        <label for="address">Address <span class="login-danger">*</span></label>
+                                        <textarea class="form-control" rows="3" cols="30"
+                                            formControlName="Address"></textarea>
+                                        <div class="text-danger"
+                                            *ngIf="FacilityForm.controls['Address'].touched">
+                                            <span
+                                                *ngIf="FacilityForm.controls['Address'].errors?.['required']">Enter
+                                                name</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-12 col-md-6 col-xl-3">
+                                    <div class="form-group local-forms">
+                                        <label for="country">Country <span class="login-danger">*</span></label>
+                                        <mat-select class="form-control select" placeholder="Select Country"
+                                            formControlName="Country">
+                                            <mat-option *ngFor="let data of selectedList3" [value]="data.value">
+                                                {{data.value}}
+                                            </mat-option>
+                                            <div class="text-danger"
+                                                *ngIf="FacilityForm.controls['Country'].touched">
+                                                <span
+                                                    *ngIf="FacilityForm.controls['Country'].errors?.['required']">Enter
+                                                    name</span>
+                                            </div>
+                                        </mat-select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-3">
+                                    <div class="form-group local-forms">
+                                        <label for="state">State/Province <span class="login-danger">*</span></label>
+                                        <mat-select class="form-control select" placeholder="Select State"
+                                            formControlName="State">
+                                            <mat-option *ngFor="let data of selectedList4" [value]="data.value">
+                                                {{data.value}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-3">
+                                    <div class="form-group local-forms">
+                                        <label for="city">City <span class="login-danger">*</span></label>
+                                        <mat-select class="form-control select" placeholder="Select City"
+                                            formControlName="City">
+                                            <mat-option *ngFor="let data of selectedList2" [value]="data.value">
+                                                {{data.value}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-3">
+                                    <div class="form-group local-forms">
+                                        <label for="postalcode">Postal Code <span class="login-danger">*</span></label>
+                                        <input class="form-control" type="text" placeholder="Postal Code"
+                                            formControlName="Postal">
+                                    </div>
+                                </div>
+
+
+                                <!-- <div class="col-12 col-md-6 col-xl-6">  
+                                    <div class="form-group local-forms">
+                                        <label for="password">Password<span class="login-danger">*</span></label>
+                                        <input class="form-control" type="password" >
+                                    </div>
+                                </div> -->
+
+                                <div class="col-12">
+                                    <div class="doctor-submit text-end">
+                                        <button type="submit" class="btn btn-primary submit-form me-2">Submit</button>
+                                        <button type="submit" class="btn btn-primary cancel-form">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

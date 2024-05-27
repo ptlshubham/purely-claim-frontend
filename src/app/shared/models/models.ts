@@ -201,6 +201,11 @@ export interface staffList {
   joiningDate: number;
   img: string;
 }
+export interface TimezoneList{
+  id: string;
+  name : string;
+}
+
 export interface patientsList {
   name: string;
   department: string;
@@ -321,5 +326,3 @@ export interface SideBarData {
   separateRoute: boolean;
   menu: MenuItem[];
 } 
-  
-
