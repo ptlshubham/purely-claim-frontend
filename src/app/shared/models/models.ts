@@ -201,6 +201,16 @@ export interface staffList {
   joiningDate: number;
   img: string;
 }
+export interface employeeList {
+  name: string;
+  department: string;
+  specialization: string;
+  degree: string;
+  mobile: string;
+  email: string;
+  joiningDate: number;
+  img: string;
+}
 export interface patientsList {
   name: string;
   department: string;

@@ -25,8 +25,13 @@ export class DataService {
       })
     );
   }
-  public getStaffList(): Observable<apiResultFormat> {
-    return this.http.get<apiResultFormat>('assets/json/staff-list.json').pipe(
+  // public getStaffList(): Observable<apiResultFormat> {
+  //   return this.http.get<apiResultFormat>('assets/json/staff-list.json').pipe(
+  //     map((res: apiResultFormat) => {
+  //       return res;
+
+  public getEmployeeList(): Observable<apiResultFormat> {
+    return this.http.get<apiResultFormat>('assets/json/employee-list.json').pipe(
       map((res: apiResultFormat) => {
         return res;
       })
@@ -130,12 +135,34 @@ export class DataService {
       })
     );
   }
+  // public getEmployeeList(): Observable<apiResultFormat> {
+  //   return this.http.get<apiResultFormat>('assets/json/Employee-list.json').pipe(
+  //     map((res: apiResultFormat) => {
+  //       return res;
+  //     })
+  //   );
+  // }
   public getPatientDashboard(): Observable<apiResultFormat> {
     return this.http.get<apiResultFormat>('assets/json/patient-dashboard.json').pipe(
       map((res: apiResultFormat) => {
         return res;
       })
     );
+    
+  // }
+  //   public getemployee-list(): Observable<apiResultFormat> {
+  //     return this.http.get<apiResultFormat>('assets/json/employee-list.json').pipe(
+  //       map((res: apiResultFormat) => {
+  //         return res;
+  //       })
+  //     );
+
+
+
+
+
+
+
   }
   public getInvoicesPaid(): Observable<apiResultFormat> {
     return this.http.get<apiResultFormat>('assets/json/invoices-paid.json').pipe(
@@ -224,6 +251,40 @@ export class DataService {
             },
           ],
         },
+
+
+        {
+          menuValue: 'Employee',
+          hasSubRoute: true,
+          showSubRoute: false,
+          base: 'employee',
+          route:'employee',
+          img: 'assets/img/icons/menu-icon-01.svg',
+          subMenus: [
+            {
+              menuValue: 'employee-list',
+              route: routes.employeelist,
+              base: routes.employeelist,
+            },
+            
+          ],
+        },
+        // {
+        //     menuValue: 'employee-list',
+        //     hasSubRoute: true,
+        //     showSubRoute: false,
+        //     base: 'employee-list',
+        //     route:'employee-list',
+        //     img: 'assets/img/icons/menu-icon-01.svg',
+        // },
+
+
+
+
+
+
+
+
         // {
         //   menuValue: 'Doctors',
         //   hasSubRoute: true,
