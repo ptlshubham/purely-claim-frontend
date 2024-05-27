@@ -8,6 +8,8 @@ import { SidebarComponent } from '../common-component/sidebar/sidebar.component'
 import { SharedModule } from '../shared/shared.module';
 // import { CompanyComponent } from './company/company.component';
 // import { AssetsComponent } from './assets/assets.component';
+import { EmployeeComponent } from './employee/employee.component';
+//import { EmployeeListComponent } from './employee-list/employee-list.component';
 //import { ModalComponent } from './modal/modal.component';
 
 
@@ -18,6 +20,7 @@ import { SharedModule } from '../shared/shared.module';
     SidebarComponent,
     // CompanyComponent,
     // AssetsComponent,
+    EmployeeComponent,
     
   ],
   imports: [

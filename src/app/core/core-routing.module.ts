@@ -14,6 +14,14 @@ const routes: Routes = [
         loadChildren: () =>
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
+
+      {
+        path: 'employee',
+        loadChildren: () =>
+          import('./employee/employee.module').then((m) => m.EmployeeModule),
+      },
+
+
       // {
       //   path: 'doctor',
       //   loadChildren: () =>
@@ -25,9 +33,9 @@ const routes: Routes = [
       //     import('./patient/patient.module').then((m) => m.PatientModule),
       // },
       // {
-      //   path: 'staff',
+      //   path: 'employeelist',
       //   loadChildren: () =>
-      //     import('./staff/staff.module').then((m) => m.StaffModule),
+      //     import('./employee-list/employee-list.module').then((m) => m.EmployeeListModule),
       // },
       // {
       //   path: 'appointments',

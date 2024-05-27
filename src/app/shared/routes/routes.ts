@@ -1,6 +1,7 @@
 export class routes {
 
   private static Url = '';
+static add: any;
 
   public static get baseUrl(): string {
     return this.Url;
@@ -361,4 +362,8 @@ export class routes {
   public static get error500(): string {
     return this.baseUrl + '/error/error500';
   }
+  public static get employeelist(): string {
+    return this.baseUrl + '/employee/employee-list';
+  }
+
 }
