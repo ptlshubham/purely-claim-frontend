@@ -16,6 +16,7 @@ import { FormGroup,FormControl, Validators, ReactiveFormsModule,FormBuilder } fr
     CommonModule,
     EmployeeRoutingModule,
     ReactiveFormsModule
+    
   ]
 })
 export class EmployeeModule { 

@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationComponent } from './authentication.component';
-
+import { OrganizationloginComponent } from './organizationlogin/organizationlogin.component';
+//import { OrganizationLoginComponent } from './organizationlogin/organizationlogin.component';
+import { OrganizationregisterComponent} from './organizationregister/organizationregister.component';
 const routes: Routes = [
   { path: '', component: AuthenticationComponent,
   children: [
@@ -9,7 +11,7 @@ const routes: Routes = [
       path: '',
       redirectTo:'login',
       pathMatch:'full'
-    },
+    },    
     {
       path: 'login',
       loadChildren: () =>
@@ -21,11 +23,6 @@ const routes: Routes = [
         import('./forgot-password/forgot-password.module').then(
           (m) => m.ForgotPasswordModule
         ),
-    },
-    {
-      path: 'register',
-      loadChildren: () =>
-        import('./register/register.module').then((m) => m.RegisterModule),
     },
     {
       path: 'change-password2',
@@ -43,6 +40,18 @@ const routes: Routes = [
     },
   ],
 },
+
+
+{
+  path: 'register',
+  component: OrganizationregisterComponent
+},
+
+{
+  path: 'organization-login',
+  component: OrganizationloginComponent
+},
+
 ];
 
 @NgModule({
