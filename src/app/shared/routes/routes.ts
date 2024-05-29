@@ -85,6 +85,12 @@ static add: any;
   public static get addFacilities(): string {
     return this.baseUrl + '/company/add-facilities';
   }
+  public static get facilityType(): string {
+    return this.baseUrl + '/company/facility-type';
+  }
+  public static get speciality(): string {
+    return this.baseUrl + '/company/speciality';
+  }
 
   public static get editAsset(): string {
     return this.baseUrl + '/assets/edit-asset';

@@ -614,14 +614,45 @@ export class DataService {
         // },
         {
           menuValue: 'Facility',
-          route: routes.addFacilities,
-          hasSubRoute: false,
+          hasSubRoute: true,
           showSubRoute: false,
           icon: 'fa-cube',
+          base: 'facility',
           faIcon: true,
-          base: 'company',
-          subMenus: [],
-        },
+          subMenus: [
+            {
+              menuValue: 'add-facilities',
+              route: routes.addFacilities,
+              base: routes.addFacilities,
+            },
+            {
+              menuValue: 'facility-type',
+              route: routes.facilityType,
+              base: routes.facilityType,
+            },
+            {
+              menuValue: 'specilaity',
+              route: routes.speciality,
+              base: routes.speciality,
+            }
+          ],
+        }
+        // {
+        //   menuValue: 'Employee',
+        //   hasSubRoute: true,
+        //   showSubRoute: false,
+        //   base: 'employee',
+        //   route:'employee',
+        //   img: 'assets/img/icons/menu-icon-01.svg',
+        //   subMenus: [
+        //     {
+        //       menuValue: 'employee-list',
+        //       route: routes.employeelist,
+        //       base: routes.employeelist,
+        //     },
+            
+        //   ],
+        // },
     //     {
     //       menuValue: 'activities',
     //       route: routes.activities,

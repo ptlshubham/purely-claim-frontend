@@ -336,3 +336,17 @@ export interface SideBarData {
   separateRoute: boolean;
   menu: MenuItem[];
 } 
+
+export interface FacilityType {
+  id: number;
+  name: string;
+}
+
+export interface Speciality {
+  id: number;
+  active: boolean;
+  name: string;
+  taxonomyCode: string;
+  detail: string;
+  notes: string;
+}

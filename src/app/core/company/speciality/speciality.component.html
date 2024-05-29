@@ -1,0 +1,175 @@
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a [routerLink]="routes.speciality">Facility </a></li>
+                        <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
+                        <li class="breadcrumb-item active">Specialty</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Page Header -->
+                    <div class="page-table-header mb-2">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <div class="doctor-table-blk">
+                                    <h3>Specialty</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Page Body -->
+                    <div>
+                        <form [formGroup]="specialityForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-6 col-md-6 col-xl-6">
+                                    <div class="form-group local-forms">
+                                        <label for="Name">Specialty Name:</label>
+                                        <input class="form-control" type="text" placeholder="speciality name"
+                                            formControlName="name"
+                                            [ngClass]="{ 'is-invalid': fa['name'].touched && fa['name'].errors}">
+                                        <div class="invalid-feedback"
+                                            *ngIf="fa['name'].touched || fa['name'].invalid || fa['name'].pristine">
+                                            <div *ngIf="fa['name'].errors?.['required']">Name is required</div>
+                                            <div *ngIf="fa['name'].errors?.['pattern']">Max length exceeded, only 20
+                                                characters, no special character or numbers</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-forms">
+                                        <label for="taxonomyCode">Taxonomy Code</label>
+                                        <mat-select class="form-control select" placeholder="select taxonomy code"
+                                            formControlName="taxonomyCode"
+                                            [ngClass]="{'is-invalid': fa['taxonomyCode'].touched && fa['taxonomyCode'].errors}">
+                                            <mat-option *ngFor="let t of selectedList" [value]="t.value">
+                                                {{t.value}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <div class="text-danger" *ngIf="fa['taxonomyCode'].touched">
+                                            <span *ngIf="fa['taxonomyCode'].errors?.['required']">Please select taxonomy
+                                                code</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-forms">
+                                        <label for="detail">Details</label>
+                                        <input class="form-control" type="text" placeholder="enter details"
+                                            formControlName="detail"
+                                            [ngClass]="{ 'is-invalid': fa['detail'].touched && fa['detail'].errors}">
+                                        <div class="invalid-feedback" *ngIf="fa['detail'].touched">
+                                            <div *ngIf="fa['detail'].errors?.['required']">Detail is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-forms">
+                                        <label for="detail">Notes </label>
+                                        <input class="form-control" type="text" formControlName="notes"
+                                            placeholder="enter notes">
+                                    </div>
+                                </div>
+
+                                <div class="col-6 doctor-submit text-start">
+                                    <button type="submit" class="btn btn-primary submit-form me-2"
+                                        (submit)="addInList($event)">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-table show-entire">
+                <div class="card-body">
+                    <!-- Table Header -->
+                    <div class="page-table-header mb-2">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <div class="doctor-table-blk">
+                                    <h3>Speciality List</h3>
+                                </div>
+                            </div>
+                            <div class="col-auto text-end float-end ms-auto download-grp">
+                                <div class="doctor-search-blk">
+                                    <div class="top-nav-search table-search-blk">
+                                        <input class="form-control" placeholder="Search here"
+                                            [(ngModel)]="searchDataValue" (ngModelChange)="searchData(searchDataValue)">
+                                        <a class="btn"><img src="assets/img/icons/search-normal.svg" alt=""></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Table Header -->
+
+                    <div class="table-responsive">
+                        <table matSort (matSortChange)="sortData($event)"
+                            class="table border-0 custom-table comman-table datatable mb-0">
+                            <thead>
+                                <tr>
+                                    <th mat-sort-header="active">Active</th>
+                                    <th mat-sort-header="name">Name</th>
+                                    <th mat-sort-header="taxonomyCode">Taxonomy Code</th>
+                                    <th mat-sort-header="detail">Detail</th>
+                                    <th mat-sort-header="notes">Notes</th>
+                                    <th mat-sort-header="specialization">
+                                        <a><i class="fa-solid fa-pen-to-square"></i></a>
+                                    </th>
+                                    <th mat-sort-header="specialization">
+                                        <a><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of selectedList1">
+                                    <td>
+                                        <div class="form-check check-tables">
+                                            <input class="form-check-input" type="checkbox" checked>
+                                        </div>
+                                    </td>
+                                    <td>{{data.name}}</td>
+                                    <td>{{data.taxonomyCode}}</td>
+                                    <td>{{data.detail}}</td>
+                                    <td>{{data.notes}}</td>
+                                    <td>
+                                        <div>
+                                    <td>
+                                        <a (click)="onEdit()" class="facTypeIcon"><i
+                                                class="fa-solid fa-pen-to-square"></i></a>
+                                    </td>
+                    </div>
+                    </td>
+                    <td>
+                        <div>
+                    <td>
+                        <a (click)="onDelete()" class="facTypeIcon"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </td>
+                </div>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
