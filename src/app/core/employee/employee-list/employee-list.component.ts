@@ -14,25 +14,26 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DataService } from 'src/app/shared/data/data.service';
-import { apiResultFormat, pageSelection, employeeList } from 'src/app/shared/models/models';
+import {
+  apiResultFormat,
+  pageSelection,
+  employeeList,
+} from 'src/app/shared/models/models';
 import { routes } from 'src/app/shared/routes/routes';
-import { FormControl, Validators} from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
-  styleUrls: ['./employee-list.component.scss']
+  styleUrls: ['./employee-list.component.scss'],
 })
-
 export class EmployeeListComponent implements OnInit {
   public routes = routes;
   public employeeList: Array<employeeList> = [];
   dataSource!: MatTableDataSource<employeeList>;
 
-
-  
-  // emailForm= new FormGroup({
-  //   user:new FormControl('',Validators.required)
-  // })
+  validationForm = new FormGroup({
+    firstName: new FormGroup(''),
+  });
 
   public showFilter = false;
   public searchDataValue = '';
@@ -48,75 +49,71 @@ export class EmployeeListComponent implements OnInit {
   public pageSelection: Array<pageSelection> = [];
   public totalPages = 0;
 
-public employeeForm : FormGroup;
- public userForm : FormGroup; 
-
-isOpen:boolean=false;
-selectedValue: any;
-selectedList1: any;
-selectedList2:any;
-selectedList3:any;
-selectedList4:any;
-  validationForm: any;
-  constructor(public data : DataService,private fb: FormBuilder) { 
-    this.userForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-      mobileNumber: ['', Validators.required]
-    });
-  }
-  submitForm() {
-    if (this.userForm.valid) {
-      console.log('Form submitted successfully.');
-    } else {
-      console.log('Form is invalid. Please check the fields.');
-      this.markFormGroupTouched(this.userForm);
-    }
-  }
+  isOpen: boolean = false;
+  selectedValue: any;
+  selectedList1: any;
+  selectedList2: any;
+  selectedList3: any;
+  selectedList4: any;
+  data: any;
+  formBuilder: any;
 
   markFormGroupTouched(formGroup: FormGroup) {
-    Object.values(formGroup.controls).forEach(control => {
+    Object.values(formGroup.controls).forEach((control) => {
       control.markAsTouched();
       if (control instanceof FormGroup) {
         this.markFormGroupTouched(control);
       }
     });
   }
-  get f() { return this.validationForm.controls; }
-
+  get f() {
+    return this.validationForm.controls;
+  }
 
   ngOnInit() {
+    this.getEmployeeDetails();
+
+    this.validationForm = this.formBuilder.group({
+      role: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      contact: [
+        '',
+        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
+      ],
+      email: ['', [Validators.required, Validators.email]],
+      birthday_date: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+    });
+
     this.getTableData();
     this.selectedList1 = [
       { value: 'Orthopedics' },
       { value: 'Radiology' },
-      {value: 'Dentist'},
+      { value: 'Dentist' },
       // Add more options as needed
     ];
     this.selectedList2 = [
-      {value: 'Select City'},
-    {value: 'Alaska'},
-    {value: 'Los Angeles'},
+      { value: 'Select City' },
+      { value: 'Alaska' },
+      { value: 'Los Angeles' },
       // Add more options as needed
     ];
     this.selectedList3 = [
-      {value: 'Select Country'},
-    {value: 'Usa'},
-    {value: 'Uk'},
-    {value: 'Italy'},
+      { value: 'Select Country' },
+      { value: 'Usa' },
+      { value: 'Uk' },
+      { value: 'Italy' },
       // Add more options as needed
     ];
     this.selectedList4 = [
-      {value: 'Select State'},
-    {value: 'Alaska'},
-    {value: 'California'},
+      { value: 'Select State' },
+      { value: 'Alaska' },
+      { value: 'California' },
       // Add more options as needed
     ];
-    
-
+  }
+  getEmployeeDetails() {
+    throw new Error('Method not implemented.');
   }
 
   private getTableData(): void {
@@ -199,12 +196,10 @@ selectedList4:any;
       this.pageSelection.push({ skip: skip, limit: limit });
     }
   }
-  backToTable(){
-    this.isOpen=false
+  backToTable() {
+    this.isOpen = false;
   }
-  addToList(){
-    this.isOpen=true
+  addToList() {
+    this.isOpen = true;
   }
-
-  
 }

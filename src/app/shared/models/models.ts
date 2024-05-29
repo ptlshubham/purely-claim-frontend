@@ -201,9 +201,9 @@ export interface staffList {
   joiningDate: number;
   img: string;
 }
-export interface TimezoneList{
+export interface TimezoneList {
   id: string;
-  name : string;
+  name: string;
 }
 
 export interface employeeList {
@@ -315,7 +315,6 @@ export interface SubMenu {
   menuValue: string;
   route: string;
   base: string;
- 
 }
 export interface MenuItem {
   menuValue: string;
@@ -327,7 +326,6 @@ export interface MenuItem {
   icon?: string;
   faIcon?: boolean;
   subMenus: SubMenu[];
-  
 }
 
 export interface SideBarData {
@@ -350,3 +348,19 @@ export interface Speciality {
   detail: string;
   notes: string;
 }
+
+
+export const environment = {
+  production: false,
+  defaultauth: 'fake-backend',
+  firebaseConfig: {
+    apiKey: '',
+    authDomain: '',
+    databaseURL: '',
+    projectId: '',
+    storageBucket: '',
+    messagingSenderId: '',
+    appId: '',
+    measurementId: '',
+  },
+};
