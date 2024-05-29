@@ -88,11 +88,16 @@ const routes: Routes = [
       //   loadChildren: () =>
       //     import('./blogs/blogs.module').then((m) => m.BlogsModule),
       // },
-      // {
-      //   path: 'assets',
-      //   loadChildren: () =>
-      //     import('./assets/assets.module').then((m) => m.AssetsModule),
-      // },
+      {
+        path: 'assets',
+        loadChildren: () =>
+          import('./assets/assets.module').then((m) => m.AssetsModule),
+      },
+      {
+        path: 'company',
+        loadChildren: () =>
+          import('./company/company.module').then((m) => m.CompanyModule),
+      },
       // {
       //   path: 'activities',
       //   loadChildren: () =>

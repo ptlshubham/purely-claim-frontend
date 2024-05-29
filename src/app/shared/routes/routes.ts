@@ -81,6 +81,11 @@ static add: any;
   public static get assetsList(): string {
     return this.baseUrl + '/assets/assets-list';
   }
+
+  public static get addFacilities(): string {
+    return this.baseUrl + '/company/add-facilities';
+  }
+
   public static get editAsset(): string {
     return this.baseUrl + '/assets/edit-asset';
   }

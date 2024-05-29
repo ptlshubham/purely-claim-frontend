@@ -201,6 +201,11 @@ export interface staffList {
   joiningDate: number;
   img: string;
 }
+export interface TimezoneList {
+  id: string;
+  name: string;
+}
+
 export interface employeeList {
   name: string;
   department: string;
@@ -310,7 +315,6 @@ export interface SubMenu {
   menuValue: string;
   route: string;
   base: string;
- 
 }
 export interface MenuItem {
   menuValue: string;
@@ -322,7 +326,6 @@ export interface MenuItem {
   icon?: string;
   faIcon?: boolean;
   subMenus: SubMenu[];
-  
 }
 
 export interface SideBarData {
@@ -330,9 +333,7 @@ export interface SideBarData {
   showAsTab: boolean;
   separateRoute: boolean;
   menu: MenuItem[];
-} 
-  
-
+}
 
 export const environment = {
   production: false,
@@ -345,7 +346,6 @@ export const environment = {
     storageBucket: '',
     messagingSenderId: '',
     appId: '',
-    measurementId: ''
-  }
+    measurementId: '',
+  },
 };
-

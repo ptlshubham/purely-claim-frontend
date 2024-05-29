@@ -6,6 +6,8 @@ import { CoreComponent } from './core.component';
 import { HeaderComponent } from '../common-component/header/header.component';
 import { SidebarComponent } from '../common-component/sidebar/sidebar.component';
 import { SharedModule } from '../shared/shared.module';
+// import { CompanyComponent } from './company/company.component';
+// import { AssetsComponent } from './assets/assets.component';
 import { EmployeeComponent } from './employee/employee.component';
 //import { EmployeeListComponent } from './employee-list/employee-list.component';
 //import { ModalComponent } from './modal/modal.component';
@@ -16,6 +18,8 @@ import { EmployeeComponent } from './employee/employee.component';
     CoreComponent,
     HeaderComponent,
     SidebarComponent,
+    // CompanyComponent,
+    // AssetsComponent,
     EmployeeComponent,
     
   ],

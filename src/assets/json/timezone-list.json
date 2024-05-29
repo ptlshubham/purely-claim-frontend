@@ -1,0 +1,13 @@
+{
+    "data": [
+        {
+            "id" : "India",
+            "name": "India UTC+5:30"
+        },
+        {
+            "id" : "USA",
+            "name": "USA UTC+5:30"
+        }
+    ],
+    "totalData":2
+}
