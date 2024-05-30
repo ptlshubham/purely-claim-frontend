@@ -7,10 +7,8 @@ import { Sort } from '@angular/material/sort';
 import { pageSelection } from 'src/app/shared/models/models';
 import { FormControl, FormControlName, FormGroup, Validators, UntypedFormGroup, FormBuilder, UntypedFormBuilder } from '@angular/forms';
 import { FacilityType } from 'src/app/shared/models/models';
-
-interface data {
-  value: string ;
-}
+import { FacilitiesService } from 'src/app/shared/services/facilities.services';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-facility-type',
   templateUrl: './facility-type.component.html',
@@ -18,11 +16,8 @@ interface data {
 })
 export class FacilityTypeComponent implements OnInit {
   public routes = routes;
-  selectedList: data[] =[
-    {value: 'Facility1'},
-    {value: 'Facility2'},
-    {value: 'Facility2'},
-  ]
+  selectedList: any = [];
+  facilityTypeModel: any = {};
   public facilityList: Array<FacilityType> = [
     {
       id: 1,
@@ -85,42 +80,75 @@ export class FacilityTypeComponent implements OnInit {
   }
 
 
-  constructor(private formBuilder: UntypedFormBuilder) { 
-    
+  constructor(
+    private formBuilder: UntypedFormBuilder,
+    private facilitiesService: FacilitiesService
+  ) {
+    this.getAllfacilityType();
+
   }
 
   // public facType: FormGroup;
   facType!: UntypedFormGroup;
   submitted = false;
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.facType = this.formBuilder.group({
-      name:['', [Validators.required, Validators.pattern(/^[A-Za-z]{1,20}$/)]],
+      name: ['', [Validators.required, Validators.pattern(/^[A-Za-z]{1,20}$/)]],
     })
   }
 
-  get fa() {return this.facType.controls;}
+  get fa() { return this.facType.controls; }
 
   public onSubmit(): void {
-    this.submitted=true;
-    if(this.facType.invalid){
+    this.submitted = true;
+    if (this.facType.invalid) {
       return;
     }
-    else{
-      console.log("valid");
+    else {
+      this.facilityTypeModel.isactive = true;
+      this.facilitiesService.saveFacilityType(this.facilityTypeModel).subscribe((data: any) => {
+        if (data = 'success') {
+          this.getAllfacilityType();
+          // this.toastr.success('registration details added successfully', 'Success', { timeOut: 3000 });
+          this.isOpen = false;
+          this.facilityTypeModel = {};
+          this.facType.markAsUntouched();
+          // this.getAllRegistration();
+        }
+      })
+      debugger
+      // console.log("valid");
     }
   }
 
-  onEdit(): void{
+  onEdit(): void {
     alert("Clicked!");
   }
-  onDelete(): void{ 
-    alert("Clicked!");
-  }
-  addInList(e:any): void{
-    let id= this.facilityList.length+1;
-    let name = (e.target.getAttribute('name'));
-    this.facilityList.push({id:id, name:name});
-  }
+  removeFacilityType1(id:any): void {
+    debugger
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#34c38f',
+      cancelButtonColor: '#f46a6a',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(result => {
+      if (result.value) {
+        this.facilitiesService.removeFacilityType(id).subscribe(() => {
+        })
+        this.getAllfacilityType();
+        Swal.fire('Deleted!', 'registration  details has been deleted.', 'success');
+      }
+    });
 
+  }
+  getAllfacilityType() {
+    this.facilitiesService.getAllFacilityTypeList().subscribe((res: any) => {
+      this.selectedList = res;
+      debugger
+    })
+  }
 }

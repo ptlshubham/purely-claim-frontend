@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Sort } from '@angular/material/sort';
 import { Speciality, pageSelection } from 'src/app/shared/models/models';
 import { routes } from 'src/app/shared/routes/routes';
+import { FacilitiesService } from 'src/app/shared/services/facilities.services';
+import { NgSelectComponent } from '@ng-select/ng-select';
 
 interface data {
-  value: string ;
+  value: string;
 }
 
 @Component({
@@ -14,20 +17,15 @@ interface data {
   styleUrls: ['./speciality.component.scss']
 })
 export class SpecialityComponent {
-  public routes= routes;
+  public routes = routes;
   public specialityList: Array<Speciality> = [];
+  specialityModel: any = {};
+  public employeeList: Array<Speciality> = [];
 
-  selectedList: data[] =[
-      {value: '207N00000X Radiology'},
-      {value: '207N00000X Psychology'},
-      {value: '207N00000X Neurology'}
-    ]
-    selectedList1: Speciality[] =[
-      {id:1, active:true, name:'Radiology',taxonomyCode:"207N00000X",detail:'',notes:''},
-      {id:1, active:true, name:'Psychology',taxonomyCode:"207N00000X",detail:'',notes:''},
-      {id:1, active:true, name:'Neurology',taxonomyCode:"207N00000X",detail:'',notes:''}
-    ]
- 
+  selectedList: any = [];
+  taxonomyDetail: any = [];
+  selectedList1: Speciality[] = []
+
   public showFilter = false;
   public searchDataValue = '';
   public lastIndex = 0;
@@ -73,44 +71,79 @@ export class SpecialityComponent {
     this.isOpen = true
   }
 
+  
 
-  constructor(private formBuilder: UntypedFormBuilder) { 
-    
+  constructor(private formBuilder: UntypedFormBuilder,
+    private facilitiesService: FacilitiesService) {
+    this.getAllTaxonomyCode();
   }
 
   // public specialityForm: FormGroup;
   specialityForm!: UntypedFormGroup;
   submitted = false;
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.specialityForm = this.formBuilder.group({
-      name:['', [Validators.required, Validators.pattern(/^[A-Za-z]{1,20}$/)]],
-      taxonomyCode:['',[Validators.required]],
-      detail:['',Validators.required],
-      notes:['']
+      name: ['', [Validators.required, Validators.pattern(/^[A-Za-z]{1,20}$/)]],
+      taxonomyCode: ['', [Validators.required]],
+      detail: ['', Validators.required],
+      notes: ['']
     })
   }
+  getAllTaxonomyCode() {
+    this.facilitiesService.getAllTaxonomyCode().then((res: any) => {
+      this.selectedList = res;
+      console.log(this.selectedList[0]['MEDICARE PROVIDER/SUPPLIER TYPE DESCRIPTION']);
+      this.specialityModel = {};
+      this.specialityForm.markAsUntouched();
+      debugger
+    }).catch((error: any) => {
+      console.error('Error fetching the data:', error);
+    });
+  }
+  get fa() { return this.specialityForm.controls; }
 
-  get fa() {return this.specialityForm.controls;}
+  onSelectChange(event: any):void{
+    // const selectedItem = this.selectedList.find(item => item['PROVIDER TAXONOMY CODE'] === event);
+    // if (selectedItem) {
+    //   this.specialityModel.description = selectedItem['PROVIDER TAXONOMY DESCRIPTION: TYPE, CLASSIFICATION, SPECIALIZATION'];
+    // }
+  }
+
+  onEdit(): void {
+    alert("Clicked!");
+  }
+  onDelete(): void {
+    alert("Clicked!");
+  }
 
   public onSubmit(): void {
-    this.submitted=true;
-    if(this.specialityForm.invalid){
+    this.submitted = true;
+    if (this.specialityForm.invalid) {
       return;
     }
-    else{
-      console.log("valid");
+    else {
+      this.specialityModel.isactive = true;
+      this.facilitiesService.saveFacilityType(this.specialityModel).subscribe((data: any) => {
+        if (data = 'success') {
+          this.getAllSpeciality();
+          // this.toastr.success('registration details added successfully', 'Success', { timeOut: 3000 });
+          this.isOpen = false;
+          this.specialityModel = {};
+          this.specialityForm.markAsUntouched();
+          // this.getAllRegistration();
+        }
+      })
+      debugger
+      // console.log("valid");
     }
   }
 
-  onEdit(): void{
-    alert("Clicked!");
-  }
-  onDelete(): void{ 
-    alert("Clicked!");
-  }
-  addInList(e:any): void{
-    let id= this.specialityList.length+1;
-    let name = (e.target.getAttribute('name'));
+
+  getAllSpeciality() {
+    this.facilitiesService.getAllFacilityTypeList().subscribe((res: any) => {
+      this.selectedList = res;
+      debugger
+    })
   }
 }

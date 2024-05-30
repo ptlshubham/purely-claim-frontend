@@ -38,6 +38,14 @@ export class DataService {
     );
   }
 
+  public getSpecialityList(): Observable<apiResultFormat> {
+    return this.http.get<apiResultFormat>('assets/json/speciality.json').pipe(
+      map((res: apiResultFormat) => {
+        return res;
+      })
+    );
+  }
+
   public getTimezoneList(): Observable<apiResultFormat> {
     return this.http.get<apiResultFormat>('assets/json/timezone-list.json').pipe(
       map((res: apiResultFormat) => {

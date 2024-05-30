@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SpecialityRoutingModule } from './speciality-routing.module';
 import { SpecialityComponent } from './speciality.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { SpecialityComponent } from './speciality.component';
   imports: [
     CommonModule,
     SpecialityRoutingModule,
-    SharedModule
+    SharedModule,
+    NgSelectModule
   ]
 })
 export class SpecialityModule { }
