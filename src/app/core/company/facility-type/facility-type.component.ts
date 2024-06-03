@@ -110,15 +110,12 @@ export class FacilityTypeComponent implements OnInit {
       this.facilitiesService.saveFacilityType(this.facilityTypeModel).subscribe((data: any) => {
         if (data = 'success') {
           this.getAllfacilityType();
-          // this.toastr.success('registration details added successfully', 'Success', { timeOut: 3000 });
           this.isOpen = false;
           this.facilityTypeModel = {};
           this.facType.markAsUntouched();
-          // this.getAllRegistration();
         }
       })
       debugger
-      // console.log("valid");
     }
   }
 
@@ -143,7 +140,6 @@ export class FacilityTypeComponent implements OnInit {
         Swal.fire('Deleted!', 'registration  details has been deleted.', 'success');
       }
     });
-
   }
   getAllfacilityType() {
     this.facilitiesService.getAllFacilityTypeList().subscribe((res: any) => {

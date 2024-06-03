@@ -37,9 +37,12 @@ export class FacilitiesService {
         debugger
         return this.httpClient.get<any>(ApiService.removeFacilityTypeURL + id);
     }
-    saveSpeciality(id: number, active: boolean, name: string, taxonomyCode: string, detail: string, notes: string): Observable<any> {
+    saveSpeciality(data:any): Observable<any> {
         debugger
-        return this.httpClient.get<any>(ApiService.removeFacilityTypeURL + id);
+        return this.httpClient.get<any>(ApiService.saveSpecialityURL, data);
+    }
+    getAllSpecialityDetails(): Observable<any> {
+        return this.httpClient.get<any>(ApiService.getAllSpecialityDetailsURL);
     }
 
 }

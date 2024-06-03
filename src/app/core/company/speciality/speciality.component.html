@@ -46,19 +46,39 @@
 
                 <div class="col-12 col-md-6 col-xl-6">
                   <div class="form-group local-forms">
-                    <div class="form-control select">
+                    <div class="form-control">
                       <label for="taxonomyCode">Taxonomy Code</label>
-                      <ng-select placeholder="select taxonomy code" [items]="selectedList"
-                        bindLabel="PROVIDER TAXONOMY CODE" bindValue="PROVIDER TAXONOMY CODE"
-                        [(ngModel)]="specialityModel.code" [ngModelOptions]="{standalone: true}"
-                        (selectionChange)="onSelectChange($event)">
+                      <ng-select [placeholder]="specialityModel.code ? '' : 'select taxonomy code'"
+                        [items]="selectedList" bindLabel="PROVIDER TAXONOMY CODE" bindValue="PROVIDER TAXONOMY CODE"
+                        [(ngModel)]="specialityModel.code" formControlName="taxonomyCode"
+                        (change)="onSelectChange(this, specialityModel.code)"
+                        [ngClass]="{'is-invalid': fa['taxonomyCode'].touched && fa['taxonomyCode'].errors}">
                         <ng-template ng-optgroup-tmp let-item="item">
                           {{item}}
                         </ng-template>
                       </ng-select>
+                      <!-- <div class="invalid-feedback" *ngIf="fa['taxonomyCode'].touched">
+                        <span *ngIf="fa['taxonomyCode'].errors?.['required']">Taxonomy code is required</span>
+                      </div> -->
+                      <div class="invalid-feedback" *ngIf="fa['taxonomyCode'].touched && fa['taxonomyCode'].errors">
+                        <span *ngIf="fa['taxonomyCode'].errors?.['required']">Taxonomy code is required</span>
+                      </div>
                     </div>
                   </div>
                 </div>
+
+                <!-- <label for="taxonomyCode">Taxonomy Code</label>
+                                        <mat-select class="form-control select" placeholder="select taxonomy code"
+                                            formControlName="taxonomyCode"
+                                            [ngClass]="{'is-invalid': fa['taxonomyCode'].touched && fa['taxonomyCode'].errors}">
+                                            <mat-option *ngFor="let t of selectedList" [value]="t.value">
+                                                {{t.value}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <div class="text-danger" *ngIf="fa['taxonomyCode'].touched">
+                                            <span *ngIf="fa['taxonomyCode'].errors?.['required']">Please select taxonomy
+                                                code</span>
+                                        </div> -->
 
                 <div class="col-12 col-md-6 col-xl-6">
                   <div class="form-group local-forms">

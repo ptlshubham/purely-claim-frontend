@@ -226,3 +226,11 @@ ngx-material-timepicker-content {
   .mat-pseudo-checkbox{
     display: none;
   }
+  .ng-dropdown-panel .scroll-host {
+    overflow: hidden;
+    overflow-y: auto;
+    position: relative;
+    display: block;
+    background-color: white !important;
+    -webkit-overflow-scrolling: touch;
+}
