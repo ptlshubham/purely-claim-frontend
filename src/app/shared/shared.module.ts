@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './data/data.service';
 import { MatSortModule } from '@angular/material/sort';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -31,11 +32,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       "clockwise": false,
       "startFromZero": false,
       "lazy": false,
-      "outerStrokeLinecap":"square",
+      "outerStrokeLinecap": "square",
       "showSubtitle": false,
-      "showTitle" : false,
-      "showUnits" : false,
-      "showBackground" : false
+      "showTitle": false,
+      "showUnits": false,
+      "showBackground": false
     }),
     SlickCarouselModule,
     materialModule,
@@ -45,8 +46,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatSortModule,
     FormsModule,
     ReactiveFormsModule,
-    
-    
+    ToastrModule
+
+
   ],
   exports: [
     CommonModule,
@@ -62,8 +64,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatSortModule,
     FormsModule,
     ReactiveFormsModule
-   
-    
+
+
   ],
   providers: [
     DataService,

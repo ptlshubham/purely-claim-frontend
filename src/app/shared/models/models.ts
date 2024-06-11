@@ -99,15 +99,9 @@ export interface invoicerecurring {
   status: string;
   img: string;
 }
-export interface doctorlist {
+export interface facilityList {
   name: string;
-  department: string;
-  specialization: string;
-  degree: string;
-  mobile: string;
-  email: string;
-  joiningDate: number;
-  img: string;
+
 }
 export interface schedule {
   doctorName: string;
@@ -333,14 +327,14 @@ export interface SideBarData {
   showAsTab: boolean;
   separateRoute: boolean;
   menu: MenuItem[];
-} 
+}
 
 export interface FacilityType {
   id: number;
   name: string;
 }
 
-export interface Speciality {
+export interface SpecialityList {
   id: number;
   active: boolean;
   name: string;

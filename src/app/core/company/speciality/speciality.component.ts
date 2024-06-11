@@ -2,10 +2,13 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Sort } from '@angular/material/sort';
-import { Speciality, pageSelection } from 'src/app/shared/models/models';
+import { SpecialityList, apiResultFormat, pageSelection } from 'src/app/shared/models/models';
 import { routes } from 'src/app/shared/routes/routes';
 import { FacilitiesService } from 'src/app/shared/services/facilities.services';
-import { NgSelectComponent } from '@ng-select/ng-select';
+import { ToastrService } from 'ngx-toastr';
+
+import Swal from 'sweetalert2';
+import { MatTableDataSource } from '@angular/material/table';
 
 interface data {
   value: string;
@@ -18,13 +21,12 @@ interface data {
 })
 export class SpecialityComponent {
   public routes = routes;
-  public specialityList: Array<Speciality> = [];
+
   specialityModel: any = {};
-  public employeeList: Array<Speciality> = [];
 
   selectedList: any = [];
   taxonomyDetail: any = [];
-  selectedList1: any = []
+  SpecialityList: any = []
 
   public showFilter = false;
   public searchDataValue = '';
@@ -39,51 +41,45 @@ export class SpecialityComponent {
   public pageNumberArray: Array<number> = [];
   public pageSelection: Array<pageSelection> = [];
   public totalPages = 0;
-  isOpen: boolean = false;
+  isUpdate: boolean = false;
+  specialityForm!: UntypedFormGroup;
+  dataSource!: MatTableDataSource<SpecialityList>;
 
 
   public sortData(sort: Sort): void {
-    const data = this.specialityList.slice();
+    const data = this.SpecialityList.slice();
     if (!sort.active || sort.direction === '') {
-      this.specialityList = data;
+      this.SpecialityList = data;
     } else {
-      this.specialityList = data.sort((a, b) => {
+      this.SpecialityList = data.sort((a: any, b: any) => {
         const aValue = (a as any)[sort.active];
         const bValue = (b as any)[sort.active];
         return (aValue < bValue ? -1 : 1) * (sort.direction === 'asc' ? 1 : -1);
       });
     }
   }
-  private getTableData(): void {
-    this.specialityList = [];
-    this.serialNumberArray = [];
+  // private getTableData(): void {
+  //   this.SpecialityList = [];
+  //   this.serialNumberArray = [];
 
-  }
+  // }
 
-  public searchData(value: any): void {
-    // this.dataSource.filter = value.trim().toLowerCase();
-    // this.specialityList = this.dataSource.filteredData;
-  }
-  backToTable() {
-    this.isOpen = false
-  }
-  addToList() {
-    this.isOpen = true
-  }
+  constructor(
+    private formBuilder: UntypedFormBuilder,
+    public toastr: ToastrService,
 
-  
-
-  constructor(private formBuilder: UntypedFormBuilder,
     private facilitiesService: FacilitiesService) {
     this.getAllTaxonomyCode();
     // this.specialityModel = {};
   }
 
   // public specialityForm: FormGroup;
-  specialityForm!: UntypedFormGroup;
   submitted = false;
 
   ngOnInit(): void {
+    this.getTableData();
+
+    this.getAllSpeciality();
     this.specialityForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern(/^[A-Za-z]{1,20}$/)]],
       taxonomyCode: ['', [Validators.required]],
@@ -91,6 +87,90 @@ export class SpecialityComponent {
       notes: ['']
     })
   }
+
+
+
+  private getTableData(): void {
+    this.SpecialityList = [];
+    this.serialNumberArray = [];
+
+    this.facilitiesService.getAllSpecialityDetails().subscribe(
+      (data: any[]) => {
+        this.totalData = data.length; // Assuming totalData is the count of items
+        data.map((res: SpecialityList, index: number) => {
+          const serialNumber = index + 1;
+          if (index >= this.skip && serialNumber <= this.limit) {
+            this.SpecialityList.push(res);
+            this.serialNumberArray.push(serialNumber);
+          }
+        });
+        this.dataSource = new MatTableDataSource<SpecialityList>(this.SpecialityList);
+        this.calculateTotalPages(this.totalData, this.pageSize);
+      },
+      // (error: any) => {
+      //   console.error('Error loading facility list:', error);
+      // }
+    );
+  }
+  public searchData(value: any): void {
+    if (this.dataSource) {
+      this.dataSource.filter = value.trim().toLowerCase();
+      this.SpecialityList = this.dataSource.filteredData;
+    } else {
+      console.error('this.dataSource is undefined');
+    }
+  }
+  private calculateTotalPages(totalData: number, pageSize: number): void {
+    this.pageNumberArray = [];
+    this.totalPages = totalData / pageSize;
+    if (this.totalPages % 1 != 0) {
+      this.totalPages = Math.trunc(this.totalPages + 1);
+    }
+    /* eslint no-var: off */
+    for (var i = 1; i <= this.totalPages; i++) {
+      const limit = pageSize * i;
+      const skip = limit - pageSize;
+      this.pageNumberArray.push(i);
+      this.pageSelection.push({ skip: skip, limit: limit });
+    }
+  }
+  public getMoreData(event: string): void {
+    if (event == 'next') {
+      this.currentPage++;
+      this.pageIndex = this.currentPage - 1;
+      this.limit += this.pageSize;
+      this.skip = this.pageSize * this.pageIndex;
+      this.getTableData();
+    } else if (event == 'previous') {
+      this.currentPage--;
+      this.pageIndex = this.currentPage - 1;
+      this.limit -= this.pageSize;
+      this.skip = this.pageSize * this.pageIndex;
+      this.getTableData();
+    }
+  }
+
+  public PageSize(): void {
+    this.pageSelection = [];
+    this.limit = this.pageSize;
+    this.skip = 0;
+    this.currentPage = 1;
+    this.getTableData();
+  }
+  public moveToPage(pageNumber: number): void {
+    this.currentPage = pageNumber;
+    this.skip = this.pageSelection[pageNumber - 1].skip;
+    this.limit = this.pageSelection[pageNumber - 1].limit;
+    if (pageNumber > this.currentPage) {
+      this.pageIndex = pageNumber - 1;
+    } else if (pageNumber < this.currentPage) {
+      this.pageIndex = pageNumber + 1;
+    }
+    this.getTableData();
+  }
+
+
+
   getAllTaxonomyCode() {
     this.facilitiesService.getAllTaxonomyCode().then((res: any) => {
       this.selectedList = res;
@@ -109,43 +189,61 @@ export class SpecialityComponent {
     const filteredElement = this.selectedList.find((element: any) => element['PROVIDER TAXONOMY CODE'] === code);
     if (filteredElement) {
       const taxonomyDescription = filteredElement["PROVIDER TAXONOMY DESCRIPTION:  TYPE, CLASSIFICATION, SPECIALIZATION"];
-      
+
       this.specialityModel.detail = filteredElement[a] + "-->" + taxonomyDescription;
     }
   }
 
-  onEdit(): void {
-    alert("Clicked!");
-  }
-  onDelete(): void {
-    alert("Clicked!");
-  }
 
-  public onSubmit(): void {
+
+  saveSpeciality() {
     this.submitted = true;
     if (this.specialityForm.invalid) {
       return;
     }
+
     else {
-      this.specialityModel.active = true;
+      if (this.specialityModel.notes === undefined) {
+        this.specialityModel.notes = '';
+      }
       this.facilitiesService.saveSpeciality(this.specialityModel).subscribe((data: any) => {
         if (data = 'success') {
-          console.log(this.specialityModel);
-          this.getAllSpeciality();
-          this.isOpen = false;
+
           this.specialityModel = {};
           this.specialityForm.markAsUntouched();
         }
       })
-      debugger
+      this.getAllSpeciality();
     }
   }
 
 
   getAllSpeciality() {
+    debugger;
     this.facilitiesService.getAllSpecialityDetails().subscribe((res: any) => {
-      this.selectedList1 = res;
-      debugger
-    })
+      this.SpecialityList = res;
+      this.getTableData();
+
+    });
   }
+  removeSpeciality(id: any): void {
+    debugger
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#34c38f',
+      cancelButtonColor: '#f46a6a',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(result => {
+      if (result.value) {
+        this.facilitiesService.removeSpecialtyDetails(id).subscribe(() => {
+        })
+        this.getAllSpeciality();
+        Swal.fire('Deleted!', 'Speciality  details has been deleted.', 'success');
+      }
+    });
+  }
+
 }

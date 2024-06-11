@@ -36,12 +36,6 @@
                     <br>
                     <!-- Body here -->
                     <form [formGroup]="facType">
-                        <!-- <div class="row">
-                            <div class="col-auto">Facility Type Name:</div>
-                            <div class="col-4"><input class="form-control" type="text" placeholder="facility type name" formControlName="name" ></div>
-                            <div class="col-auto">Active:</div>
-                            <div class="col-auto"> <input class="form-check-input" type="checkbox" formControlName="active" style=" width: 30px; height: 30px;"  ></div>
-                        </div> -->
                         <div class="row">
                             <div class="col-6 col-md-6 col-xl-6">
                                 <form [formGroup]="facType">
@@ -60,7 +54,8 @@
                                 </form>
                             </div>
                             <div class="col-6 doctor-submit text-start">
-                                <button type="submit" class="btn btn-primary submit-form me-2" (click)="onSubmit()">Submit</button>
+                                <button type="submit" class="btn btn-primary submit-form me-2"
+                                    (click)="onSubmit()">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -72,7 +67,6 @@
             <div class="col-sm-12">
                 <div class="card card-table show-entire">
                     <div class="card-body">
-
                         <!-- Table Header -->
                         <div class="page-table-header mb-2">
                             <div class="row align-items-center">
@@ -94,50 +88,119 @@
                             </div>
                         </div>
                         <!-- /Table Header -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table matSort (matSortChange)="sortData($event)"
+                                    class="table border-0 custom-table comman-table datatable mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th mat-sort-header="active">Active</th>
+                                            <th mat-sort-header="name" style="width: 70%;">Name</th>
 
-                        <div class="table-responsive">
-                            <table matSort (matSortChange)="sortData($event)"
-                                class="table border-0 custom-table comman-table datatable mb-0">
-                                <thead>
-                                    <tr>
-                                        <th mat-sort-header="active">Active</th>
-                                        <th mat-sort-header="name" style="width: 70%;">Name</th>
-                                        <th mat-sort-header="specialization"><a><i
-                                                    class="fa-solid fa-pen-to-square"></i></a></th>
-                                        <th mat-sort-header="specialization"><a><i class="fa fa-trash"
-                                                    aria-hidden="true"></i></a></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let s of selectedList">
-                                        <td>
-                                            <div class="form-check check-tables">
-                                                <input class="form-check-input" type="checkbox" value="something"
-                                                    checked>
-                                            </div>
-                                        </td>
-                                        <td>{{s.name}}</td>
-                                        <td>
-                                            <div>
-                                        <td><a (click)="onEdit()" class="facTypeIcon"><i
-                                                    class="fa-solid fa-pen-to-square"></i></a></td>
+                                            <th mat-sort-header="specialization">
+                                                <a>
+                                                    <i class="fa fa-trash" aria-hidden="true"> </i>
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let s of facilityList">
+                                            <td>
+                                                <div class="form-check check-tables">
+                                                    <input class="form-check-input" type="checkbox" value="something"
+                                                        checked>
+                                                </div>
+                                            </td>
+                                            <td>{{s.name}}</td>
+                                            <td>
+                                                <a (click)="removeFacilityType(s.id)" class="facTypeIcon ">
+                                                    <i class="fa fa-trash " aria-hidden="true"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="table_footer">
+                                    <div class="col-sm-12 col-md-5">
+                                        <div class="dataTables_info">
+                                            Showing {{ serialNumberArray[0] }} to
+                                            {{ serialNumberArray[serialNumberArray.length - 1] }} of
+                                            {{ totalData }} entries
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-7">
+                                        <div class="pagination_section">
+                                            <ul class="pagination">
+                                                <li class="page-item" [ngClass]="{
+                                              disabled: currentPage === 1}">
+                                                    <a (click)="getMoreData('previous')" class="page-link"
+                                                        href="javascript:void(0);" tabindex="-1">Previous</a>
+                                                </li>
+
+                                                <ng-container *ngFor="let item of pageNumberArray; let i = index">
+                                                    <li class="page-item" [class.active]="item === currentPage"
+                                                        [ngClass]="
+                                                (pageNumberArray[currentPage - 2] > item &&
+                                                  item !== 1 &&
+                                                  pageNumberArray.length > 6) ||
+                                                (pageNumberArray[currentPage] < item &&
+                                                  item !== 1 &&
+                                                  pageNumberArray.length > 6 &&
+                                                  pageNumberArray.length !== item)
+                                                  ? 'hide-page-no'
+                                                  : 'show-page-no'
+                                              ">
+                                                        <a (click)="moveToPage(item)" class="page-link"
+                                                            href="javascript:void(0);">
+                                                            {{ item }}
+                                                        </a>
+                                                    </li>
+                                                    <li class="page-item" *ngIf="
+                                                i === 0 &&
+                                                pageNumberArray.length > 6 &&
+                                                currentPage > 2
+                                              " [hidden]="currentPage === 1" (click)="moveToPage(currentPage - 2)"
+                                                        (keyup.enter)="moveToPage(currentPage - 2)" tabindex="0">
+                                                        <a class="page-link" href="javascript:void(0);">
+                                                            ...
+                                                        </a>
+                                                    </li>
+                                                    <li *ngIf="
+                                                i === pageNumberArray.length - 2 &&
+                                                pageNumberArray.length > 6
+                                              " [hidden]="
+                                                currentPage >=
+                                                  pageNumberArray[pageNumberArray.length - 2] ||
+                                                totalData <
+                                                  serialNumberArray[serialNumberArray.length - 1]
+                                              " class="page-item" (click)="moveToPage(currentPage + 2)"
+                                                        (keyup.enter)="moveToPage(currentPage + 2)" tabindex="0">
+                                                        <a class="page-link" href="javascript:void(0);">
+                                                            ...
+                                                        </a>
+                                                    </li>
+                                                </ng-container>
+
+                                                <li class="page-item" [ngClass]="{
+                                              disabled:
+                                                currentPage ===
+                                                  pageNumberArray[pageNumberArray.length - 1] ||
+                                                  facilityList.length === 0
+                                            }">
+                                                    <a (click)="getMoreData('next')" class="page-link"
+                                                        href="javascript:void(0);">Next
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        </td>
-                        <td>
-                            <div>
-                        <td><a (click)="removeFacilityType1(s.id)" class="facTypeIcon"><i class="fa fa-trash "
-                                    aria-hidden="true"></i></a></td>
                     </div>
-                    </td>
-                    </tr>
-                    </tbody>
-                    </table>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-</div>
 </div>

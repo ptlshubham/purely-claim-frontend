@@ -33,7 +33,7 @@
                   <div class="form-group local-forms">
                     <label for="Name">Specialty Name:</label>
                     <input class="form-control" type="text" placeholder="speciality name" formControlName="name"
-                      [(ngModel)]="specialityModel.name"
+                      [(ngModel)]="specialityModel.specialityname"
                       [ngClass]="{ 'is-invalid': fa['name'].touched && fa['name'].errors}">
                     <div class="invalid-feedback"
                       *ngIf="fa['name'].touched || fa['name'].invalid || fa['name'].pristine">
@@ -53,6 +53,7 @@
                         [(ngModel)]="specialityModel.code" formControlName="taxonomyCode"
                         (change)="onSelectChange(this, specialityModel.code)"
                         [ngClass]="{'is-invalid': fa['taxonomyCode'].touched && fa['taxonomyCode'].errors}">
+
                         <ng-template ng-optgroup-tmp let-item="item">
                           {{item}}
                         </ng-template>
@@ -67,18 +68,7 @@
                   </div>
                 </div>
 
-                <!-- <label for="taxonomyCode">Taxonomy Code</label>
-                                        <mat-select class="form-control select" placeholder="select taxonomy code"
-                                            formControlName="taxonomyCode"
-                                            [ngClass]="{'is-invalid': fa['taxonomyCode'].touched && fa['taxonomyCode'].errors}">
-                                            <mat-option *ngFor="let t of selectedList" [value]="t.value">
-                                                {{t.value}}
-                                            </mat-option>
-                                        </mat-select>
-                                        <div class="text-danger" *ngIf="fa['taxonomyCode'].touched">
-                                            <span *ngIf="fa['taxonomyCode'].errors?.['required']">Please select taxonomy
-                                                code</span>
-                                        </div> -->
+
 
                 <div class="col-12 col-md-6 col-xl-6">
                   <div class="form-group local-forms">
@@ -100,93 +90,159 @@
                   </div>
                 </div>
 
-                <div class="col-6 doctor-submit text-start">
-                  <button type="submit" class="btn btn-primary submit-form me-2" (click)="onSubmit()">Submit</button>
+                <div class="col-6 doctor-submit text-start" *ngIf="isUpdate==false">
+                  <button type="submit" class="btn btn-primary submit-form me-2"
+                    (click)="saveSpeciality()">Submit</button>
                 </div>
               </div>
             </form>
+
           </div>
-
-
 
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="card card-table show-entire">
-        <div class="card-body">
-          <!-- Table Header -->
-          <div class="page-table-header mb-2">
-            <div class="row align-items-center">
-              <div class="col">
-                <div class="doctor-table-blk">
-                  <h3>Speciality List</h3>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card card-table show-entire">
+          <div class="card-body">
+            <!-- Table Header -->
+            <div class="page-table-header mb-2">
+              <div class="row align-items-center">
+                <div class="col">
+                  <div class="doctor-table-blk">
+                    <h3>Speciality List</h3>
+                  </div>
+
+                </div>
+
+                <div class="col-auto text-end float-end ms-auto download-grp">
+                  <div class="doctor-search-blk">
+                    <div class="top-nav-search table-search-blk">
+                      <input class="form-control" placeholder="Search here" [(ngModel)]="searchDataValue"
+                        (ngModelChange)="searchData(searchDataValue)">
+                      <a class="btn"><img src="assets/img/icons/search-normal.svg" alt=""></a>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="col-auto text-end float-end ms-auto download-grp">
-                <div class="doctor-search-blk">
-                  <div class="top-nav-search table-search-blk">
-                    <input class="form-control" placeholder="Search here" [(ngModel)]="searchDataValue"
-                      (ngModelChange)="searchData(searchDataValue)">
-                    <a class="btn"><img src="assets/img/icons/search-normal.svg" alt=""></a>
+            </div>
+            <!-- /Table Header -->
+            <div class="card-body">
+              <div class="table-responsive">
+                <table matSort (matSortChange)="sortData($event)"
+                  class="table border-0 custom-table comman-table datatable mb-0">
+                  <thead>
+                    <tr>
+                      <th mat-sort-header="active">Active</th>
+                      <th mat-sort-header="name">Name</th>
+                      <th mat-sort-header="taxonomyCode">Taxonomy Code</th>
+                      <th mat-sort-header="detail">Detail</th>
+                      <th mat-sort-header="notes">Notes</th>
+                      <th mat-sort-header="specialization">
+                        <a><i class="fa fa-trash" aria-hidden="true"></i></a>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of SpecialityList">
+                      <td>
+                        <!-- [(ngModel)]="specialityModel.isactive" -->
+                        <div class="form-check check-tables">
+                          <input class="form-check-input" type="checkbox" checked>
+                        </div>
+                      </td>
+                      <td>{{data.specialityname}}</td>
+                      <td>{{data.taxonomycode}}</td>
+                      <td>{{data.detail}}</td>
+                      <td>{{data.notes}}</td>
+
+                      <td class="text-right">
+                        <a class="facTypeIcon" (click)="removeSpeciality(data.id)"><i class="fa fa-trash"
+                            aria-hidden="true"></i></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="table_footer">
+                  <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info">
+                      Showing {{ serialNumberArray[0] }} to
+                      {{ serialNumberArray[serialNumberArray.length - 1] }} of
+                      {{ totalData }} entries
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-7">
+                    <div class="pagination_section">
+                      <ul class="pagination">
+                        <li class="page-item" [ngClass]="{
+                            disabled: currentPage === 1}">
+                          <a (click)="getMoreData('previous')" class="page-link" href="javascript:void(0);"
+                            tabindex="-1">Previous</a>
+                        </li>
+
+                        <ng-container *ngFor="let item of pageNumberArray; let i = index">
+                          <li class="page-item" [class.active]="item === currentPage" [ngClass]="
+                              (pageNumberArray[currentPage - 2] > item &&
+                                item !== 1 &&
+                                pageNumberArray.length > 6) ||
+                              (pageNumberArray[currentPage] < item &&
+                                item !== 1 &&
+                                pageNumberArray.length > 6 &&
+                                pageNumberArray.length !== item)
+                                ? 'hide-page-no'
+                                : 'show-page-no'
+                            ">
+                            <a (click)="moveToPage(item)" class="page-link" href="javascript:void(0);">
+                              {{ item }}
+                            </a>
+                          </li>
+                          <li class="page-item" *ngIf="
+                              i === 0 &&
+                              pageNumberArray.length > 6 &&
+                              currentPage > 2
+                            " [hidden]="currentPage === 1" (click)="moveToPage(currentPage - 2)"
+                            (keyup.enter)="moveToPage(currentPage - 2)" tabindex="0">
+                            <a class="page-link" href="javascript:void(0);">
+                              ...
+                            </a>
+                          </li>
+                          <li *ngIf="
+                              i === pageNumberArray.length - 2 &&
+                              pageNumberArray.length > 6
+                            " [hidden]="
+                              currentPage >=
+                                pageNumberArray[pageNumberArray.length - 2] ||
+                              totalData <
+                                serialNumberArray[serialNumberArray.length - 1]
+                            " class="page-item" (click)="moveToPage(currentPage + 2)"
+                            (keyup.enter)="moveToPage(currentPage + 2)" tabindex="0">
+                            <a class="page-link" href="javascript:void(0);">
+                              ...
+                            </a>
+                          </li>
+                        </ng-container>
+
+                        <li class="page-item" [ngClass]="{
+                            disabled:
+                              currentPage ===
+                                pageNumberArray[pageNumberArray.length - 1] ||
+                                SpecialityList.length === 0
+                          }">
+                          <a (click)="getMoreData('next')" class="page-link" href="javascript:void(0);">Next
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- /Table Header -->
-
-          <div class="table-responsive">
-            <table matSort (matSortChange)="sortData($event)"
-              class="table border-0 custom-table comman-table datatable mb-0">
-              <thead>
-                <tr>
-                  <th mat-sort-header="active">Active</th>
-                  <th mat-sort-header="name">Name</th>
-                  <th mat-sort-header="taxonomyCode">Taxonomy Code</th>
-                  <th mat-sort-header="detail">Detail</th>
-                  <th mat-sort-header="notes">Notes</th>
-                  <th mat-sort-header="specialization">
-                    <a><i class="fa-solid fa-pen-to-square"></i></a>
-                  </th>
-                  <th mat-sort-header="specialization">
-                    <a><i class="fa fa-trash" aria-hidden="true"></i></a>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let data of selectedList1">
-                  <td>
-                    <div class="form-check check-tables">
-                      <input class="form-check-input" type="checkbox" checked>
-                    </div>
-                  </td>
-                  <td>{{data.name}}</td>
-                  <td>{{data.taxonomyCode}}</td>
-                  <td>{{data.detail}}</td>
-                  <td>{{data.notes}}</td>
-                  <td>
-                    <div>
-                  <td>
-                    <a (click)="onEdit()" class="facTypeIcon"><i class="fa-solid fa-pen-to-square"></i></a>
-                  </td>
-          </div>
-          </td>
-          <td>
-            <div>
-          <td>
-            <a (click)="onDelete()" class="facTypeIcon"><i class="fa fa-trash" aria-hidden="true"></i></a>
-          </td>
         </div>
-        </td>
-        </tr>
-        </tbody>
-        </table>
       </div>
     </div>
   </div>
-</div>
-</div>
+
+
 </div>

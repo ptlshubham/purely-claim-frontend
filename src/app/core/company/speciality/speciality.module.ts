@@ -5,6 +5,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { SpecialityRoutingModule } from './speciality-routing.module';
 import { SpecialityComponent } from './speciality.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ToastrModule } from 'ngx-toastr';
+
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     CommonModule,
     SpecialityRoutingModule,
     SharedModule,
-    NgSelectModule
+    NgSelectModule,
+    ToastrModule
+
   ]
 })
 export class SpecialityModule { }

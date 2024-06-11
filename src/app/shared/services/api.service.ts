@@ -11,13 +11,16 @@ export class ApiService {
     })
   }
   public static saveFacilityTypeURL: string = ApiService.HOST_URL + '/admin/SaveFacilityType';
-  public static getAllServicesURL: string = ApiService.HOST_URL + '/admin/GetAllServices';  
+  public static getAllServicesURL: string = ApiService.HOST_URL + '/admin/GetAllServices';
   public static removeFacilityTypeURL: string = ApiService.HOST_URL + '/admin/RemoveFacilityType/';
   public static saveSpecialityURL: string = ApiService.HOST_URL + '/admin/SaveSpeciality';
-  public static getAllSpecialityDetailsURL: string = ApiService.HOST_URL + '/admin/GetAllSpecialityDetails';  
+  public static getAllSpecialityDetailsURL: string = ApiService.HOST_URL + '/admin/GetAllSpecialityDetails';
+  public static RemoveSpecialtyDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveSpecialtyDetails/';
+  public static updateSpecialityDetailsURL: string = ApiService.HOST_URL + '/admin/UpdateSpecialityDetails/';
 
 
-  
+
+
 
 
 
