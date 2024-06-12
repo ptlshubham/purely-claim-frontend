@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { routes } from 'src/app/shared/routes/routes';
 import { FormBuilder, FormControl, FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Country, getTimezonesForCountry } from 'countries-and-timezones'
+import { ClinicService } from 'src/app/shared/services/clinic.service';
 
 interface data {
-  value: string ;
+  value: string;
 }
 interface coun {
-  value: any ;
+  value: any;
 }
 
 let coun: any;
@@ -21,42 +22,38 @@ console.log(coun);
   styleUrls: ['./add-facilities.component.scss']
 })
 
-export class AddFacilitiesComponent{
+export class AddFacilitiesComponent {
   public routes = routes;
-  public selectedValue !: string  ;
+  public selectedValue !: string;
   // validationForm!: FormGroup;
   // submitted = false;
   selectedList1: data[] = [
-    {value: 'Neurology'},
-    {value: 'Orthology'},
-    {value: 'Radiology'},
+    { value: 'Neurology' },
+    { value: 'Orthology' },
+    { value: 'Radiology' },
   ];
-  selectedList2: data[] = [
-    {value: 'Alaska'},
-    {value: 'Los Angeles'},
-  ];
-  selectedList3: data[] = [
-    {value: 'Usa'},
-    {value: 'Uk'},
-    {value: 'Italy'},
-  ];
-  selectedList4: data[] = [
-    {value: 'Alaska'},
-    {value: 'California'},
-  ];
-  selectedList5: data[] =[
-    {value: 'Chicago (GMT-5)'},
-    {value: 'Denver (GMT-6)'},
-    {value: 'Phoenix (GMT-7)'},
-    {value: 'Los Angeles (GMT-7)'},
-    {value: 'Anchorage (GMT-8)'},
-    {value: 'Honolulu (GMT-10)'}
+  countries: any[] = [];
+  states: any[] = [];
+  cities: any[] = [];
+  allData: any = [];
+  selectedList5: data[] = [
+    { value: 'Chicago (GMT-5)' },
+    { value: 'Denver (GMT-6)' },
+    { value: 'Phoenix (GMT-7)' },
+    { value: 'Los Angeles (GMT-7)' },
+    { value: 'Anchorage (GMT-8)' },
+    { value: 'Honolulu (GMT-10)' }
   ]
 
   public FacilityForm: FormGroup;
 
-  constructor(  ) {
-
+  constructor(
+    private ClinicService: ClinicService,
+  ) {
+    this.ClinicService.getAllAddressData().then((data: any) => {
+      this.allData = data;
+      this.countries = [...new Set(data.map((item: any) => item.country))];
+    });
   }
 
   ngOnInit(): void {
@@ -66,7 +63,7 @@ export class AddFacilitiesComponent{
     // });
   }
   // get f() { return this.validationForm.controls; }
-  
+
   private validateForm(): void {
     this.FacilityForm = new FormGroup({
       Name: new FormControl('', Validators.required),
@@ -86,8 +83,19 @@ export class AddFacilitiesComponent{
       Postal: new FormControl('', Validators.required),
     })
   }
+  onCountryChange(country: string) {
+    this.states = this.allData.filter((item: any) => item.country === country).map((item: any) => item.subcountry);
+    this.cities = [];
+    this.FacilityForm.controls['State'].reset();
+    this.FacilityForm.controls['City'].reset();
+  }
 
-  send(): void{
+  onStateChange(state: string) {
+    this.cities = this.allData.filter((item: any) => item.subcountry === state);
+    this.FacilityForm.controls['City'].reset();
+  }
+
+  send(): void {
     console.log(coun);
   }
 }

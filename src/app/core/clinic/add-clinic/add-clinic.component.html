@@ -1,86 +1,65 @@
 <div class="page-wrapper">
-    <div class="content">
+  <div class="content">
 
-        <!-- Page Header -->
-        <div class="page-header">
-            <div class="row">
-                <div class="col-sm-12">
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a [routerLink]="routes.addclinic">Add Clinic </a></li>
-                        <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
-                        <li class="breadcrumb-item active">Add Clinic</li>
-                    </ul>
-                </div>
-            </div>
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="row">
+        <div class="col-sm-12">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="routes.addclinic">Add Clinic </a></li>
+            <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
+            <li class="breadcrumb-item active">Add Clinic</li>
+          </ul>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-              <div class="card card-table show-entire">
-                <div class="card-body">
-                  <!-- Table Header -->
-                  <div class="page-table-header mb-2">
-                    <div class="row align-items-center">
-                      <div class="col">
-                        <div class="doctor-table-blk">
-                          <h3>CLinic List</h3>
-                          <div class="doctor-search-blk">
-                            <!-- <div class="top-nav-search table-search-blk">
-                              <input
-                                class="form-control"
-                                placeholder="Search here"
-                                [(ngModel)]="searchDataValue"
-                                (ngModelChange)="searchData(searchDataValue)"
-                              />
-                              <a class="btn"
-                                ><img src="assets/img/icons/search-normal.svg" alt=""
-                              /></a>
-                            </div> -->
-      
-                            <div class="add-group">
-                              <!-- <a
-                                class="btn btn-primary add-pluss ms-2"
-                                (click)="addToList()"
-                                ><img src="assets/img/icons/plus.svg" alt=""
-                              /></a> -->
-                              <a
-                                href="javascript:;"
-                                class="btn btn-primary doctor-refresh ms-2"
-                                ><img src="assets/img/icons/re-fresh.svg" alt=""
-                              /></a>
-                            </div>
-                          </div>
-                        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card card-table show-entire">
+          <div class="card-body">
+            <!-- Table Header -->
+            <div class="page-table-header mb-2">
+              <div class="row align-items-center">
+                <div class="col">
+                  <div class="doctor-table-blk">
+                    <h3>Clinic List</h3>
+                    <div class="doctor-search-blk">
+                      <div class="top-nav-search table-search-blk">
+                        <input class="form-control" placeholder="Search here" [(ngModel)]="searchDataValue"
+                          (ngModelChange)="searchData(searchDataValue)" />
+                        <a class="btn"><img src="assets/img/icons/search-normal.svg" alt="" /></a>
                       </div>
-                      
+
+                      <div class="add-group">
+                        <a class="btn btn-primary add-pluss ms-2"><img src="assets/img/icons/plus.svg" alt="" /></a>
+                        <a href="javascript:;" class="btn btn-primary doctor-refresh ms-2"><img
+                            src="assets/img/icons/re-fresh.svg" alt="" /></a>
+                      </div>
                     </div>
                   </div>
-                  <!-- /Table Header -->
-      
-                  <div class="table-responsive">
-                    <table
-                      matSort
-                      (matSortChange)="sortData($event)"
-                      class="table border-0 custom-table comman-table datatable mb-0"
-                    >
-                      <thead>
-                        <tr>
-                          <th mat-sort-header="checkbox">
-                            <div class="form-check check-tables">
-                              <input
-                                class="form-check-input"
-                                type="checkbox"
-                                value="something"
-                              />
-                            </div>
-                          </th>
-                          <th mat-sort-header="name">Clinic Name</th>
-                          <th mat-sort-header="specialization">Specialization</th>
-                          <th mat-sort-header="mobile">Mobile</th>
-                          <th mat-sort-header="email">Email</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <!-- <tbody>
+                </div>
+              </div>
+            </div>
+            <!-- /Table Header -->
+
+            <div class="table-responsive">
+              <table matSort (matSortChange)="sortData($event)"
+                class="table border-0 custom-table comman-table datatable mb-0">
+                <thead>
+                  <tr>
+                    <th mat-sort-header="checkbox">
+                      <div class="form-check check-tables">
+                        <input class="form-check-input" type="checkbox" value="something" />
+                      </div>
+                    </th>
+                    <th mat-sort-header="name">Clinic Name</th>
+                    <th mat-sort-header="specialization">Specialization</th>
+                    <th mat-sort-header="mobile">Mobile</th>
+                    <th mat-sort-header="email">Email</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <!-- <tbody>
                         <tr *ngFor="let data of employeeList">
                           <td>
                             <div class="form-check check-tables">
@@ -132,188 +111,178 @@
                           </td>
                         </tr>
                       </tbody> -->
-                    </table>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+
+        <div class="card">
+          <div class="card-body">
+            <form [formGroup]="ClinicForm">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-heading">
+                    <h4>Add Clinic</h4>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-6">
+                  <div class="form-group local-forms">
+                    <label for="Name">Clinic Name <span class="login-danger">*</span></label>
+                    <input class="form-control" type="text" placeholder="Clinic Name" formControlName="Name"
+                      [ngClass]="{'is-invalid': ClinicForm.controls['Name'].touched && ClinicForm.controls['Name'].errors }">
+                    <div class="invalid-feedback" *ngIf="ClinicForm.controls['Name'].touched">
+                      <span *ngIf="ClinicForm.controls['Name'].errors?.['required']">Enter
+                        name</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-xl-6">
+                  <div class="form-group local-forms">
+                    <label for="Timezone">Timezone <span class="login-danger">*</span></label>
+                    <mat-select class="form-control select" placeholder="Select Timezone" formControlName="Timezone"
+                      [ngClass]="{'is-invalid': ClinicForm.controls['Timezone'].touched && ClinicForm.controls['Timezone'].errors}">
+                      <mat-option *ngFor="let t of selectedList5" [value]="t.value">
+                        {{t.value}}
+                      </mat-option>
+                    </mat-select>
+                    <div class="text-danger" *ngIf="ClinicForm.controls['Timezone'].touched">
+                      <span *ngIf="ClinicForm.controls['Timezone'].errors?.['required']">Select
+                        timezone</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-xl-6">
+                  <div class="form-group local-forms">
+                    <label for="Speciality">Speciality </label>
+
+                    <mat-select class="form-control select" placeholder="Select Speciality" formControlName="Speciality"
+                      [ngClass]="{'is-invalid': ClinicForm.controls['Speciality'].touched && ClinicForm.controls['Speciality'].errors}">
+                      <mat-option *ngFor="let data of SpecialityList" [value]="data.specialityname">
+                        {{data.specialityname}}
+                      </mat-option>
+                    </mat-select>
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-xl-6">
+                  <div class="form-group local-forms">
+                    <label for="Name">Clinic ID <span class="login-danger">*</span></label>
+                    <input class="form-control" type="text" placeholder="Clinic ID" formControlName="Name"
+                      [ngClass]="{'is-invalid': ClinicForm.controls['Name'].touched && ClinicForm.controls['Name'].errors }">
+                    <div class="invalid-feedback" *ngIf="ClinicForm.controls['Name'].touched">
+                      <span *ngIf="ClinicForm.controls['Name'].errors?.['required']">Enter
+                        name</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-12">
+                  <div class="form-group local-forms">
+                    <label for="address">Address <span class="login-danger">*</span></label>
+                    <textarea class="form-control" rows="3" cols="30" formControlName="Address"
+                      [ngClass]="{'is-invalid': ClinicForm.controls['Address'].touched && ClinicForm.controls['Address'].errors}"></textarea>
+                    <div class="text-danger" *ngIf="ClinicForm.controls['Address'].touched">
+                      <span *ngIf="ClinicForm.controls['Address'].errors?.['required']">Enter
+                        address</span>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="col-12 col-md-6 col-xl-3">
+                  <div class="form-group local-forms">
+                    <label for="country">Country <span class="login-danger">*</span></label>
+                    <mat-select class="form-control select" placeholder="Select Country" formControlName="Country"
+                      [ngClass]="{'is-invalid': ClinicForm.controls['Country'].touched && ClinicForm.controls['Country'].errors}"
+                      (selectionChange)="onCountryChange($event.value)">
+                      <mat-option *ngFor="let country of countries" [value]="country">
+                        {{ country }}
+                      </mat-option>
+                    </mat-select>
+                    <div class="text-danger" *ngIf="ClinicForm.controls['Country'].touched">
+                      <span *ngIf="ClinicForm.controls['Country'].errors?.['required']">Enter country</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-xl-3">
+                  <div class="form-group local-forms">
+                    <label for="state">State/Province <span class="login-danger">*</span></label>
+                    <mat-select class="form-control select" placeholder="Select State" formControlName="State"
+                      [ngClass]="{'is-invalid': ClinicForm.controls['State'].touched && ClinicForm.controls['State'].errors}"
+                      (selectionChange)="onStateChange($event.value)">
+                      <mat-option *ngFor="let state of states" [value]="state">
+                        {{ state }}
+                      </mat-option>
+                    </mat-select>
+                    <div class="text-danger" *ngIf="ClinicForm.controls['State'].touched">
+                      <span *ngIf="ClinicForm.controls['State'].errors?.['required']">Select state</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-xl-3">
+                  <div class="form-group local-forms">
+                    <label for="city">City <span class="login-danger">*</span></label>
+                    <mat-select class="form-control select" placeholder="Select City" formControlName="City"
+                      [ngClass]="{'is-invalid': ClinicForm.controls['City'].touched && ClinicForm.controls['City'].errors}">
+                      <mat-option *ngFor="let city of cities" [value]="city.name">
+                        {{ city.name }}
+                      </mat-option>
+                    </mat-select>
+                    <div class="text-danger" *ngIf="ClinicForm.controls['City'].touched">
+                      <span *ngIf="ClinicForm.controls['City'].errors?.['required']">Select city</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3">
+                  <div class="form-group local-forms">
+                    <label for="postalcode">Postal Code <span class="login-danger">*</span></label>
+                    <input class="form-control" type="text" placeholder="Postal Code" formControlName="Postal"
+                      [ngClass]="{'is-invalid': ClinicForm.controls['Postal'].touched && ClinicForm.controls['Postal'].errors}">
+                    <div class="text-danger" *ngIf="ClinicForm.controls['Postal'].touched">
+                      <span *ngIf="ClinicForm.controls['Postal'].errors?.['required']">Enter
+                        postal code</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-6">
+                  <div class="form-group local-forms">
+                    <label for="Contact">Contact </label>
+                    <input class="form-control" type="number" placeholder="Contact no" formControlName="Contact">
+                    <div class="text-danger" *ngIf="ClinicForm.controls['Contact'].touched">
+                      <span *ngIf="ClinicForm.controls['Contact'].errors?.['required']">Enter
+                        contact</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-6">
+                  <div class="form-group local-forms">
+                    <label for="Email">Email </label>
+                    <input class="form-control" type="email" placeholder="Email" formControlName="Email">
+                    <div class="text-danger" *ngIf="ClinicForm.controls['Email'].touched">
+                      <span *ngIf="ClinicForm.controls['Email'].errors?.['required']">Enter
+                        email</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="doctor-submit text-end">
+                    <button type="submit" class="btn btn-primary submit-form me-2" (submit)="send()">Submit</button>
+                    <button type="submit" class="btn btn-primary cancel-form">Cancel</button>
                   </div>
                 </div>
               </div>
-            </div>
+            </form>
           </div>
-        <div class="row">
-            <div class="col-sm-12">
-
-                <div class="card">
-                    <div class="card-body">
-                        <form [formGroup]="ClinicForm">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-heading">
-                                        <h4>Add Clinic</h4>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-6">
-                                    <div class="form-group local-forms">
-                                        <label for="Name">Clinic Name <span class="login-danger">*</span></label>
-                                        <input class="form-control" type="text" placeholder="Clinic Name"
-                                            formControlName="Name"
-                                            [ngClass]="{'is-invalid': ClinicForm.controls['Name'].touched && ClinicForm.controls['Name'].errors }">
-                                        <div class="invalid-feedback" *ngIf="ClinicForm.controls['Name'].touched">
-                                            <span *ngIf="ClinicForm.controls['Name'].errors?.['required']">Enter
-                                                name</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-6 col-xl-6">
-                                    <div class="form-group local-forms">
-                                        <label for="Timezone">Timezone <span class="login-danger">*</span></label>
-                                        <mat-select class="form-control select" placeholder="Select Timezone"
-                                            formControlName="Timezone"
-                                            [ngClass]="{'is-invalid': ClinicForm.controls['Timezone'].touched && ClinicForm.controls['Timezone'].errors}">
-                                            <mat-option *ngFor="let t of selectedList5" [value]="t.value">
-                                                {{t.value}}
-                                            </mat-option>
-                                        </mat-select>
-                                        <div class="text-danger" *ngIf="ClinicForm.controls['Timezone'].touched">
-                                            <span *ngIf="ClinicForm.controls['Timezone'].errors?.['required']">Select
-                                                timezone</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-6 col-xl-6">
-                                    <div class="form-group local-forms">
-                                        <label for="Speciality">Speciality </label>
-
-                                        <mat-select class="form-control select" placeholder="Select Speciality"
-                                            formControlName="Speciality"
-                                            [ngClass]="{'is-invalid': ClinicForm.controls['Speciality'].touched && ClinicForm.controls['Speciality'].errors}">
-                                            <mat-option *ngFor="let data of selectedList1" [value]="data.value">
-                                                {{data.value}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-6 col-xl-6">
-                                    <div class="form-group local-forms">
-                                        <label for="Name">Clinic ID <span class="login-danger">*</span></label>
-                                        <input class="form-control" type="text" placeholder="Clinic ID"
-                                            formControlName="Name"
-                                            [ngClass]="{'is-invalid': ClinicForm.controls['Name'].touched && ClinicForm.controls['Name'].errors }">
-                                        <div class="invalid-feedback" *ngIf="ClinicForm.controls['Name'].touched">
-                                            <span *ngIf="ClinicForm.controls['Name'].errors?.['required']">Enter
-                                                name</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-12">
-                                    <div class="form-group local-forms">
-                                        <label for="address">Address <span class="login-danger">*</span></label>
-                                        <textarea class="form-control" rows="3" cols="30" formControlName="Address"
-                                            [ngClass]="{'is-invalid': ClinicForm.controls['Address'].touched && ClinicForm.controls['Address'].errors}"></textarea>
-                                        <div class="text-danger" *ngIf="ClinicForm.controls['Address'].touched">
-                                            <span *ngIf="ClinicForm.controls['Address'].errors?.['required']">Enter
-                                                address</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-12 col-md-6 col-xl-3">
-                                    <div class="form-group local-forms">
-                                        <label for="country">Country <span class="login-danger">*</span></label>
-                                        <mat-select class="form-control select" placeholder="Select Country"
-                                            formControlName="Country"
-                                            [ngClass]="{'is-invalid': ClinicForm.controls['Country'].touched && ClinicForm.controls['Country'].errors}">
-                                            <mat-option *ngFor="let data of selectedList3" [value]="data.value">
-                                                {{data.value}}
-                                            </mat-option>   
-                                        </mat-select>
-                                        <div class="text-danger" *ngIf="ClinicForm.controls['Country'].touched">
-                                            <span *ngIf="ClinicForm.controls['Country'].errors?.['required']">Enter
-                                                country</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-3">
-                                    <div class="form-group local-forms">
-                                        <label for="state">State/Province <span class="login-danger">*</span></label>
-                                        <mat-select class="form-control select" placeholder="Select State"
-                                            formControlName="State"
-                                            [ngClass]="{'is-invalid': ClinicForm.controls['State'].touched && ClinicForm.controls['State'].errors}">
-                                            <mat-option *ngFor="let data of selectedList4" [value]="data.value">
-                                                {{data.value}}
-                                            </mat-option>
-                                        </mat-select>
-                                        <div class="text-danger" *ngIf="ClinicForm.controls['State'].touched">
-                                            <span *ngIf="ClinicForm.controls['State'].errors?.['required']">Select
-                                                state</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-3">
-                                    <div class="form-group local-forms">
-                                        <label for="city">City <span class="login-danger">*</span></label>
-                                        <mat-select class="form-control select" placeholder="Select City"
-                                            formControlName="City"
-                                            [ngClass]="{'is-invalid': ClinicForm.controls['City'].touched && ClinicForm.controls['City'].errors}">
-                                            <mat-option *ngFor="let data of selectedList2" [value]="data.value">
-                                                {{data.value}}
-                                            </mat-option>
-                                        </mat-select>
-                                        <div class="text-danger" *ngIf="ClinicForm.controls['City'].touched">
-                                            <span *ngIf="ClinicForm.controls['City'].errors?.['required']">Select
-                                                city</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-3">
-                                    <div class="form-group local-forms">
-                                        <label for="postalcode">Postal Code <span class="login-danger">*</span></label>
-                                        <input class="form-control" type="text" placeholder="Postal Code"
-                                            formControlName="Postal"
-                                            [ngClass]="{'is-invalid': ClinicForm.controls['Postal'].touched && ClinicForm.controls['Postal'].errors}">
-                                        <div class="text-danger" *ngIf="ClinicForm.controls['Postal'].touched">
-                                            <span *ngIf="ClinicForm.controls['Postal'].errors?.['required']">Enter
-                                                postal code</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-6">
-                                    <div class="form-group local-forms">
-                                        <label for="Contact">Contact </label>
-                                        <input class="form-control" type="number" placeholder="Contact no"
-                                            formControlName="Contact">
-                                        <div class="text-danger" *ngIf="ClinicForm.controls['Contact'].touched">
-                                            <span *ngIf="ClinicForm.controls['Contact'].errors?.['required']">Enter
-                                                contact</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-6">
-                                    <div class="form-group local-forms">
-                                        <label for="Email">Email </label>
-                                        <input class="form-control" type="email" placeholder="Email"
-                                            formControlName="Email">
-                                        <div class="text-danger" *ngIf="ClinicForm.controls['Email'].touched">
-                                            <span *ngIf="ClinicForm.controls['Email'].errors?.['required']">Enter
-                                                email</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="doctor-submit text-end">
-                                        <button type="submit" class="btn btn-primary submit-form me-2"
-                                            (submit)="send()">Submit</button>
-                                        <button type="submit" class="btn btn-primary cancel-form">Cancel</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-            </div>
         </div>
+
+      </div>
     </div>
+  </div>
 </div>

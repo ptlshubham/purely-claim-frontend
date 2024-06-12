@@ -165,9 +165,10 @@
                                         <label for="country">Country <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select Country"
                                             formControlName="Country"
-                                            [ngClass]="{'is-invalid': FacilityForm.controls['Country'].touched && FacilityForm.controls['Country'].errors}">
-                                            <mat-option *ngFor="let data of selectedList3" [value]="data.value">
-                                                {{data.value}}
+                                            [ngClass]="{'is-invalid': FacilityForm.controls['Country'].touched && FacilityForm.controls['Country'].errors}"
+                                            (selectionChange)="onCountryChange($event.value)">
+                                            <mat-option *ngFor="let country of countries" [value]="country">
+                                                {{ country }}
                                             </mat-option>
                                         </mat-select>
                                         <div class="text-danger" *ngIf="FacilityForm.controls['Country'].touched">
@@ -176,14 +177,16 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-12 col-md-6 col-xl-3">
                                     <div class="form-group local-forms">
                                         <label for="state">State/Province <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select State"
                                             formControlName="State"
-                                            [ngClass]="{'is-invalid': FacilityForm.controls['State'].touched && FacilityForm.controls['State'].errors}">
-                                            <mat-option *ngFor="let data of selectedList4" [value]="data.value">
-                                                {{data.value}}
+                                            [ngClass]="{'is-invalid': FacilityForm.controls['State'].touched && FacilityForm.controls['State'].errors}"
+                                            (selectionChange)="onStateChange($event.value)">
+                                            <mat-option *ngFor="let state of states" [value]="state">
+                                                {{ state }}
                                             </mat-option>
                                         </mat-select>
                                         <div class="text-danger" *ngIf="FacilityForm.controls['State'].touched">
@@ -192,14 +195,15 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-12 col-md-6 col-xl-3">
                                     <div class="form-group local-forms">
                                         <label for="city">City <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select City"
                                             formControlName="City"
                                             [ngClass]="{'is-invalid': FacilityForm.controls['City'].touched && FacilityForm.controls['City'].errors}">
-                                            <mat-option *ngFor="let data of selectedList2" [value]="data.value">
-                                                {{data.value}}
+                                            <mat-option *ngFor="let city of cities" [value]="city.name">
+                                                {{ city.name }}
                                             </mat-option>
                                         </mat-select>
                                         <div class="text-danger" *ngIf="FacilityForm.controls['City'].touched">
