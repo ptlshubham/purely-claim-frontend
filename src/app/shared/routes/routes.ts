@@ -1,7 +1,7 @@
 export class routes {
 
   private static Url = '';
-static add: any;
+  static add: any;
 
   public static get baseUrl(): string {
     return this.Url;
@@ -91,7 +91,9 @@ static add: any;
   public static get speciality(): string {
     return this.baseUrl + '/company/speciality';
   }
-
+  public static get addclinic(): string {
+    return this.baseUrl + '/clinic/add-clinic';
+  }
   public static get editAsset(): string {
     return this.baseUrl + '/assets/edit-asset';
   }

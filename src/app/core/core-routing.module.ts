@@ -98,6 +98,12 @@ const routes: Routes = [
         loadChildren: () =>
           import('./company/company.module').then((m) => m.CompanyModule),
       },
+
+      {
+        path: 'clinic',
+        loadChildren: () =>
+          import('./clinic/clinic.module').then((m) => m.ClinicModule),
+      },
       // {
       //   path: 'activities',
       //   loadChildren: () =>
@@ -174,4 +180,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CoreRoutingModule {}
+export class CoreRoutingModule { }
