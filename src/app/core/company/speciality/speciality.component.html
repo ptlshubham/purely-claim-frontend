@@ -32,7 +32,7 @@
                 <div class="col-6 col-md-6 col-xl-6">
                   <div class="form-group local-forms">
                     <label for="Name">Specialty Name:</label>
-                    <input class="form-control" type="text" placeholder="speciality name" formControlName="name"
+                    <input class="form-control" type="text" placeholder="Speciality Name" formControlName="name"
                       [(ngModel)]="specialityModel.specialityname"
                       [ngClass]="{ 'is-invalid': fa['name'].touched && fa['name'].errors}">
                     <div class="invalid-feedback"
@@ -73,7 +73,7 @@
                 <div class="col-12 col-md-6 col-xl-6">
                   <div class="form-group local-forms">
                     <label for="detail">Details</label>
-                    <input class="form-control" type="text" placeholder="enter details" formControlName="detail"
+                    <input class="form-control" type="text" placeholder="Enter Details" formControlName="detail"
                       [(ngModel)]="specialityModel.detail"
                       [ngClass]="{ 'is-invalid': fa['detail'].touched && fa['detail'].errors}">
                     <div class="invalid-feedback" *ngIf="fa['detail'].touched">
@@ -86,7 +86,7 @@
                   <div class="form-group local-forms">
                     <label for="detail">Notes </label>
                     <input class="form-control" type="text" formControlName="notes" [(ngModel)]="specialityModel.notes"
-                      placeholder="enter notes">
+                      placeholder="Enter Notes">
                   </div>
                 </div>
 

@@ -6,15 +6,14 @@
             <div class="row">
                 <div class="col-sm-12">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a [routerLink]="routes.addFacilities">Facility </a></li>
+                        <li class="breadcrumb-item"><a [routerLink]="routes.addclinic">Add Clinic </a></li>
                         <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
-                        <li class="breadcrumb-item active">Add Facilities</li>
+                        <li class="breadcrumb-item active">Add Clinic</li>
                     </ul>
                 </div>
             </div>
         </div>
-        <!-- /Page Header -->
-        <div class="row" *ngIf="isOpen==false">
+        <div class="row" *ngIf="isOpen == false">
             <div class="col-sm-12">
                 <div class="card card-table show-entire">
                     <div class="card-body">
@@ -23,7 +22,7 @@
                             <div class="row align-items-center">
                                 <div class="col">
                                     <div class="doctor-table-blk">
-                                        <h3>Employee List</h3>
+                                        <h3>Clinic List</h3>
                                         <div class="doctor-search-blk">
                                             <div class="top-nav-search table-search-blk">
                                                 <input class="form-control" placeholder="Search here"
@@ -32,9 +31,11 @@
                                                 <a class="btn"><img src="assets/img/icons/search-normal.svg"
                                                         alt="" /></a>
                                             </div>
+
                                             <div class="add-group">
-                                                <a class="btn btn-primary add-pluss ms-2" (click)="addFacilities()"><img
+                                                <a class="btn btn-primary add-pluss ms-2" (click)="addclinic()"><img
                                                         src="assets/img/icons/plus.svg" alt="" /></a>
+
                                             </div>
                                         </div>
                                     </div>
@@ -53,17 +54,15 @@
                                                 <input class="form-check-input" type="checkbox" value="something" />
                                             </div>
                                         </th>
-                                        <th mat-sort-header="name">Name</th>
-                                        <th mat-sort-header="department">Department</th>
+                                        <th mat-sort-header="name">Clinic Name</th>
                                         <th mat-sort-header="specialization">Specialization</th>
-                                        <th mat-sort-header="degree">Degree</th>
-                                        <th mat-sort-header="mobile">Mobile</th>
+                                        <th mat-sort-header="mobile">Contact</th>
                                         <th mat-sort-header="email">Email</th>
-                                        <th mat-sort-header="joiningDate">Joining Date</th>
                                         <th mat-sort-header="add-facilities">
                                             <a>
                                                 <i class="fa fa-trash" aria-hidden="true"> </i>
                                             </a>
+
 
                                         </th>
                                         <th mat-sort-header="add-facilities ">
@@ -72,38 +71,87 @@
                                             </a>
                                         </th>
 
-                                        <th></th>
                                     </tr>
                                 </thead>
-
+                                <!-- <tbody>
+                          <tr *ngFor="let data of employeeList">
+                            <td>
+                              <div class="form-check check-tables">
+                                <input
+                                  class="form-check-input"
+                                  type="checkbox"
+                                  value="something"
+                                />
+                              </div>
+                            </td>
+                            <td class="profile-image">
+                              <a [routerLink]="routes.profile"
+                                ><img
+                                  width="28"
+                                  height="28"
+                                  [src]="data.img"
+                                  class="rounded-circle m-r-5"
+                                  alt=""
+                                />
+                                {{ data.name }}</a
+                              >
+                            </td>
+                            <td>{{ data.department }}</td>
+                            <td>{{ data.specialization }}</td>
+                            <td>{{ data.degree }}</td>
+                            <td>
+                              <a href="javascript:;">{{ data.mobile }}</a>
+                            </td>
+                            <td>{{ data.email }}</td>
+                            <td>{{ data.joiningDate }}</td>
+                            <td class="text-end">
+                              <div class="dropdown dropdown-action">
+                                <a
+                                  href="javascript:void(0);"
+                                  class="action-icon dropdown-toggle"
+                                  data-bs-toggle="dropdown"
+                                  aria-expanded="false"
+                                  ><i class="fa fa-ellipsis-v"></i
+                                ></a>
+                                
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody> -->
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                            class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                </div>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row" *ngIf="isOpen==true">
+        <div class="row" *ngIf="isOpen == true">
             <div class="col-sm-12">
 
                 <div class="card">
                     <div class="card-body">
-                        <form [formGroup]="FacilityForm">
+                        <form [formGroup]="ClinicForm">
                             <div class="row">
                                 <div class="col-12">
+
                                     <div class="form-heading d-flex justify-content-between">
-                                        <h4>Add Facilities</h4>
+                                        <h4>Add Clinic</h4>
                                         <button type="submit" class="btn btn-primary submit-form mb-4 doctor-submit"
                                             (click)="BackToTabel()">Back</button>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-6">
                                     <div class="form-group local-forms">
-                                        <label for="Name">Facility Name <span class="login-danger">*</span></label>
-                                        <input class="form-control" type="text" placeholder="Facility Name"
+                                        <label for="Name">Clinic Name <span class="login-danger">*</span></label>
+                                        <input class="form-control" type="text" placeholder="Clinic Name"
                                             formControlName="Name"
-                                            [ngClass]="{'is-invalid': FacilityForm.controls['Name'].touched && FacilityForm.controls['Name'].errors }">
-                                        <div class="invalid-feedback" *ngIf="FacilityForm.controls['Name'].touched">
-                                            <span *ngIf="FacilityForm.controls['Name'].errors?.['required']">Enter
+                                            [ngClass]="{'is-invalid': ClinicForm.controls['Name'].touched && ClinicForm.controls['Name'].errors }">
+                                        <div class="invalid-feedback" *ngIf="ClinicForm.controls['Name'].touched">
+                                            <span *ngIf="ClinicForm.controls['Name'].errors?.['required']">Enter
                                                 name</span>
                                         </div>
                                     </div>
@@ -114,39 +162,28 @@
                                         <label for="Timezone">Timezone <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select Timezone"
                                             formControlName="Timezone"
-                                            [ngClass]="{'is-invalid': FacilityForm.controls['Timezone'].touched && FacilityForm.controls['Timezone'].errors}">
+                                            [ngClass]="{'is-invalid': ClinicForm.controls['Timezone'].touched && ClinicForm.controls['Timezone'].errors}">
                                             <mat-option *ngFor="let t of selectedList5" [value]="t.value">
                                                 {{t.value}}
                                             </mat-option>
                                         </mat-select>
-                                        <div class="text-danger" *ngIf="FacilityForm.controls['Timezone'].touched">
-                                            <span *ngIf="FacilityForm.controls['Timezone'].errors?.['required']">Select
+                                        <div class="text-danger" *ngIf="ClinicForm.controls['Timezone'].touched">
+                                            <span *ngIf="ClinicForm.controls['Timezone'].errors?.['required']">Select
                                                 timezone</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-6">
-                                    <div class="form-group local-forms">
-                                        <label for="NPI">National Provider Information(NPI) </label>
-                                        <input class="form-control" type="number" placeholder="NPI"
-                                            formControlName="NPI">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-6">
-                                    <div class="form-group local-forms">
-                                        <label for="POS">Place Of Service(POS) </label>
-                                        <input class="form-control" type="text" placeholder="POS" formControlName="POS">
-                                    </div>
-                                </div>
+
                                 <div class="col-12 col-md-6 col-xl-6">
                                     <div class="form-group local-forms">
                                         <label for="Speciality">Speciality </label>
 
                                         <mat-select class="form-control select" placeholder="Select Speciality"
                                             formControlName="Speciality"
-                                            [ngClass]="{'is-invalid': FacilityForm.controls['Speciality'].touched && FacilityForm.controls['Speciality'].errors}">
-                                            <mat-option *ngFor="let data of selectedList1" [value]="data.value">
-                                                {{data.value}}
+                                            [ngClass]="{'is-invalid': ClinicForm.controls['Speciality'].touched && ClinicForm.controls['Speciality'].errors}">
+                                            <mat-option *ngFor="let data of SpecialityList"
+                                                [value]="data.specialityname">
+                                                {{data.specialityname}}
                                             </mat-option>
                                         </mat-select>
                                     </div>
@@ -154,76 +191,35 @@
 
                                 <div class="col-12 col-md-6 col-xl-6">
                                     <div class="form-group local-forms">
-                                        <label for="TaxId">Tax ID </label>
-                                        <input class="form-control" type="text" placeholder="Tax ID"
-                                            formControlName="Taxid">
-                                    </div>
-                                </div>
-                                <!-- <div class="col-12 col-md-6 col-xl-6">  
-                                    <div class="form-group local-forms">
-                                        <label for="CLIA">CLIA <span class="login-danger">*</span></label>
-                                        <input class="form-control" type="text" placeholder="CLIA" >
-                                    </div>
-                                </div> -->
-                                <div class="col-12 col-md-6 col-xl-6">
-                                    <div class="form-group local-top-form">
-                                        <label for="CLIA" class="local-top">CLIA </label>
-                                        <div class="settings-btn upload-files-avator">
-                                            <input type="file" accept="image/*" name="image" id="file"
-                                                onchange="loadFile(event)" class="hide-input" formControlName="CLIA">>
-                                            <label for="file" class="upload">Choose File</label>
+                                        <label for="Name">Clinic ID <span class="login-danger">*</span></label>
+                                        <input class="form-control" type="text" placeholder="Clinic ID"
+                                            formControlName="clientid"
+                                            [ngClass]="{'is-invalid': ClinicForm.controls['clientid'].touched && ClinicForm.controls['clientid'].errors }">
+                                        <div class="invalid-feedback" *ngIf="ClinicForm.controls['clientid'].touched">
+                                            <span *ngIf="ClinicForm.controls['clientid'].errors?.['required']">Enter
+                                                name</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-6">
                                     <div class="form-group local-forms">
-                                        <label for="Email">Email </label>
-                                        <input class="form-control" type="email" placeholder="Email"
-                                            formControlName="Email">
-                                        <div class="text-danger" *ngIf="FacilityForm.controls['Email'].touched">
-                                            <span *ngIf="FacilityForm.controls['Email'].errors?.['required']">Enter
-                                                email</span>
+                                        <label for="Name">Short Code<span class="login-danger">*</span></label>
+                                        <input class="form-control" type="text" placeholder="Short Code"
+                                            formControlName="ShortCode"
+                                            [ngClass]="{'is-invalid': ClinicForm.controls['ShortCode'].touched && ClinicForm.controls['ShortCode'].errors }">
+                                        <div class="invalid-feedback" *ngIf="ClinicForm.controls['ShortCode'].touched">
+                                            <span *ngIf="ClinicForm.controls['ShortCode'].errors?.['required']">Enter
+                                                name</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-6">
-                                    <div class="form-group local-forms">
-                                        <label for="Contact">Contact </label>
-                                        <input class="form-control" type="number" placeholder="Contact no"
-                                            formControlName="Contact">
-                                        <div class="text-danger" *ngIf="FacilityForm.controls['Contact'].touched">
-                                            <span *ngIf="FacilityForm.controls['Contact'].errors?.['required']">Enter
-                                                contact</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- <div class="col-12 col-md-6 col-xl-6"> 
-                                    <div class="form-group local-forms">
-                                        <label for="avator" class="local-top">Avatar <span class="login-danger">*</span></label>
-                                        <div class="settings-btn upload-files-avator">
-                                            <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" class="hide-input">
-                                            <label for="file" class="upload">Choose File</label>
-                                        </div>
-                                    </div>
-                                </div> -->
-                                <div class="col-12 col-md-6 col-xl-6">
-                                    <div class="form-group local-top-form">
-                                        <label for="avator" class="local-top">Avatar </label>
-                                        <div class="settings-btn upload-files-avator">
-                                            <input type="file" accept="image/*" name="image" id="file"
-                                                onchange="loadFile(event)" class="hide-input" formControlName="Avatar">
-                                            <label for="file" class="upload">Choose File</label>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div class="col-12 col-sm-12">
                                     <div class="form-group local-forms">
                                         <label for="address">Address <span class="login-danger">*</span></label>
                                         <textarea class="form-control" rows="3" cols="30" formControlName="Address"
-                                            [ngClass]="{'is-invalid': FacilityForm.controls['Address'].touched && FacilityForm.controls['Address'].errors}"></textarea>
-                                        <div class="text-danger" *ngIf="FacilityForm.controls['Address'].touched">
-                                            <span *ngIf="FacilityForm.controls['Address'].errors?.['required']">Enter
+                                            [ngClass]="{'is-invalid': ClinicForm.controls['Address'].touched && ClinicForm.controls['Address'].errors}"></textarea>
+                                        <div class="text-danger" *ngIf="ClinicForm.controls['Address'].touched">
+                                            <span *ngIf="ClinicForm.controls['Address'].errors?.['required']">Enter
                                                 address</span>
                                         </div>
                                     </div>
@@ -235,14 +231,14 @@
                                         <label for="country">Country <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select Country"
                                             formControlName="Country"
-                                            [ngClass]="{'is-invalid': FacilityForm.controls['Country'].touched && FacilityForm.controls['Country'].errors}"
+                                            [ngClass]="{'is-invalid': ClinicForm.controls['Country'].touched && ClinicForm.controls['Country'].errors}"
                                             (selectionChange)="onCountryChange($event.value)">
                                             <mat-option *ngFor="let country of countries" [value]="country">
                                                 {{ country }}
                                             </mat-option>
                                         </mat-select>
-                                        <div class="text-danger" *ngIf="FacilityForm.controls['Country'].touched">
-                                            <span *ngIf="FacilityForm.controls['Country'].errors?.['required']">Enter
+                                        <div class="text-danger" *ngIf="ClinicForm.controls['Country'].touched">
+                                            <span *ngIf="ClinicForm.controls['Country'].errors?.['required']">Enter
                                                 country</span>
                                         </div>
                                     </div>
@@ -253,14 +249,14 @@
                                         <label for="state">State/Province <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select State"
                                             formControlName="State"
-                                            [ngClass]="{'is-invalid': FacilityForm.controls['State'].touched && FacilityForm.controls['State'].errors}"
+                                            [ngClass]="{'is-invalid': ClinicForm.controls['State'].touched && ClinicForm.controls['State'].errors}"
                                             (selectionChange)="onStateChange($event.value)">
                                             <mat-option *ngFor="let state of states" [value]="state">
                                                 {{ state }}
                                             </mat-option>
                                         </mat-select>
-                                        <div class="text-danger" *ngIf="FacilityForm.controls['State'].touched">
-                                            <span *ngIf="FacilityForm.controls['State'].errors?.['required']">Select
+                                        <div class="text-danger" *ngIf="ClinicForm.controls['State'].touched">
+                                            <span *ngIf="ClinicForm.controls['State'].errors?.['required']">Select
                                                 state</span>
                                         </div>
                                     </div>
@@ -271,13 +267,13 @@
                                         <label for="city">City <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select City"
                                             formControlName="City"
-                                            [ngClass]="{'is-invalid': FacilityForm.controls['City'].touched && FacilityForm.controls['City'].errors}">
+                                            [ngClass]="{'is-invalid': ClinicForm.controls['City'].touched && ClinicForm.controls['City'].errors}">
                                             <mat-option *ngFor="let city of cities" [value]="city.name">
                                                 {{ city.name }}
                                             </mat-option>
                                         </mat-select>
-                                        <div class="text-danger" *ngIf="FacilityForm.controls['City'].touched">
-                                            <span *ngIf="FacilityForm.controls['City'].errors?.['required']">Select
+                                        <div class="text-danger" *ngIf="ClinicForm.controls['City'].touched">
+                                            <span *ngIf="ClinicForm.controls['City'].errors?.['required']">Select
                                                 city</span>
                                         </div>
                                     </div>
@@ -287,33 +283,48 @@
                                         <label for="postalcode">Postal Code <span class="login-danger">*</span></label>
                                         <input class="form-control" type="text" placeholder="Postal Code"
                                             formControlName="Postal"
-                                            [ngClass]="{'is-invalid': FacilityForm.controls['Postal'].touched && FacilityForm.controls['Postal'].errors}">
-                                        <div class="text-danger" *ngIf="FacilityForm.controls['Postal'].touched">
-                                            <span *ngIf="FacilityForm.controls['Postal'].errors?.['required']">Enter
+                                            [ngClass]="{'is-invalid': ClinicForm.controls['Postal'].touched && ClinicForm.controls['Postal'].errors}">
+                                        <div class="text-danger" *ngIf="ClinicForm.controls['Postal'].touched">
+                                            <span *ngIf="ClinicForm.controls['Postal'].errors?.['required']">Enter
                                                 postal code</span>
                                         </div>
                                     </div>
                                 </div>
-
-
-                                <!-- <div class="col-12 col-md-6 col-xl-6">  
+                                <div class="col-12 col-md-6 col-xl-6">
                                     <div class="form-group local-forms">
-                                        <label for="password">Password<span class="login-danger">*</span></label>
-                                        <input class="form-control" type="password" >
+                                        <label for="Contact">Contact </label>
+                                        <input class="form-control" type="number" placeholder="Contact no"
+                                            formControlName="Contact">
+                                        <div class="text-danger" *ngIf="ClinicForm.controls['Contact'].touched">
+                                            <span *ngIf="ClinicForm.controls['Contact'].errors?.['required']">Enter
+                                                contact</span>
+                                        </div>
                                     </div>
-                                </div> -->
-
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-forms">
+                                        <label for="Email">Email </label>
+                                        <input class="form-control" type="email" placeholder="Email"
+                                            formControlName="Email">
+                                        <div class="text-danger" *ngIf="ClinicForm.controls['Email'].touched">
+                                            <span *ngIf="ClinicForm.controls['Email'].errors?.['required']">Enter
+                                                email</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-12">
                                     <div class="doctor-submit text-end">
                                         <button type="submit" class="btn btn-primary submit-form me-2"
                                             (submit)="send()">Submit</button>
-                                        <button type="submit" class="btn btn-primary cancel-form">Cancel</button>
+                                        <button type="submit" class="btn btn-primary cancel-form"
+                                            (click)="backToTable()">Cancel</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

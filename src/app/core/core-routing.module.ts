@@ -99,11 +99,11 @@ const routes: Routes = [
           import('./company/company.module').then((m) => m.CompanyModule),
       },
 
-      {
-        path: 'clinic',
-        loadChildren: () =>
-          import('./clinic/clinic.module').then((m) => m.ClinicModule),
-      },
+      // {
+      //   path: 'clinic',
+      //   loadChildren: () =>
+      //     import('./company/clinic.module').then((m) => m.ClinicModule),
+      // },
       // {
       //   path: 'activities',
       //   loadChildren: () =>

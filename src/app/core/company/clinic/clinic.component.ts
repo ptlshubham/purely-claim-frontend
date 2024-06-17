@@ -1,24 +1,24 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { getTimezonesForCountry } from 'countries-and-timezones';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { routes } from 'src/app/shared/routes/routes';
 import { Sort } from '@angular/material/sort';
 import { ClinicService } from 'src/app/shared/services/clinic.service';
 import { FacilitiesService } from 'src/app/shared/services/facilities.services';
+
 interface data {
   value: string;
 }
-
 
 let coun: any;
 coun = getTimezonesForCountry('US');
 console.log(coun);
 @Component({
-  selector: 'app-add-clinic',
-  templateUrl: './add-clinic.component.html',
-  styleUrls: ['./add-clinic.component.scss']
+  selector: 'app-clinic',
+  templateUrl: './clinic.component.html',
+  styleUrls: ['./clinic.component.scss']
 })
-export class AddClinicComponent {
+export class ClinicComponent {
   public routes = routes;
   ClinicList: any = [];
   searchDataValue: string = ''
@@ -27,6 +27,8 @@ export class AddClinicComponent {
   states: any[] = [];
   cities: any[] = [];
   allData: any = [];
+  isOpen: boolean = false;
+
   selectedList5: data[] = [
     { value: 'Chicago (GMT-5)' },
     { value: 'Denver (GMT-6)' },
@@ -74,19 +76,16 @@ export class AddClinicComponent {
     this.ClinicForm = new FormGroup({
       Name: new FormControl('', Validators.required),
       Timezone: new FormControl('', Validators.required),
-      NPI: new FormControl(),
-      POS: new FormControl(),
       Speciality: new FormControl(),
-      Taxid: new FormControl(),
-      CLIA: new FormControl(),
       Email: new FormControl('', Validators.required),
       Contact: new FormControl('', Validators.required),
-      Avatar: new FormControl(),
       Address: new FormControl('', Validators.required),
       Country: new FormControl('', Validators.required),
       State: new FormControl('', Validators.required),
       City: new FormControl('', Validators.required),
       Postal: new FormControl('', Validators.required),
+      clientid: new FormControl('', Validators.required),
+      ShortCode: new FormControl('', Validators.required)
     });
 
 
@@ -106,7 +105,12 @@ export class AddClinicComponent {
   send(): void {
     console.log(coun);
   }
-
+  backToTable() {
+    this.isOpen = false;
+  }
+  addclinic() {
+    this.isOpen = true;
+  }
   getAllSpeciality() {
     debugger;
     this.FacilitiesService.getAllSpecialityDetails().subscribe((res: any) => {
@@ -115,5 +119,7 @@ export class AddClinicComponent {
   }
   public searchData(value: any): void {
   }
-
+  BackToTabel() {
+    this.isOpen = false;
+  }
 }

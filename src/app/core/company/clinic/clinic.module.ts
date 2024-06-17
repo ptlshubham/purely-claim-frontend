@@ -4,17 +4,14 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ClinicRoutingModule } from './clinic-routing.module';
 import { ClinicComponent } from './clinic.component';
 
-
 @NgModule({
   declarations: [
-    ClinicComponent,
-
+    ClinicComponent
   ],
   imports: [
     CommonModule,
     ClinicRoutingModule,
-    SharedModule,
-
+    SharedModule
   ]
 })
 export class ClinicModule { }

@@ -1,13 +1,3 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-employee-list',
-//   templateUrl: './employee-list.component.html',
-//   styleUrls: ['./employee-list.component.css']
-// })
-// export class EmployeeListComponent {
-//   // Your component logic here
-// }
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -30,10 +20,9 @@ export class EmployeeListComponent implements OnInit {
   public routes = routes;
   public employeeList: Array<employeeList> = [];
   dataSource!: MatTableDataSource<employeeList>;
+  public validationForm: FormGroup;
 
-  validationForm = new FormGroup({
-    firstName: new FormGroup(''),
-  });
+
 
   public showFilter = false;
   public searchDataValue = '';
@@ -52,12 +41,14 @@ export class EmployeeListComponent implements OnInit {
   isOpen: boolean = false;
   selectedValue: any;
   selectedList1: any;
+  NPI: any;
+  EmployeeType: any
   selectedList2: any;
   selectedList3: any;
   selectedList4: any;
   data: any;
   formBuilder: any;
-
+  Timezone: any;
   markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach((control) => {
       control.markAsTouched();
@@ -71,19 +62,8 @@ export class EmployeeListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getEmployeeDetails();
+    this.validateForm();
 
-    this.validationForm = this.formBuilder.group({
-      role: ['', [Validators.required]],
-      name: ['', [Validators.required]],
-      contact: [
-        '',
-        [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')],
-      ],
-      email: ['', [Validators.required, Validators.email]],
-      birthday_date: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-    });
 
     this.getTableData();
     this.selectedList1 = [
@@ -92,10 +72,31 @@ export class EmployeeListComponent implements OnInit {
       { value: 'Dentist' },
       // Add more options as needed
     ];
+    this.NPI = [
+      { value: 'Individual' },
+      { value: 'Organization' },
+
+      // Add more options as needed
+    ];
+    this.Timezone = [
+      { value: 'Chicago (GMT-5)' },
+      { value: 'Denver (GMT-6)' },
+      { value: 'Phoenix (GMT-7)' },
+      { value: 'Los Angeles (GMT-7)' },
+      { value: 'Anchorage (GMT-8)' },
+      { value: 'Honolulu (GMT-10)' }
+
+    ]
     this.selectedList2 = [
       { value: 'Select City' },
       { value: 'Alaska' },
       { value: 'Los Angeles' },
+      // Add more options as needed
+    ];
+    this.EmployeeType = [
+      { value: 'Full Time' },
+      { value: 'Part Time' },
+
       // Add more options as needed
     ];
     this.selectedList3 = [
@@ -112,26 +113,35 @@ export class EmployeeListComponent implements OnInit {
       // Add more options as needed
     ];
   }
-  getEmployeeDetails() {
-    throw new Error('Method not implemented.');
+
+
+  private validateForm(): void {
+    this.validationForm = new FormGroup({
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+
+    });
+
+
   }
+
 
   private getTableData(): void {
     this.employeeList = [];
     this.serialNumberArray = [];
 
-    this.data.getEmployeeList().subscribe((data: apiResultFormat) => {
-      this.totalData = data.totalData;
-      data.data.map((res: employeeList, index: number) => {
-        const serialNumber = index + 1;
-        if (index >= this.skip && serialNumber <= this.limit) {
-          this.employeeList.push(res);
-          this.serialNumberArray.push(serialNumber);
-        }
-      });
-      this.dataSource = new MatTableDataSource<employeeList>(this.employeeList);
-      this.calculateTotalPages(this.totalData, this.pageSize);
-    });
+    // this.data.getEmployeeList().subscribe((data: apiResultFormat) => {
+    //   this.totalData = data.totalData;
+    //   data.data.map((res: employeeList, index: number) => {
+    //     const serialNumber = index + 1;
+    //     if (index >= this.skip && serialNumber <= this.limit) {
+    //       this.employeeList.push(res);
+    //       this.serialNumberArray.push(serialNumber);
+    //     }
+    //   });
+    //   this.dataSource = new MatTableDataSource<employeeList>(this.employeeList);
+    //   this.calculateTotalPages(this.totalData, this.pageSize);
+    // });
   }
 
   public searchData(value: any): void {
