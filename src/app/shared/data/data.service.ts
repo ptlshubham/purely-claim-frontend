@@ -313,25 +313,30 @@ export class DataService {
               menuValue: 'specilaity',
               route: routes.speciality,
               base: routes.speciality,
-            }
-          ],
-        },
-        {
-          menuValue: 'Clinic',
-          hasSubRoute: true,
-          showSubRoute: false,
-          icon: 'fa-cube',
-          base: 'clinic',
-          faIcon: true,
-          subMenus: [
+            },
             {
-              menuValue: 'add-clinic',
+              menuValue: 'Add-Clinic',
               route: routes.addclinic,
               base: routes.addclinic,
             }
-
           ],
         },
+        // {
+        //   menuValue: 'Clinic',
+        //   hasSubRoute: true,
+        //   showSubRoute: false,
+        //   icon: 'fa-cube',
+        //   base: 'clinic',
+        //   faIcon: true,
+        //   subMenus: [
+        //     {
+        //       menuValue: 'add-clinic',
+        //       route: routes.addclinic,
+        //       base: routes.addclinic,
+        //     }
+
+        //   ],
+        // },
         // {
         //     menuValue: 'employee-list',
         //     hasSubRoute: true,

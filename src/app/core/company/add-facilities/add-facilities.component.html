@@ -14,7 +14,75 @@
             </div>
         </div>
         <!-- /Page Header -->
-        <div class="row">
+        <div class="row" *ngIf="isOpen==false">
+            <div class="col-sm-12">
+                <div class="card card-table show-entire">
+                    <div class="card-body">
+                        <!-- Table Header -->
+                        <div class="page-table-header mb-2">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <div class="doctor-table-blk">
+                                        <h3>Employee List</h3>
+                                        <div class="doctor-search-blk">
+                                            <div class="top-nav-search table-search-blk">
+                                                <input class="form-control" placeholder="Search here"
+                                                    [(ngModel)]="searchDataValue"
+                                                    (ngModelChange)="searchData(searchDataValue)" />
+                                                <a class="btn"><img src="assets/img/icons/search-normal.svg"
+                                                        alt="" /></a>
+                                            </div>
+                                            <div class="add-group">
+                                                <a class="btn btn-primary add-pluss ms-2" (click)="addFacilities()"><img
+                                                        src="assets/img/icons/plus.svg" alt="" /></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Table Header -->
+
+                        <div class="table-responsive">
+                            <table matSort (matSortChange)="sortData($event)"
+                                class="table border-0 custom-table comman-table datatable mb-0">
+                                <thead>
+                                    <tr>
+                                        <th mat-sort-header="checkbox">
+                                            <div class="form-check check-tables">
+                                                <input class="form-check-input" type="checkbox" value="something" />
+                                            </div>
+                                        </th>
+                                        <th mat-sort-header="name">Name</th>
+                                        <th mat-sort-header="department">Department</th>
+                                        <th mat-sort-header="specialization">Specialization</th>
+                                        <th mat-sort-header="degree">Degree</th>
+                                        <th mat-sort-header="mobile">Mobile</th>
+                                        <th mat-sort-header="email">Email</th>
+                                        <th mat-sort-header="joiningDate">Joining Date</th>
+                                        <th mat-sort-header="add-facilities">
+                                            <a>
+                                                <i class="fa fa-trash" aria-hidden="true"> </i>
+                                            </a>
+
+                                        </th>
+                                        <th mat-sort-header="add-facilities ">
+                                            <a>
+                                                <i class="fa-solid fa-pen-to-square "></i>
+                                            </a>
+                                        </th>
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="isOpen==true">
             <div class="col-sm-12">
 
                 <div class="card">
@@ -22,8 +90,10 @@
                         <form [formGroup]="FacilityForm">
                             <div class="row">
                                 <div class="col-12">
-                                    <div class="form-heading">
+                                    <div class="form-heading d-flex justify-content-between">
                                         <h4>Add Facilities</h4>
+                                        <button type="submit" class="btn btn-primary submit-form mb-4 doctor-submit"
+                                            (click)="BackToTabel()">Back</button>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-6">
@@ -165,9 +235,10 @@
                                         <label for="country">Country <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select Country"
                                             formControlName="Country"
-                                            [ngClass]="{'is-invalid': FacilityForm.controls['Country'].touched && FacilityForm.controls['Country'].errors}">
-                                            <mat-option *ngFor="let data of selectedList3" [value]="data.value">
-                                                {{data.value}}
+                                            [ngClass]="{'is-invalid': FacilityForm.controls['Country'].touched && FacilityForm.controls['Country'].errors}"
+                                            (selectionChange)="onCountryChange($event.value)">
+                                            <mat-option *ngFor="let country of countries" [value]="country">
+                                                {{ country }}
                                             </mat-option>
                                         </mat-select>
                                         <div class="text-danger" *ngIf="FacilityForm.controls['Country'].touched">
@@ -176,14 +247,16 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-12 col-md-6 col-xl-3">
                                     <div class="form-group local-forms">
                                         <label for="state">State/Province <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select State"
                                             formControlName="State"
-                                            [ngClass]="{'is-invalid': FacilityForm.controls['State'].touched && FacilityForm.controls['State'].errors}">
-                                            <mat-option *ngFor="let data of selectedList4" [value]="data.value">
-                                                {{data.value}}
+                                            [ngClass]="{'is-invalid': FacilityForm.controls['State'].touched && FacilityForm.controls['State'].errors}"
+                                            (selectionChange)="onStateChange($event.value)">
+                                            <mat-option *ngFor="let state of states" [value]="state">
+                                                {{ state }}
                                             </mat-option>
                                         </mat-select>
                                         <div class="text-danger" *ngIf="FacilityForm.controls['State'].touched">
@@ -192,14 +265,15 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-12 col-md-6 col-xl-3">
                                     <div class="form-group local-forms">
                                         <label for="city">City <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select City"
                                             formControlName="City"
                                             [ngClass]="{'is-invalid': FacilityForm.controls['City'].touched && FacilityForm.controls['City'].errors}">
-                                            <mat-option *ngFor="let data of selectedList2" [value]="data.value">
-                                                {{data.value}}
+                                            <mat-option *ngFor="let city of cities" [value]="city.name">
+                                                {{ city.name }}
                                             </mat-option>
                                         </mat-select>
                                         <div class="text-danger" *ngIf="FacilityForm.controls['City'].touched">

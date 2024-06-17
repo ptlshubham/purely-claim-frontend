@@ -13,132 +13,123 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="isOpen == false">
             <div class="col-sm-12">
-              <div class="card card-table show-entire">
-                <div class="card-body">
-                  <!-- Table Header -->
-                  <div class="page-table-header mb-2">
-                    <div class="row align-items-center">
-                      <div class="col">
-                        <div class="doctor-table-blk">
-                          <h3>CLinic List</h3>
-                          <div class="doctor-search-blk">
-                            <!-- <div class="top-nav-search table-search-blk">
-                              <input
-                                class="form-control"
-                                placeholder="Search here"
-                                [(ngModel)]="searchDataValue"
-                                (ngModelChange)="searchData(searchDataValue)"
-                              />
-                              <a class="btn"
-                                ><img src="assets/img/icons/search-normal.svg" alt=""
-                              /></a>
-                            </div> -->
-      
-                            <div class="add-group">
-                              <!-- <a
-                                class="btn btn-primary add-pluss ms-2"
-                                (click)="addToList()"
-                                ><img src="assets/img/icons/plus.svg" alt=""
-                              /></a> -->
-                              <a
-                                href="javascript:;"
-                                class="btn btn-primary doctor-refresh ms-2"
-                                ><img src="assets/img/icons/re-fresh.svg" alt=""
-                              /></a>
+                <div class="card card-table show-entire">
+                    <div class="card-body">
+                        <!-- Table Header -->
+                        <div class="page-table-header mb-2">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <div class="doctor-table-blk">
+                                        <h3>Clinic List</h3>
+                                        <div class="doctor-search-blk">
+                                            <div class="top-nav-search table-search-blk">
+                                                <input class="form-control" placeholder="Search here"
+                                                    [(ngModel)]="searchDataValue"
+                                                    (ngModelChange)="searchData(searchDataValue)" />
+                                                <a class="btn"><img src="assets/img/icons/search-normal.svg"
+                                                        alt="" /></a>
+                                            </div>
+
+                                            <div class="add-group">
+                                                <a class="btn btn-primary add-pluss ms-2" (click)="addclinic()"><img
+                                                        src="assets/img/icons/plus.svg" alt="" /></a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
                         </div>
-                      </div>
-                      
-                    </div>
-                  </div>
-                  <!-- /Table Header -->
-      
-                  <div class="table-responsive">
-                    <table
-                      matSort
-                      (matSortChange)="sortData($event)"
-                      class="table border-0 custom-table comman-table datatable mb-0"
-                    >
-                      <thead>
-                        <tr>
-                          <th mat-sort-header="checkbox">
-                            <div class="form-check check-tables">
-                              <input
-                                class="form-check-input"
-                                type="checkbox"
-                                value="something"
-                              />
-                            </div>
-                          </th>
-                          <th mat-sort-header="name">Clinic Name</th>
-                          <th mat-sort-header="specialization">Specialization</th>
-                          <th mat-sort-header="mobile">Mobile</th>
-                          <th mat-sort-header="email">Email</th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <!-- <tbody>
-                        <tr *ngFor="let data of employeeList">
-                          <td>
-                            <div class="form-check check-tables">
-                              <input
-                                class="form-check-input"
-                                type="checkbox"
-                                value="something"
-                              />
-                            </div>
-                          </td>
-                          <td class="profile-image">
-                            <a [routerLink]="routes.profile"
-                              ><img
-                                width="28"
-                                height="28"
-                                [src]="data.img"
-                                class="rounded-circle m-r-5"
-                                alt=""
-                              />
-                              {{ data.name }}</a
-                            >
-                          </td>
-                          <td>{{ data.department }}</td>
-                          <td>{{ data.specialization }}</td>
-                          <td>{{ data.degree }}</td>
-                          <td>
-                            <a href="javascript:;">{{ data.mobile }}</a>
-                          </td>
-                          <td>{{ data.email }}</td>
-                          <td>{{ data.joiningDate }}</td>
-                          <td class="text-end">
-                            <div class="dropdown dropdown-action">
-                              <a
-                                href="javascript:void(0);"
-                                class="action-icon dropdown-toggle"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                                ><i class="fa fa-ellipsis-v"></i
-                              ></a>
-                              <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item"
-                                  ><i class="fa fa-pencil m-r-5"></i> Edit</a
-                                >
-                                <a class="dropdown-item" href="javascript:void(0);"
-                                  ><i class="fa fa-trash-o m-r-5"></i> Delete</a
-                                >
+                        <!-- /Table Header -->
+
+                        <div class="table-responsive">
+                            <table matSort (matSortChange)="sortData($event)"
+                                class="table border-0 custom-table comman-table datatable mb-0">
+                                <thead>
+                                    <tr>
+                                        <th mat-sort-header="checkbox">
+                                            <div class="form-check check-tables">
+                                                <input class="form-check-input" type="checkbox" value="something" />
+                                            </div>
+                                        </th>
+                                        <th mat-sort-header="name">Clinic Name</th>
+                                        <th mat-sort-header="specialization">Specialization</th>
+                                        <th mat-sort-header="mobile">Contact</th>
+                                        <th mat-sort-header="email">Email</th>
+                                        <th mat-sort-header="add-facilities">
+                                            <a>
+                                                <i class="fa fa-trash" aria-hidden="true"> </i>
+                                            </a>
+
+
+                                        </th>
+                                        <th mat-sort-header="add-facilities ">
+                                            <a>
+                                                <i class="fa-solid fa-pen-to-square "></i>
+                                            </a>
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <!-- <tbody>
+                          <tr *ngFor="let data of employeeList">
+                            <td>
+                              <div class="form-check check-tables">
+                                <input
+                                  class="form-check-input"
+                                  type="checkbox"
+                                  value="something"
+                                />
                               </div>
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody> -->
-                    </table>
-                  </div>
+                            </td>
+                            <td class="profile-image">
+                              <a [routerLink]="routes.profile"
+                                ><img
+                                  width="28"
+                                  height="28"
+                                  [src]="data.img"
+                                  class="rounded-circle m-r-5"
+                                  alt=""
+                                />
+                                {{ data.name }}</a
+                              >
+                            </td>
+                            <td>{{ data.department }}</td>
+                            <td>{{ data.specialization }}</td>
+                            <td>{{ data.degree }}</td>
+                            <td>
+                              <a href="javascript:;">{{ data.mobile }}</a>
+                            </td>
+                            <td>{{ data.email }}</td>
+                            <td>{{ data.joiningDate }}</td>
+                            <td class="text-end">
+                              <div class="dropdown dropdown-action">
+                                <a
+                                  href="javascript:void(0);"
+                                  class="action-icon dropdown-toggle"
+                                  data-bs-toggle="dropdown"
+                                  aria-expanded="false"
+                                  ><i class="fa fa-ellipsis-v"></i
+                                ></a>
+                                
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody> -->
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                            class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                </div>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-        <div class="row">
+        </div>
+        <div class="row" *ngIf="isOpen == true">
             <div class="col-sm-12">
 
                 <div class="card">
@@ -146,8 +137,11 @@
                         <form [formGroup]="ClinicForm">
                             <div class="row">
                                 <div class="col-12">
-                                    <div class="form-heading">
+
+                                    <div class="form-heading d-flex justify-content-between">
                                         <h4>Add Clinic</h4>
+                                        <button type="submit" class="btn btn-primary submit-form mb-4 doctor-submit"
+                                            (click)="BackToTabel()">Back</button>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-6">
@@ -187,8 +181,9 @@
                                         <mat-select class="form-control select" placeholder="Select Speciality"
                                             formControlName="Speciality"
                                             [ngClass]="{'is-invalid': ClinicForm.controls['Speciality'].touched && ClinicForm.controls['Speciality'].errors}">
-                                            <mat-option *ngFor="let data of selectedList1" [value]="data.value">
-                                                {{data.value}}
+                                            <mat-option *ngFor="let data of SpecialityList"
+                                                [value]="data.specialityname">
+                                                {{data.specialityname}}
                                             </mat-option>
                                         </mat-select>
                                     </div>
@@ -198,10 +193,22 @@
                                     <div class="form-group local-forms">
                                         <label for="Name">Clinic ID <span class="login-danger">*</span></label>
                                         <input class="form-control" type="text" placeholder="Clinic ID"
-                                            formControlName="Name"
-                                            [ngClass]="{'is-invalid': ClinicForm.controls['Name'].touched && ClinicForm.controls['Name'].errors }">
-                                        <div class="invalid-feedback" *ngIf="ClinicForm.controls['Name'].touched">
-                                            <span *ngIf="ClinicForm.controls['Name'].errors?.['required']">Enter
+                                            formControlName="clientid"
+                                            [ngClass]="{'is-invalid': ClinicForm.controls['clientid'].touched && ClinicForm.controls['clientid'].errors }">
+                                        <div class="invalid-feedback" *ngIf="ClinicForm.controls['clientid'].touched">
+                                            <span *ngIf="ClinicForm.controls['clientid'].errors?.['required']">Enter
+                                                name</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-forms">
+                                        <label for="Name">Short Code<span class="login-danger">*</span></label>
+                                        <input class="form-control" type="text" placeholder="Short Code"
+                                            formControlName="ShortCode"
+                                            [ngClass]="{'is-invalid': ClinicForm.controls['ShortCode'].touched && ClinicForm.controls['ShortCode'].errors }">
+                                        <div class="invalid-feedback" *ngIf="ClinicForm.controls['ShortCode'].touched">
+                                            <span *ngIf="ClinicForm.controls['ShortCode'].errors?.['required']">Enter
                                                 name</span>
                                         </div>
                                     </div>
@@ -224,10 +231,11 @@
                                         <label for="country">Country <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select Country"
                                             formControlName="Country"
-                                            [ngClass]="{'is-invalid': ClinicForm.controls['Country'].touched && ClinicForm.controls['Country'].errors}">
-                                            <mat-option *ngFor="let data of selectedList3" [value]="data.value">
-                                                {{data.value}}
-                                            </mat-option>   
+                                            [ngClass]="{'is-invalid': ClinicForm.controls['Country'].touched && ClinicForm.controls['Country'].errors}"
+                                            (selectionChange)="onCountryChange($event.value)">
+                                            <mat-option *ngFor="let country of countries" [value]="country">
+                                                {{ country }}
+                                            </mat-option>
                                         </mat-select>
                                         <div class="text-danger" *ngIf="ClinicForm.controls['Country'].touched">
                                             <span *ngIf="ClinicForm.controls['Country'].errors?.['required']">Enter
@@ -235,14 +243,16 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-12 col-md-6 col-xl-3">
                                     <div class="form-group local-forms">
                                         <label for="state">State/Province <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select State"
                                             formControlName="State"
-                                            [ngClass]="{'is-invalid': ClinicForm.controls['State'].touched && ClinicForm.controls['State'].errors}">
-                                            <mat-option *ngFor="let data of selectedList4" [value]="data.value">
-                                                {{data.value}}
+                                            [ngClass]="{'is-invalid': ClinicForm.controls['State'].touched && ClinicForm.controls['State'].errors}"
+                                            (selectionChange)="onStateChange($event.value)">
+                                            <mat-option *ngFor="let state of states" [value]="state">
+                                                {{ state }}
                                             </mat-option>
                                         </mat-select>
                                         <div class="text-danger" *ngIf="ClinicForm.controls['State'].touched">
@@ -251,14 +261,15 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-12 col-md-6 col-xl-3">
                                     <div class="form-group local-forms">
                                         <label for="city">City <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select City"
                                             formControlName="City"
                                             [ngClass]="{'is-invalid': ClinicForm.controls['City'].touched && ClinicForm.controls['City'].errors}">
-                                            <mat-option *ngFor="let data of selectedList2" [value]="data.value">
-                                                {{data.value}}
+                                            <mat-option *ngFor="let city of cities" [value]="city.name">
+                                                {{ city.name }}
                                             </mat-option>
                                         </mat-select>
                                         <div class="text-danger" *ngIf="ClinicForm.controls['City'].touched">
@@ -305,7 +316,8 @@
                                     <div class="doctor-submit text-end">
                                         <button type="submit" class="btn btn-primary submit-form me-2"
                                             (submit)="send()">Submit</button>
-                                        <button type="submit" class="btn btn-primary cancel-form">Cancel</button>
+                                        <button type="submit" class="btn btn-primary cancel-form"
+                                            (click)="backToTable()">Cancel</button>
                                     </div>
                                 </div>
                             </div>

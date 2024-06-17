@@ -2,19 +2,24 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CompanyComponent } from './company.component';
 
-const routes: Routes = [{ path: '', component: CompanyComponent,
-  children:[
+const routes: Routes = [{
+  path: '', component: CompanyComponent,
+  children: [
     {
-      path:'add-facilities',
+      path: 'add-facilities',
       loadChildren: () => import('./add-facilities/add-facilities.module').then((m) => m.AddFacilitiesModule),
     },
     {
-      path:'facility-type',
+      path: 'facility-type',
       loadChildren: () => import('./facility-type/facility-type.module').then((m) => m.FacilityTypeModule),
     },
     {
-      path:'speciality',
+      path: 'speciality',
       loadChildren: () => import('./speciality/speciality.module').then((m) => m.SpecialityModule),
+    },
+    {
+      path: 'clinic',
+      loadChildren: () => import('./clinic/clinic.module').then((m) => m.ClinicModule),
     }
   ]
 }];

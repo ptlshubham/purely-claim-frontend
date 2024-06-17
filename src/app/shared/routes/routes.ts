@@ -92,7 +92,7 @@ export class routes {
     return this.baseUrl + '/company/speciality';
   }
   public static get addclinic(): string {
-    return this.baseUrl + '/clinic/add-clinic';
+    return this.baseUrl + '/company/clinic';
   }
   public static get cliniclist(): string {
     return this.baseUrl + '/clinic/clinic-list';
