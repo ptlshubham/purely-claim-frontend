@@ -282,9 +282,14 @@ export class DataService {
               menuValue: 'employee-list',
               route: routes.employeelist,
               base: routes.employeelist,
-            }
-
+            },
+            {
+              menuValue: 'employee-facility',
+              route: routes.employeefacility,
+              base: routes.employeefacility,
+            },
           ],
+          
         },
         {
           menuValue: 'Facility',

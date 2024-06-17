@@ -6,11 +6,11 @@ import { EmployeeRoutingModule } from './employee-routing.module';
 import { EmployeeComponent } from './employee.component';
 //import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { FormGroup,FormControl, Validators, ReactiveFormsModule,FormBuilder } from '@angular/forms';
+import { EmployeeFacilityComponent } from './employee-facility/employee-facility.component';
 
 @NgModule({
   declarations: [
-    
-    
+    EmployeeFacilityComponent
   ],
   imports: [
     CommonModule,

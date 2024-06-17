@@ -94,6 +94,12 @@ export class routes {
   public static get addclinic(): string {
     return this.baseUrl + '/clinic/add-clinic';
   }
+  public static get cliniclist(): string {
+    return this.baseUrl + '/clinic/clinic-list';
+  }
+  public static get employeefacility(): string {
+    return this.baseUrl + '/employee/employee-facility';
+  }
   public static get editAsset(): string {
     return this.baseUrl + '/assets/edit-asset';
   }

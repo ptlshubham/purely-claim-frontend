@@ -22,6 +22,11 @@ const routes: Routes = [
       loadChildren: () =>
         import('./employee-list/employee-list.module').then((m) => m.EmployeeListModule),
     },
+    {
+      path: 'employee-facility',
+      loadChildren: () =>
+        import('./employee-facility/employee-facility.module').then((m) => m.EmployeeFacilityModule),
+    },
     // {
     //   path: 'employee-profile',
     //   loadChildren: () =>

@@ -103,13 +103,8 @@ export interface facilityList {
   name: string;
 
 }
-export interface schedule {
-  doctorName: string;
-  department: string;
-  availableDays: string;
-  availableTime: string | number;
-  status: string;
-  img: string;
+export interface employeeList {
+ 
 }
 export interface providentFund {
   name: string;
@@ -209,6 +204,13 @@ export interface employeeList {
   email: string;
   joiningDate: number;
   img: string;
+}
+export interface ClinicList {
+  img: string;
+  clinicname: string;
+  specialization: string;
+  mobile: string;
+  email: string;
 }
 export interface patientsList {
   name: string;
