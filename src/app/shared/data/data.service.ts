@@ -271,7 +271,7 @@ export class DataService {
 
 
         {
-          menuValue: 'Employee',
+          menuValue: 'User',
           hasSubRoute: true,
           showSubRoute: false,
           base: 'employee',
@@ -279,17 +279,17 @@ export class DataService {
           img: 'assets/img/icons/menu-icon-01.svg',
           subMenus: [
             {
-              menuValue: 'employee-list',
+              menuValue: 'User-list',
               route: routes.employeelist,
               base: routes.employeelist,
             },
             {
-              menuValue: 'employee-facility',
+              menuValue: 'User-facility',
               route: routes.employeefacility,
               base: routes.employeefacility,
             },
           ],
-          
+
         },
         {
           menuValue: 'Facility',
@@ -300,25 +300,42 @@ export class DataService {
           faIcon: true,
           subMenus: [
             {
-              menuValue: 'add-facilities',
+              menuValue: 'Add-facilities',
               route: routes.addFacilities,
               base: routes.addFacilities,
             },
             {
-              menuValue: 'facility-type',
+              menuValue: 'Facility-type',
               route: routes.facilityType,
               base: routes.facilityType,
             },
             {
-              menuValue: 'specilaity',
+              menuValue: 'Specilaity',
               route: routes.speciality,
               base: routes.speciality,
             },
             {
-              menuValue: 'Add-Clinic',
+              menuValue: 'Add-Primary-Facility',
               route: routes.addclinic,
               base: routes.addclinic,
             }
+          ],
+        },
+
+        {
+          menuValue: 'Patient',
+          hasSubRoute: true,
+          showSubRoute: false,
+          icon: 'fa-cube',
+          base: 'Patient',
+          faIcon: true,
+          subMenus: [
+            {
+              menuValue: 'add-Patient',
+              route: routes.addPatient,
+              base: routes.addPatient,
+            },
+
           ],
         },
         // {

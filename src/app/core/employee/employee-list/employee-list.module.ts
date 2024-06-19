@@ -4,7 +4,7 @@ import { EmployeeListRoutingModule } from './employee-list-routing.module';
 import { EmployeeListComponent } from './employee-list.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     EmployeeListRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule
   ]
 })
 export class EmployeeListModule { }

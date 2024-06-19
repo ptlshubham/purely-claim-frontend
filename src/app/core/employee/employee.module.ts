@@ -5,7 +5,7 @@ import { EmployeeRoutingModule } from './employee-routing.module';
 //import { EmployeelistComponent } from './employeelist/employeelist.component';
 import { EmployeeComponent } from './employee.component';
 //import { EmployeeListComponent } from './employee-list/employee-list.component';
-import { FormGroup,FormControl, Validators, ReactiveFormsModule,FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { EmployeeFacilityComponent } from './employee-facility/employee-facility.component';
 
 @NgModule({
@@ -16,19 +16,19 @@ import { EmployeeFacilityComponent } from './employee-facility/employee-facility
     CommonModule,
     EmployeeRoutingModule,
     ReactiveFormsModule
-    
+
   ]
 })
-export class EmployeeModule { 
-//   employeeForm: FormGroup;
+export class EmployeeModule {
+  //   employeeForm: FormGroup;
 
-//   constructor(private fb: FormBuilder) {
-//     this.employeeForm = this.fb.group({
-//       firstName: ['', Validators.required],
-//       lastName: ['', Validators.required],
-//       email: ['', [Validators.required, Validators.email]],
-      
-//     });
-// }
+  //   constructor(private fb: FormBuilder) {
+  //     this.employeeForm = this.fb.group({
+  //       firstName: ['', Validators.required],
+  //       lastName: ['', Validators.required],
+  //       email: ['', [Validators.required, Validators.email]],
+
+  //     });
+  // }
 }
 

@@ -1,16 +1,12 @@
 
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DataService } from 'src/app/shared/data/data.service';
-import {
-  apiResultFormat,
-  pageSelection,
-  employeeList,
-} from 'src/app/shared/models/models';
+import { apiResultFormat, pageSelection, employeeList } from 'src/app/shared/models/models';
 import { routes } from 'src/app/shared/routes/routes';
-import { FormControl, Validators } from '@angular/forms';
+import { ClinicService } from 'src/app/shared/services/clinic.service';
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
@@ -21,8 +17,6 @@ export class EmployeeListComponent implements OnInit {
   public employeeList: Array<employeeList> = [];
   dataSource!: MatTableDataSource<employeeList>;
   public validationForm: FormGroup;
-
-
 
   public showFilter = false;
   public searchDataValue = '';
@@ -57,15 +51,13 @@ export class EmployeeListComponent implements OnInit {
       }
     });
   }
-  get f() {
-    return this.validationForm.controls;
-  }
 
+  countries: any[] = [];
+  states: any[] = [];
+  cities: any[] = [];
+  allData: any = [];
   ngOnInit() {
     this.validateForm();
-
-
-    this.getTableData();
     this.selectedList1 = [
       { value: 'Orthopedics' },
       { value: 'Radiology' },
@@ -113,19 +105,37 @@ export class EmployeeListComponent implements OnInit {
       // Add more options as needed
     ];
   }
-
+  constructor(
+    private clinicService: ClinicService
+  ) {
+    this.clinicService.getAllAddressData().then((data: any) => {
+      this.allData = data;
+      this.countries = [...new Set(data.map((item: any) => item.country))];
+    });
+  }
+  get f() { return this.validationForm.controls; }
 
   private validateForm(): void {
     this.validationForm = new FormGroup({
       firstName: new FormControl('', Validators.required),
+      middleName: new FormControl('', Validators.required),
+      DateOfBirth: new FormControl('', Validators.required),
+      contact: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
-
-    });
-
-
+      email: new FormControl('', [Validators.required, Validators.email]),
+      gender: new FormControl('', Validators.required),
+      Postal: new FormControl('', Validators.required),
+      Address: new FormControl('', Validators.required),
+      Country: new FormControl('', Validators.required),
+      State: new FormControl('', Validators.required),
+      City: new FormControl('', Validators.required),
+      SSN: new FormControl('', Validators.required),
+      primaryFacility: new FormControl('', Validators.required),
+      jobtitle: new FormControl('', Validators.required),
+      DateofJoin: new FormControl('', Validators.required),
+      NPI: new FormControl('', Validators.required)
+    })
   }
-
-
   private getTableData(): void {
     this.employeeList = [];
     this.serialNumberArray = [];
@@ -211,5 +221,15 @@ export class EmployeeListComponent implements OnInit {
   }
   addToList() {
     this.isOpen = true;
+  }
+  onCountryChange(country: string) {
+    this.states = this.allData.filter((item: any) => item.country === country).map((item: any) => item.subcountry);
+    this.cities = [];
+    this.validationForm.controls['State'].reset();
+    this.validationForm.controls['City'].reset();
+  }
+  onStateChange(state: string) {
+    this.cities = this.allData.filter((item: any) => item.subcountry === state);
+    this.validationForm.controls['City'].reset();
   }
 }

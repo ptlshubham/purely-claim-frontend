@@ -18,35 +18,19 @@
                 <div class="account-logo">
                   <div class="text-center">
                     <a>
-                      <img
-                        src="assets/img/login-logo.png"
-                        alt="new logo"
-                        height="73"
-                        width="132"
-                    /></a>
+                      <img src="assets/img/login-logo.png" alt="new logo" height="73" width="132" /></a>
                   </div>
                 </div>
                 <h2>Getting Started</h2>
 
-                <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                <form [formGroup]="signupForm">
                   <div class="form-group">
-                    <label for="Full"
-                      >First Name <span class="login-danger">*</span></label
-                    >
-                    <input
-                      class="form-control"
-                      type="text"
-                      [ngClass]="{
+                    <label for="Full">First Name <span class="login-danger">*</span></label>
+                    <input class="form-control" placeholder="Enter First Name" type="text" [ngClass]="{
                         'is-invalid':
                           f['firstname'].touched && f['firstname'].errors
-                      }"
-                      formControlName="firstname"
-                      id="firstname"
-                    />
-                    <div
-                      *ngIf="f['firstname'].touched && f['firstname'].errors"
-                      class="invalid-feedback"
-                    >
+                      }" formControlName="firstname" id="firstname" />
+                    <div *ngIf="f['firstname'].touched && f['firstname'].errors" class="invalid-feedback">
                       <div *ngIf="f['firstname'].errors?.['required']">
                         Firstname is required
                       </div>
@@ -54,23 +38,12 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="Full"
-                      >Last Name <span class="login-danger">*</span></label
-                    >
-                    <input
-                      class="form-control"
-                      type="text"
-                      [ngClass]="{
+                    <label for="Full">Last Name <span class="login-danger">*</span></label>
+                    <input class="form-control" type="text" placeholder="Enter Last Name" [ngClass]="{
                         'is-invalid':
                           f['lastname'].touched && f['lastname'].errors
-                      }"
-                      formControlName="lastname"
-                      id="lastname"
-                    />
-                    <div
-                      *ngIf="f['lastname'].touched && f['lastname'].errors"
-                      class="invalid-feedback"
-                    >
+                      }" formControlName="lastname" id="lastname" />
+                    <div *ngIf="f['lastname'].touched && f['lastname'].errors" class="invalid-feedback">
                       <div *ngIf="f['lastname'].errors?.['required']">
                         Last Name is required
                       </div>
@@ -78,156 +51,52 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="Full"
-                      >Email <span class="login-danger">*</span></label
-                    >
-                    <input
-                      class="form-control"
-                      type="text"
-                      [ngClass]="{
-                        'is-invalid': f['email'].touched && f['email'].errors
-                      }"
-                      formControlName="email"
-                      id="email"
-                    />
-                    <div
-                      *ngIf="
-                        f['email'].touched ||
-                        f['email'].invalid ||
-                        f['email'].pristine
-                      "
-                      class="invalid-feedback"
-                    >
+                    <label for="Full">Email <span class="login-danger">*</span></label>
+                    <input class="form-control" type="email" placeholder="Enter Email "
+                      [ngClass]="{'is-invalid': f['email'].touched && f['email'].errors}" formControlName="email"
+                      id="email" />
+                    <div *ngIf=" f['email'].touched || f['email'].invalid || f['email'].pristine"
+                      class="invalid-feedback">
                       <div *ngIf="f['email'].errors?.['required']">
                         Email is required.
                       </div>
-                      <div *ngIf="f['email'].errors?.['pattern']">
-                        Please, Enter valid email id.
+                      <div *ngIf="f['email'].errors?.['email']">
+                        Please enter a valid email address.
                       </div>
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="Full"
-                      >Phone no. <span class="login-danger">*</span></label
-                    >
-                    <input
-                      class="form-control"
-                      type="text"
-                      [ngClass]="{
-                        'is-invalid':
-                          f['phoneno'].touched && f['phoneno'].errors
-                      }"
-                      formControlName="phoneno"
-                      required
-                    />
-                    <!-- <div *ngIf="f['phoneno'].touched && f['phoneno'].errors" class="invalid-feedback">
-              <div *ngIf="f['phoneno'].errors?.['required']">phoneno is required</div>
-          </div> -->
-                    <div
-                      *ngIf="
-                        f['phoneno'].touched ||
-                        f['phoneno'].invalid ||
-                        f['phoneno'].pristine
-                      "
-                      class="invalid-feedback"
-                    >
+                    <label for="Full">Contact No. <span class="login-danger">*</span></label>
+                    <input class="form-control" type="text" placeholder="Enter Contact Number"
+                      [ngClass]="{'is-invalid':f['phoneno'].touched && f['phoneno'].errors}" formControlName="phoneno"
+                      required />
+
+                    <div *ngIf=" f['phoneno'].touched || f['phoneno'].invalid || f['phoneno'].pristine "
+                      class="invalid-feedback">
                       <div *ngIf="f['phoneno'].errors?.['required']">
                         Phone Number is required.
                       </div>
-                      <div *ngIf="f['phoneno'].errors?.['pattern']">
+                      <!-- <div *ngIf="f['phoneno'].errors?.['pattern']">
                         Please, Enter 10 digit Phone Number.
-                      </div>
+                      </div> -->
                     </div>
                   </div>
-
-                  <div class="row">
-                    <div class="form-group col-lg-6">
-                      <label for="Full"
-                        >Clinic Name <span class="login-danger">*</span></label
-                      >
-                      <input
-                        class="form-control"
-                        type="text"
-                        [ngClass]="{
-                          'is-invalid':
-                            f['clinicname'].touched && f['clinicname'].errors
-                        }"
-                        formControlName="clinicname"
-                      />
-                      <div
-                        *ngIf="
-                          f['clinicname'].touched && f['clinicname'].errors
-                        "
-                        class="invalid-feedback"
-                      >
-                        <div *ngIf="f['clinicname'].errors?.['required']">
-                          Clinicname is required
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group col-lg-6">
-                      <label for="Full"
-                        >Clinc code <span class="login-danger">*</span></label
-                      >
-                      <input
-                        class="form-control"
-                        type="text"
-                        [ngClass]="{
-                          'is-invalid':
-                            f['cliniccode'].touched && f['cliniccode'].errors
-                        }"
-                        formControlName="cliniccode"
-                      />
-                      <div
-                        *ngIf="
-                          f['cliniccode'].touched && f['cliniccode'].errors
-                        "
-                        class="invalid-feedback"
-                      >
-                        <div *ngIf="f['cliniccode'].errors?.['required']">
-                          Cliniccode is required
-                        </div>
-                      </div>
+                  <div class="form-group local-forms">
+                    <label for="Speciality">Speciality <span class="login-danger">*</span></label>
+                    <mat-select class="form-control select" placeholder="Select Speciality" formControlName="Speciality"
+                      [ngClass]="{'is-invalid': signupForm.controls['Speciality'].touched && signupForm.controls['Speciality'].errors}">
+                      <mat-option *ngFor="let data of specialityList" [value]="data.specialityname">
+                        {{data.specialityname}}
+                      </mat-option>
+                    </mat-select>
+                    <div class="text-danger" *ngIf="signupForm.controls['Speciality'].touched">
+                      <span *ngIf="signupForm.controls['Speciality'].errors?.['required']">Select
+                        Speciality</span>
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label for="Full"
-                      >Speciality<span class="login-danger">*</span></label
-                    >
-                    <select id="myDropdown" class="form-control">
-                      <option value="ops"></option>
-                      <option value="option1">option 1</option>
-                      <option value="option2">Option 2</option>
-                      <option value="option3">Option 3</option>
-                      <option value="option4">Option 4</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="Full"
-                      >Zip <span class="login-danger">*</span></label
-                    >
-                    <input
-                      class="form-control"
-                      type="text"
-                      [ngClass]="{
-                        'is-invalid': f['zip'].touched && f['zip'].errors
-                      }"
-                      formControlName="zip"
-                    />
-                    <div
-                      *ngIf="f['zip'].touched && f['zip'].errors"
-                      class="invalid-feedback"
-                    >
-                      <div *ngIf="f['zip'].errors?.['required']">
-                        Zip is required
-                      </div>
-                    </div>
-                  </div>
-
                   <div class="form-group login-btn">
-                    <button class="btn btn-primary btn-block" type="submit">
+                    <button class="btn btn-primary btn-block" type="submit" [disabled]="!signupForm.valid">
                       Sign up
                     </button>
                   </div>

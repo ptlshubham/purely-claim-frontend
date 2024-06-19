@@ -36,13 +36,13 @@ export class FacilityTypeComponent implements OnInit {
   public pageSelection: Array<pageSelection> = [];
   public totalPages = 0;
   isOpen: boolean = false;
-  facType!: UntypedFormGroup;
+  ValidationForm!: UntypedFormGroup;
   submitted = false;
   searchQuery: string = '';
   filterfacilityList: any = []
 
 
-  get fa() { return this.facType.controls; }
+  get fa() { return this.ValidationForm.controls; }
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -53,7 +53,7 @@ export class FacilityTypeComponent implements OnInit {
     this.getTableData();
     this.getAllfacilityType();
     this.dataSource = new MatTableDataSource<any>([]);
-    this.facType = this.formBuilder.group({
+    this.ValidationForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern(/^[A-Za-z]{1,20}$/)]],
     })
   }
@@ -153,7 +153,7 @@ export class FacilityTypeComponent implements OnInit {
 
   public onSubmit(): void {
     this.submitted = true;
-    if (this.facType.invalid) {
+    if (this.ValidationForm.invalid) {
       return;
     }
     else {
@@ -163,7 +163,7 @@ export class FacilityTypeComponent implements OnInit {
           this.getAllfacilityType();
           this.isOpen = false;
           this.facilityTypeModel = {};
-          this.facType.markAsUntouched();
+          this.ValidationForm.markAsUntouched();
         }
       })
 

@@ -35,10 +35,10 @@
                     </div>
                     <br>
                     <!-- Body here -->
-                    <form [formGroup]="facType">
+                    <form [formGroup]="ValidationForm">
                         <div class="row">
                             <div class="col-6 col-md-6 col-xl-6">
-                                <form [formGroup]="facType">
+                                <form [formGroup]="ValidationForm">
                                     <div class="form-group local-forms">
                                         <label for="Name">Facility Type Name:</label>
                                         <input class="form-control" type="text" placeholder="facility type name"
@@ -54,8 +54,8 @@
                                 </form>
                             </div>
                             <div class="col-6 doctor-submit text-start">
-                                <button type="submit" class="btn btn-primary submit-form me-2"
-                                    (click)="onSubmit()">Submit</button>
+                                <button type="submit" class="btn btn-primary submit-form me-2" (click)="onSubmit()"
+                                    [disabled]="ValidationForm.invalid">Submit</button>
                             </div>
                         </div>
                     </form>

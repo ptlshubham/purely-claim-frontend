@@ -6,6 +6,7 @@ import { ClinicService } from 'src/app/shared/services/clinic.service';
 import { Sort } from '@angular/material/sort';
 import { facilityList } from 'src/app/shared/models/models';
 import { MatTableDataSource } from '@angular/material/table';
+import { FacilitiesService } from 'src/app/shared/services/facilities.services';
 
 interface data {
   value: string;
@@ -31,12 +32,8 @@ export class AddFacilitiesComponent {
   // validationForm!: FormGroup;
   // submitted = false;
   facilityList: [];
-  selectedList1: data[] = [
-    { value: 'Neurology' },
-    { value: 'Orthology' },
-    { value: 'Radiology' },
-  ];
-  isOpen: boolean = false
+  isOpen: boolean = false;
+  specialityList: any = []
   countries: any[] = [];
   states: any[] = [];
   cities: any[] = [];
@@ -49,15 +46,18 @@ export class AddFacilitiesComponent {
     { value: 'Anchorage (GMT-8)' },
     { value: 'Honolulu (GMT-10)' }
   ]
+
+  PlaceOfService: data[] = [
+    { value: 'Home' },
+    { value: 'Office' },
+  ]
   public FacilityList: Array<facilityList> = [];
   dataSource!: MatTableDataSource<facilityList>;
-
   public searchDataValue = '';
-
   public FacilityForm: FormGroup;
-
   constructor(
     private ClinicService: ClinicService,
+    private facilitiesService: FacilitiesService
   ) {
     this.ClinicService.getAllAddressData().then((data: any) => {
       this.allData = data;
@@ -67,24 +67,20 @@ export class AddFacilitiesComponent {
 
   ngOnInit(): void {
     this.validateForm();
-    // this.validationForm = this.formBuilder.group({
-    //   name: ['', [Validators.required]]
-    // });
+    this.getAllSpeciality();
   }
-  // get f() { return this.validationForm.controls; }
 
   private validateForm(): void {
     this.FacilityForm = new FormGroup({
       Name: new FormControl('', Validators.required),
       Timezone: new FormControl('', Validators.required),
-      NPI: new FormControl(),
-      POS: new FormControl(),
-      Speciality: new FormControl(),
-      Taxid: new FormControl(),
-      CLIA: new FormControl(),
+      NPI: new FormControl('', Validators.required),
+      pos: new FormControl('', Validators.required),
+      Speciality: new FormControl('', Validators.required),
+      Taxid: new FormControl('', Validators.required),
       Email: new FormControl('', Validators.required),
       Contact: new FormControl('', Validators.required),
-      Avatar: new FormControl(),
+      Avatar: new FormControl('', Validators.required),
       Address: new FormControl('', Validators.required),
       Country: new FormControl('', Validators.required),
       State: new FormControl('', Validators.required),
@@ -93,14 +89,14 @@ export class AddFacilitiesComponent {
     })
   }
   onCountryChange(country: string) {
-    this.states = this.allData.filter((item: any) => item.country === country).map((item: any) => item.subcountry);
+    this.states = [...new Set(this.allData.filter((item: any) => item.country === country).map((item: any) => item.subcountry))];
     this.cities = [];
     this.FacilityForm.controls['State'].reset();
     this.FacilityForm.controls['City'].reset();
   }
 
   onStateChange(state: string) {
-    this.cities = this.allData.filter((item: any) => item.subcountry === state);
+    this.cities = [...new Set(this.allData.filter((item: any) => item.subcountry === state).map((item: any) => item.name))];
     this.FacilityForm.controls['City'].reset();
   }
   addFacilities() {
@@ -129,5 +125,12 @@ export class AddFacilitiesComponent {
 
   BackToTabel() {
     this.isOpen = false
+  }
+
+  getAllSpeciality() {
+    debugger;
+    this.facilitiesService.getAllSpecialityDetails().subscribe((res: any) => {
+      this.specialityList = res;
+    });
   }
 }

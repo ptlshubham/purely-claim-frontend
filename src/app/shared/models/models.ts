@@ -33,6 +33,10 @@ export interface staffleave {
   status: string;
   img: string;
 }
+
+export interface patientList {
+
+}
 export interface invoices {
   invoiceNumber: string;
   patient: string;
@@ -104,7 +108,7 @@ export interface facilityList {
 
 }
 export interface employeeList {
- 
+
 }
 export interface providentFund {
   name: string;

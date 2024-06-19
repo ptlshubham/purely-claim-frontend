@@ -23,7 +23,7 @@
                             <div class="row align-items-center">
                                 <div class="col">
                                     <div class="doctor-table-blk">
-                                        <h3>Employee List</h3>
+                                        <h3>Facility List</h3>
                                         <div class="doctor-search-blk">
                                             <div class="top-nav-search table-search-blk">
                                                 <input class="form-control" placeholder="Search here"
@@ -54,25 +54,26 @@
                                             </div>
                                         </th>
                                         <th mat-sort-header="name">Name</th>
-                                        <th mat-sort-header="department">Department</th>
+
                                         <th mat-sort-header="specialization">Specialization</th>
                                         <th mat-sort-header="degree">Degree</th>
-                                        <th mat-sort-header="mobile">Mobile</th>
+                                        <th mat-sort-header="mobile">Contact</th>
                                         <th mat-sort-header="email">Email</th>
                                         <th mat-sort-header="joiningDate">Joining Date</th>
-                                        <th mat-sort-header="add-facilities">
-                                            <a>
-                                                <i class="fa fa-trash" aria-hidden="true"> </i>
-                                            </a>
+                                        <div>
+                                            <th mat-sort-header=" add-facilities">
+                                                <a>
+                                                    <i class="fa fa-trash" aria-hidden="true"> </i>
+                                                </a>
+                                            </th>
+                                            <th mat-sort-header="add-facilities ">
+                                                <a>
+                                                    <i class="fa-solid fa-pen-to-square "></i>
+                                                </a>
+                                            </th>
+                                        </div>
 
-                                        </th>
-                                        <th mat-sort-header="add-facilities ">
-                                            <a>
-                                                <i class="fa-solid fa-pen-to-square "></i>
-                                            </a>
-                                        </th>
 
-                                        <th></th>
                                     </tr>
                                 </thead>
 
@@ -96,7 +97,15 @@
                                             (click)="BackToTabel()">Back</button>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-6">
+                                <!-- <div class="col-12 col-md-6 col-xl-4">
+                                    <label for="FacilityImage">Facility Image</label>
+                                    <div class="profile-img-wrap">
+                                        <img src="assets/img/user.jpg" alt="user">
+                                        <input type="file" class="form-control" id="FacilityImage">
+                                    </div>
+                                </div> -->
+
+                                <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label for="Name">Facility Name <span class="login-danger">*</span></label>
                                         <input class="form-control" type="text" placeholder="Facility Name"
@@ -109,7 +118,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12 col-md-6 col-xl-6">
+                                <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label for="Timezone">Timezone <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select Timezone"
@@ -125,57 +134,70 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-6">
+                                <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label for="NPI">National Provider Information(NPI) </label>
-                                        <input class="form-control" type="number" placeholder="NPI"
+                                        <input class="form-control" type="number"
+                                            placeholder="Enter National Provider Information" formControlName="NPI"
+                                            [ngClass]="{'is-invalid': FacilityForm.controls['NPI'].touched && FacilityForm.controls['NPI'].errors}"
                                             formControlName="NPI">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-6">
-                                    <div class="form-group local-forms">
-                                        <label for="POS">Place Of Service(POS) </label>
-                                        <input class="form-control" type="text" placeholder="POS" formControlName="POS">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 col-xl-6">
-                                    <div class="form-group local-forms">
-                                        <label for="Speciality">Speciality </label>
-
-                                        <mat-select class="form-control select" placeholder="Select Speciality"
-                                            formControlName="Speciality"
-                                            [ngClass]="{'is-invalid': FacilityForm.controls['Speciality'].touched && FacilityForm.controls['Speciality'].errors}">
-                                            <mat-option *ngFor="let data of selectedList1" [value]="data.value">
-                                                {{data.value}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-6 col-xl-6">
-                                    <div class="form-group local-forms">
-                                        <label for="TaxId">Tax ID </label>
-                                        <input class="form-control" type="text" placeholder="Tax ID"
-                                            formControlName="Taxid">
-                                    </div>
-                                </div>
-                                <!-- <div class="col-12 col-md-6 col-xl-6">  
-                                    <div class="form-group local-forms">
-                                        <label for="CLIA">CLIA <span class="login-danger">*</span></label>
-                                        <input class="form-control" type="text" placeholder="CLIA" >
-                                    </div>
-                                </div> -->
-                                <div class="col-12 col-md-6 col-xl-6">
-                                    <div class="form-group local-top-form">
-                                        <label for="CLIA" class="local-top">CLIA </label>
-                                        <div class="settings-btn upload-files-avator">
-                                            <input type="file" accept="image/*" name="image" id="file"
-                                                onchange="loadFile(event)" class="hide-input" formControlName="CLIA">>
-                                            <label for="file" class="upload">Choose File</label>
+                                        <div class="invalid-feedback" *ngIf="FacilityForm.controls['NPI'].touched">
+                                            <span *ngIf="FacilityForm.controls['NPI'].errors?.['required']">
+                                                NPI Number Required</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-6">
+
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="pos">Place of service <span class="login-danger">*</span></label>
+                                        <mat-select class="form-control select" placeholder="Select Place Of Service"
+                                            formControlName="pos"
+                                            [ngClass]="{'is-invalid': FacilityForm.controls['pos'].touched && FacilityForm.controls['pos'].errors}">
+                                            <mat-option *ngFor="let t of PlaceOfService" [value]="t.value">
+                                                {{t.value}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <div class="text-danger" *ngIf="FacilityForm.controls['pos'].touched">
+                                            <span *ngIf="FacilityForm.controls['pos'].errors?.['required']">
+                                                Place Of Service Required*</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="Speciality">Speciality </label>
+                                        <mat-select class="form-control select" placeholder="Select Speciality"
+                                            formControlName="Speciality"
+                                            [ngClass]="{'is-invalid': FacilityForm.controls['Speciality'].touched && FacilityForm.controls['Speciality'].errors}">
+                                            <mat-option *ngFor="let data of specialityList"
+                                                [value]="data.specialityname">
+                                                {{data.specialityname}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <div class="text-danger" *ngIf="FacilityForm.controls['Speciality'].touched">
+                                            <span
+                                                *ngIf="FacilityForm.controls['Speciality'].errors?.['required']">Select
+                                                Speciality</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="TaxId">Tax ID </label>
+                                        <input class="form-control" type="text" placeholder="Tax ID"
+                                            formControlName="Taxid"
+                                            [ngClass]="{'is-invalid': FacilityForm.controls['Taxid'].touched && FacilityForm.controls['Taxid'].errors }">
+                                        <div class="invalid-feedback" *ngIf="FacilityForm.controls['Taxid'].touched">
+                                            <span *ngIf="FacilityForm.controls['Taxid'].errors?.['required']">Text Id
+                                                Requied</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label for="Email">Email </label>
                                         <input class="form-control" type="email" placeholder="Email"
@@ -186,10 +208,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-6">
+                                <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label for="Contact">Contact </label>
-                                        <input class="form-control" type="number" placeholder="Contact no"
+                                        <input class="form-control" type="number" placeholder="Contact Number"
                                             formControlName="Contact">
                                         <div class="text-danger" *ngIf="FacilityForm.controls['Contact'].touched">
                                             <span *ngIf="FacilityForm.controls['Contact'].errors?.['required']">Enter
@@ -197,22 +219,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-12 col-md-6 col-xl-6"> 
-                                    <div class="form-group local-forms">
-                                        <label for="avator" class="local-top">Avatar <span class="login-danger">*</span></label>
-                                        <div class="settings-btn upload-files-avator">
-                                            <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" class="hide-input">
-                                            <label for="file" class="upload">Choose File</label>
-                                        </div>
-                                    </div>
-                                </div> -->
-                                <div class="col-12 col-md-6 col-xl-6">
+
+
+                                <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-top-form">
-                                        <label for="avator" class="local-top">Avatar </label>
+                                        <label for="avator" class="local-top">Facility Image</label>
                                         <div class="settings-btn upload-files-avator">
                                             <input type="file" accept="image/*" name="image" id="file"
                                                 onchange="loadFile(event)" class="hide-input" formControlName="Avatar">
                                             <label for="file" class="upload">Choose File</label>
+                                        </div>
+                                        <div class="text-danger"
+                                            *ngIf="FacilityForm.controls['Avatar'].touched && FacilityForm.controls['Avatar'].errors">
+                                            <span *ngIf="FacilityForm.controls['Avatar'].errors['required']">Please
+                                                choose a file</span>
                                         </div>
                                     </div>
                                 </div>
@@ -221,7 +241,8 @@
                                     <div class="form-group local-forms">
                                         <label for="address">Address <span class="login-danger">*</span></label>
                                         <textarea class="form-control" rows="3" cols="30" formControlName="Address"
-                                            [ngClass]="{'is-invalid': FacilityForm.controls['Address'].touched && FacilityForm.controls['Address'].errors}"></textarea>
+                                            [ngClass]="{'is-invalid': FacilityForm.controls['Address'].touched && FacilityForm.controls['Address'].errors}"
+                                            placeholder="Enter Address"></textarea>
                                         <div class="text-danger" *ngIf="FacilityForm.controls['Address'].touched">
                                             <span *ngIf="FacilityForm.controls['Address'].errors?.['required']">Enter
                                                 address</span>
@@ -242,7 +263,7 @@
                                             </mat-option>
                                         </mat-select>
                                         <div class="text-danger" *ngIf="FacilityForm.controls['Country'].touched">
-                                            <span *ngIf="FacilityForm.controls['Country'].errors?.['required']">Enter
+                                            <span *ngIf="FacilityForm.controls['Country'].errors?.['required']">Select
                                                 country</span>
                                         </div>
                                     </div>
@@ -272,8 +293,8 @@
                                         <mat-select class="form-control select" placeholder="Select City"
                                             formControlName="City"
                                             [ngClass]="{'is-invalid': FacilityForm.controls['City'].touched && FacilityForm.controls['City'].errors}">
-                                            <mat-option *ngFor="let city of cities" [value]="city.name">
-                                                {{ city.name }}
+                                            <mat-option *ngFor="let city of cities" [value]="city">
+                                                {{ city }}
                                             </mat-option>
                                         </mat-select>
                                         <div class="text-danger" *ngIf="FacilityForm.controls['City'].touched">
@@ -305,8 +326,8 @@
 
                                 <div class="col-12">
                                     <div class="doctor-submit text-end">
-                                        <button type="submit" class="btn btn-primary submit-form me-2"
-                                            (submit)="send()">Submit</button>
+                                        <button type="submit" class="btn btn-primary submit-form me-2" (submit)="send()"
+                                            [disabled]="FacilityForm.invalid">Submit</button>
                                         <button type="submit" class="btn btn-primary cancel-form">Cancel</button>
                                     </div>
                                 </div>

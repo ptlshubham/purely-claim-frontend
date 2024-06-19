@@ -1,20 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-//import { ReactiveFormsModule } from '@angular/forms';
-import { OrganizationregisterRoutingModule } from './organizationregister-routing.module';
+
+import { AddPatientRoutingModule } from './add-patient-routing.module';
+
+import { AddPatientComponent } from './add-patient.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
 @NgModule({
-  declarations: [],
+  declarations: [
+    AddPatientComponent
+  ],
   imports: [
     CommonModule,
-    OrganizationregisterRoutingModule,
+    AddPatientRoutingModule,
     SharedModule,
     ReactiveFormsModule,
     FormsModule
-
   ]
 })
-export class OrganizationregisterModule { }
+export class AddPatientModule { }

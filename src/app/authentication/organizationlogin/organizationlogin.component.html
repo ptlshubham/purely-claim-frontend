@@ -15,65 +15,36 @@
               <div class="login-right-wrap">
                 <div class="account-logo">
                   <div class="text-center">
-                    <a
-                      ><img
-                        src="assets/img/login-logo.png"
-                        alt="new logo"
-                        height="73"
-                        width="132"
-                    /></a>
+                    <a><img src="assets/img/login-logo.png" alt="new logo" height="73" width="132" /></a>
                   </div>
                 </div>
                 <h2>Login</h2>
 
                 <form [formGroup]="org">
                   <div class="form-group">
-                    <label for="Email"
-                      >Email <span class="login-danger">*</span></label
-                    >
-                    <input
-                      class="form-control"
-                      formControlName="email"
-                      type="text"
-                      [ngClass]="{
+                    <label for="Email">Email <span class="login-danger">*</span></label>
+                    <input class="form-control" formControlName="email" type="text" [ngClass]="{
                         'is-invalid': f['email'].touched && f['email'].invalid
-                      }"
-                    />
-                    <div
-                      *ngIf="f['email'].touched && f['email'].invalid"
-                      class="invalid-feedback"
-                    >
-                      <div
-                        *ngIf="
+                      }" />
+                    <div *ngIf="f['email'].touched && f['email'].invalid" class="invalid-feedback">
+                      <div *ngIf="
                           f['email'].errors && f['email'].errors['required']
-                        "
-                      >
+                        ">
                         Email is required.
                       </div>
-                      <div
-                        *ngIf="f['email'].errors && f['email'].errors['email']"
-                      >
+                      <div *ngIf="f['email'].errors && f['email'].errors['email']">
                         Please, enter valid email address.
                       </div>
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="Password"
-                      >Password <span class="login-danger">*</span></label
-                    >
-                    <input
-                      class="form-control pass-input"
-                      [ngClass]="{
+                    <label for="Password">Password <span class="login-danger">*</span></label>
+                    <input class="form-control pass-input" [ngClass]="{
                         'is-invalid':
                           f['password'].touched && f['password'].errors
-                      }"
-                      formControlName="password"
-                    />
-                    <div
-                      *ngIf="f['password'].touched && f['password'].errors"
-                      class="invalid-feedback"
-                    >
+                      }" formControlName="password" />
+                    <div *ngIf="f['password'].touched && f['password'].errors" class="invalid-feedback">
                       <div *ngIf="f['password'].errors?.['required']">
                         Password is required
                       </div>

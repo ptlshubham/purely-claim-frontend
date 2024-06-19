@@ -6,12 +6,12 @@
         <div class="col-sm-12">
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
-              <a [routerLink]="routes.employeelist">Employees</a>
+              <a [routerLink]="routes.employeelist">User</a>
             </li>
             <li class="breadcrumb-item">
               <i class="feather icon-chevron-right"></i>
             </li>
-            <li class="breadcrumb-item active">Employee List</li>
+            <li class="breadcrumb-item active">User List</li>
           </ul>
         </div>
       </div>
@@ -27,7 +27,7 @@
               <div class="row align-items-center">
                 <div class="col">
                   <div class="doctor-table-blk">
-                    <h3>Employee List</h3>
+                    <h3>User List</h3>
                     <div class="doctor-search-blk">
                       <div class="top-nav-search table-search-blk">
                         <input class="form-control" placeholder="Search here" [(ngModel)]="searchDataValue"
@@ -56,21 +56,21 @@
                       </div>
                     </th>
                     <th mat-sort-header="name">Name</th>
-                    <th mat-sort-header="department">SSN</th>
                     <th mat-sort-header="specialization">Job Title</th>
-                    <th mat-sort-header="degree">Degree</th>
-                    <th mat-sort-header="mobile">NPI</th>
                     <th mat-sort-header="joiningDate">Joining Date</th>
-                    <th mat-sort-header="add-facilities">
-                      <a>
-                        <i class="fa fa-trash" aria-hidden="true"> </i>
-                      </a>
-                    </th>
-                    <th mat-sort-header="add-facilities ">
-                      <a>
-                        <i class="fa-solid fa-pen-to-square "></i>
-                      </a>
-                    </th>
+                    <div>
+                      <th mat-sort-header=" add-facilities">
+                        <a>
+                          <i class="fa fa-trash" aria-hidden="true"> </i>
+                        </a>
+                      </th>
+                      <th mat-sort-header="add-facilities ">
+                        <a>
+                          <i class="fa-solid fa-pen-to-square "></i>
+                        </a>
+                      </th>
+                    </div>
+
                   </tr>
                 </thead>
                 <tbody>
@@ -124,12 +124,12 @@
             <div class="col-sm-12">
               <ul class="breadcrumb">
                 <li class="breadcrumb-item">
-                  <a [routerLink]="routes.employeelist">Employee </a>
+                  <a [routerLink]="routes.employeelist">User </a>
                 </li>
                 <li class="breadcrumb-item">
                   <i class="feather icon-chevron-right"></i>
                 </li>
-                <li class="breadcrumb-item active">Add Employee</li>
+                <li class="breadcrumb-item active">Add User</li>
               </ul>
             </div>
           </div>
@@ -150,27 +150,27 @@
                   </div>
                   <div class="col-12 col-md-6 col-xl-4">
                     <div class="form-group local-forms">
-                      <label for="user">Code <span class="login-danger">*</span></label>
-                      <input class="form-control" type="number" />
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-6 col-xl-4">
-                    <div class="form-group local-forms">
                       <label for="firstName">First Name <span class="login-danger">*</span></label>
-                      <input class="form-control" type="text" placeholder="Enter Name" formControlName="firstName"
+                      <input class="form-control" type="text" placeholder="First Name" formControlName="firstName"
                         [ngClass]="{'is-invalid': validationForm.controls['firstName'].touched && validationForm.controls['firstName'].errors }">
                       <div class="invalid-feedback" *ngIf="validationForm.controls['firstName'].touched">
-                        <span *ngIf="validationForm.controls['firstName'].errors?.['required']">Enter
-                          name</span>
+                        <span *ngIf="validationForm.controls['firstName'].errors?.['required']">
+                          First Name Required*</span>
                       </div>
                     </div>
                   </div>
                   <div class="col-12 col-md-6 col-xl-4">
                     <div class="form-group local-forms">
-                      <label for="user">Middle Name <span class="login-danger">*</span></label>
-                      <input class="form-control" type="text" placeholder="Middle Name" />
+                      <label for="middleName">Middle Name <span class="login-danger">*</span></label>
+                      <input class="form-control" type="text" placeholder="Middle Name" formControlName="middleName"
+                        [ngClass]="{'is-invalid': validationForm.controls['middleName'].touched && validationForm.controls['middleName'].errors }">
+                      <div class="invalid-feedback" *ngIf="validationForm.controls['middleName'].touched">
+                        <span *ngIf="validationForm.controls['middleName'].errors?.['required']">
+                          Middle Name Required*</span>
+                      </div>
                     </div>
                   </div>
+
                   <div class="col-12 col-md-6 col-xl-4">
                     <div class="form-group local-forms">
                       <label for="last">Last Name <span class="login-danger">*</span></label>
@@ -178,18 +178,30 @@
                         formControlName="lastName"
                         [ngClass]="{'is-invalid': validationForm.controls['lastName'].touched && validationForm.controls['lastName'].errors }">
                       <div class="invalid-feedback" *ngIf="validationForm.controls['lastName'].touched">
-                        <span *ngIf="validationForm.controls['lastName'].errors?.['required']">Enter
-                          name</span>
+                        <span *ngIf="validationForm.controls['lastName'].errors?.['required']"> Last
+                          name Required*</span>
                       </div>
                     </div>
                   </div>
+
                   <div class="col-12 col-md-6 col-xl-4">
                     <div class="form-group local-forms">
-                      <label for="password">Credential <span class="login-danger">*</span></label>
-                      <input class="form-control" type="password" placeholder="Enter Credential" />
+                      <label for="date">Date Of Birth <span class="login-danger">*</span></label>
+                      <input class="form-control datetimepicker" type="text" matInput [matDatepicker]="picker"
+                        formControlName="DateOfBirth" placeholder="Date Of Birth"
+                        [ngClass]="{'is-invalid': validationForm.controls['DateOfBirth'].touched && validationForm.controls['DateOfBirth'].errors }">
+                      <mat-datepicker #picker></mat-datepicker>
+                      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                      <div class="invalid-feedback" *ngIf="validationForm.controls['DateOfBirth'].touched">
+                        <span *ngIf="validationForm.controls['DateOfBirth'].errors?.['required']"> Date of
+                          Birth Required*</span>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-12 col-md-6 col-xl-4">
+
+
+
+                  <!-- <div class="col-12 col-md-6 col-xl-4">
                     <div class="form-group local-forms">
                       <label for="Birth">Date Of Birth
                         <span class="login-danger">*</span></label>
@@ -198,11 +210,16 @@
                       <mat-datepicker #picker></mat-datepicker>
                       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     </div>
-                  </div>
+                  </div> -->
                   <div class="col-12 col-md-6 col-xl-4">
                     <div class="form-group local-forms">
-                      <label for="user">SSN <span class="login-danger">*</span></label>
-                      <input class="form-control" type="number" placeholder="Enter SSN Number" />
+                      <label for="Contact">Contact Number <span class="login-danger">*</span></label>
+                      <input class="form-control" type="number" placeholder="Contact Number" formControlName="contact"
+                        [ngClass]="{'is-invalid': validationForm.controls['contact'].touched && validationForm.controls['contact'].errors}">
+                      <div class="text-danger" *ngIf="validationForm.controls['contact'].touched">
+                        <span *ngIf="validationForm.controls['contact'].errors?.['required']">
+                          Contact Number Required*</span>
+                      </div>
                     </div>
                   </div>
                   <div class="col-12 col-md-6 col-xl-4">
@@ -210,23 +227,147 @@
                       <label for="gender" class="gen-label">Gender<span class="login-danger">*</span></label>
                       <div class="form-check-inline">
                         <label class="form-check-label">
-                          <input type="radio" name="gender" class="form-check-input" />Male
+                          <input type="radio" name="gender" class="form-check-input" formControlName="gender"
+                            value="male" />Male
                         </label>
                       </div>
                       <div class="form-check-inline">
                         <label class="form-check-label">
-                          <input type="radio" name="gender" class="form-check-input" />Female
+                          <input type="radio" name="gender" class="form-check-input" formControlName="gender"
+                            value="female" />Female
                         </label>
+                      </div>
+                      <div class="text-danger"
+                        *ngIf="validationForm.controls['gender'].touched && validationForm.controls['gender'].errors">
+                        <span *ngIf="validationForm.controls['gender'].errors?.['required']"> Please select a
+                          gender</span>
                       </div>
                     </div>
                   </div>
-                </div>
 
+                  <div class="col-12 col-md-6 col-xl-4">
+                    <div class="form-group local-forms">
+                      <label for="user">SSN <span class="login-danger">*</span></label>
+                      <input class="form-control" type="number" placeholder="Enter Social Security Number"
+                        formControlName="SSN"
+                        [ngClass]="{'is-invalid': validationForm.controls['SSN'].touched && validationForm.controls['SSN'].errors }" />
+                      <div class="text-danger" *ngIf="validationForm.controls['SSN'].touched">
+                        <span *ngIf="validationForm.controls['SSN'].errors?.['required']"> Social
+                          Security
+                          Number Required*</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6 col-xl-4">
+                    <div class="form-group local-forms">
+                      <label for="Full">Email <span class="login-danger">*</span></label>
+                      <input class="form-control" type="email" placeholder="Enter Email "
+                        [ngClass]="{'is-invalid': f['email'].touched && f['email'].errors}" formControlName="email"
+                        id="email" />
+                      <div *ngIf=" f['email'].touched || f['email'].invalid || f['email'].pristine"
+                        class="invalid-feedback">
+                        <div *ngIf="f['email'].errors?.['required']">
+                          Email is required.
+                        </div>
+                        <div *ngIf="f['email'].errors?.['email']">
+                          Please enter a valid email address.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="col-12 col-md-6 col-xl-4">
+                    <div class="form-group local-forms">
+                      <label for="email">Email Id <span class="login-danger">*</span></label>
+                      <input class="form-control" type="email" placeholder="Enter Email" formControlName="email"
+                        [ngClass]="{'is-invalid': validationForm.controls['email'].touched && validationForm.controls['email'].errors }" />
+                      <div class="text-danger" *ngIf="validationForm.controls['email'].touched">
+                        <span *ngIf="validationForm.controls['email'].errors?.['required']"> Social
+                          Security
+                          Number Required*</span>
+                      </div>
+                    </div>
+                  </div> -->
+
+                  <div class="col-12 col-md-6 col-xl-4">
+                    <div class="form-group local-forms">
+                      <label for="country">Country <span class="login-danger">*</span></label>
+                      <mat-select class="form-control select" placeholder="Select Country" formControlName="Country"
+                        [ngClass]="{'is-invalid': validationForm.controls['Country'].touched && validationForm.controls['Country'].errors}"
+                        (selectionChange)="onCountryChange($event.value)">
+                        <mat-option *ngFor="let country of countries" [value]="country">
+                          {{ country }}
+                        </mat-option>
+                      </mat-select>
+                      <div class="text-danger" *ngIf="validationForm.controls['Country'].touched">
+                        <span *ngIf="validationForm.controls['Country'].errors?.['required']">Select
+                          country*</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-6 col-xl-4">
+                    <div class="form-group local-forms">
+                      <label for="state">State/Province <span class="login-danger">*</span></label>
+                      <mat-select class="form-control select" placeholder="Select State" formControlName="State"
+                        [ngClass]="{'is-invalid': validationForm.controls['State'].touched && validationForm.controls['State'].errors}"
+                        (selectionChange)="onStateChange($event.value)">
+                        <mat-option *ngFor="let state of states" [value]="state">
+                          {{ state }}
+                        </mat-option>
+                      </mat-select>
+                      <div class="text-danger" *ngIf="validationForm.controls['State'].touched">
+                        <span *ngIf="validationForm.controls['State'].errors?.['required']">Select
+                          state*</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-6 col-xl-4">
+                    <div class="form-group local-forms">
+                      <label for="city">City <span class="login-danger">*</span></label>
+                      <mat-select class="form-control select" placeholder="Select City" formControlName="City"
+                        [ngClass]="{'is-invalid': validationForm.controls['City'].touched && validationForm.controls['City'].errors}">
+                        <mat-option *ngFor="let city of cities" [value]="city.name">
+                          {{ city.name }}
+                        </mat-option>
+                      </mat-select>
+                      <div class="text-danger" *ngIf="validationForm.controls['City'].touched">
+                        <span *ngIf="validationForm.controls['City'].errors?.['required']">Select
+                          city*</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6 col-xl-4">
+
+                    <div class="form-group local-forms">
+                      <label for="address">Address <span class="login-danger">*</span></label>
+                      <textarea class="form-control" rows="3" cols="30" formControlName="Address"
+                        [ngClass]="{'is-invalid': validationForm.controls['Address'].touched && validationForm.controls['Address'].errors}"
+                        placeholder="Enter Address"></textarea>
+                      <div class="text-danger" *ngIf="validationForm.controls['Address'].touched">
+                        <span *ngIf="validationForm.controls['Address'].errors?.['required']">
+                          Address Required*</span>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-12 col-md-6 col-xl-4">
+                    <div class="form-group local-forms">
+                      <label for="postalcode">Postal Code <span class="login-danger">*</span></label>
+                      <input class="form-control" type="text" placeholder="Postal Code" formControlName="Postal"
+                        [ngClass]="{'is-invalid': validationForm.controls['Postal'].touched && validationForm.controls['Postal'].errors}">
+                      <div class="text-danger" *ngIf="validationForm.controls['Postal'].touched">
+                        <span *ngIf="validationForm.controls['Postal'].errors?.['required']">
+                          postal code Required*</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
               </div>
 
               <div class="card-body">
                 <div class="row">
-
                   <div class="col-12">
                     <div class="form-heading">
                       <h4 name="EmployeeDetails">Primary Facility Detail</h4>
@@ -235,145 +376,83 @@
                   <div class="col-12 col-md-6 col-xl-4">
                     <div class="form-group local-forms">
                       <label for="department">Primary Facility <span class="login-danger">*</span></label>
-                      <mat-select class="form-control select" placeholder="Select  Primary Facility">
-                        <!-- <mat-option *ngFor="let data of selectedList1" [value]="data.value">
+                      <mat-select class="form-control select" placeholder="Select  Primary Facility"
+                        formControlName="primaryFacility"
+                        [ngClass]="{'is-invalid': validationForm.controls['primaryFacility'].touched && validationForm.controls['primaryFacility'].errors}">
+                        <mat-option *ngFor="let data of selectedList1" [value]="data.value">
                           {{ data.value }}
-                        </mat-option> -->
+                        </mat-option>
                       </mat-select>
-                    </div>
-                  </div>
-
-
-                  <div class="col-12 col-md-6 col-xl-6">
-                    <div class="form-group local-forms">
-                      <label for="mobile">Job Title <span class="login-danger">*</span></label>
-                      <input class="form-control" type="text" required placeholder="Contact Number" />
+                      <div class="text-danger" *ngIf="validationForm.controls['primaryFacility'].touched">
+                        <span *ngIf="validationForm.controls['primaryFacility'].errors?.['required']">
+                          Primary Facility required*</span>
+                      </div>
                     </div>
                   </div>
                   <div class="col-12 col-md-6 col-xl-4">
                     <div class="form-group local-forms">
-                      <label for="department">NPI Type <span class="login-danger">*</span></label>
-                      <mat-select class="form-control select" placeholder="Select NPI Type">
-                        <mat-option *ngFor="let data of NPI" [value]="data.value">
-                          {{ data.value }}
-                        </mat-option>
-                      </mat-select>
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-6 col-xl-6">
-                    <div class="form-group local-forms">
-                      <label for="mobile">NPI <span class="login-danger">*</span></label>
-                      <input class="form-control" type="text" required disabled />
-                    </div>
-                  </div>
-
-
-                  <!-- <div class="col-12 col-md-6 col-xl-6">
-                      <div class="form-group local-forms">
-                        <label for="confirmpassword">Confirm Password
-                          <span class="login-danger">*</span></label>
-                        <input class="form-control" type="password" placeholder="Enter Password" />
+                      <label for="mobile">Job Title <span class="login-danger">*</span></label>
+                      <input class="form-control" type="text" required placeholder="Enter Job Title"
+                        formControlName="jobtitle"
+                        [ngClass]="{'is-invalid': validationForm.controls['jobtitle'].touched && validationForm.controls['jobtitle'].errors}" />
+                      <div class="text-danger" *ngIf="validationForm.controls['jobtitle'].touched">
+                        <span *ngIf="validationForm.controls['jobtitle'].errors?.['required']">
+                          Job Title Required*</span>
                       </div>
-                    </div> -->
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-6 col-xl-4">
+                    <div class="form-group local-forms">
+                      <label for="mobile">National Provider Identifier(NPI) <span class="login-danger">*</span></label>
+                      <input class="form-control" type="text" formControlName="NPI"
+                        placeholder="Enter  National Provider Identifier Number "
+                        [ngClass]="{'is-invalid': validationForm.controls['NPI'].touched && validationForm.controls['NPI'].errors}" />
+                      <div class="text-danger" *ngIf="validationForm.controls['NPI'].touched">
+                        <span *ngIf="validationForm.controls['NPI'].errors?.['required']">
+                          National Provider Identifier Required*</span>
+                      </div>
+                    </div>
+
+                  </div>
                   <div class="col-12 col-md-6 col-xl-4">
                     <div class="form-group local-forms">
                       <label for="Birth">Date Of Joining
                         <span class="login-danger">*</span></label>
-                      <input class="form-control datetimepicker" type="text" matInput [matDatepicker]="picker" required
-                        placeholder="Date Of Joining" />
-                      <mat-datepicker #picker></mat-datepicker>
-                      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                      <input class="form-control datetimepicker" type="text" matInput [matDatepicker]="picker1" required
+                        placeholder="Date Of Joining" formControlName="DateofJoin"
+                        [ngClass]="{'is-invalid': validationForm.controls['DateofJoin'].touched && validationForm.controls['DateofJoin'].errors }" />
+                      <mat-datepicker #picker1></mat-datepicker>
+                      <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <div class="invalid-feedback" *ngIf="validationForm.controls['DateofJoin'].touched">
+                        <span *ngIf="validationForm.controls['DateofJoin'].errors?.['required']"> Date of
+                          Birth Required*</span>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-12 col-md-6 col-xl-6">
+
+                  <!-- <div class="col-12 col-md-6 col-xl-4">
                     <div class="form-group local-forms">
                       <label for="Timezone">Timezone <span class="login-danger">*</span></label>
-                      <mat-select class="form-control select" placeholder="Select Timezone" formControlName="Timezone">
+                      <mat-select class="form-control select" placeholder="Select Timezone" formControlName="Timezone"
+                        [ngClass]="{'is-invalid': validationForm.controls['Timezone'].touched && validationForm.controls['Timezone'].errors}">
                         <mat-option *ngFor="let t of Timezone" [value]="t.value">
                           {{t.value}}
                         </mat-option>
                       </mat-select>
-
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-6 col-xl-6">
-                    <div class="form-group local-forms">
-                      <label for="mobile">CTP <span class="login-danger">*</span></label>
-                      <input class="form-control" type="text" required disabled
-                        placeholder="Certificate Of Prescribe" />
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-6 col-xl-6">
-                    <div class="form-group local-forms">
-                      <label for="mobile">SPI <span class="login-danger">*</span></label>
-                      <input class="form-control" type="text" required placeholder="Surescript Provider Identity" />
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-6 col-xl-6">
-                    <div class="form-group local-forms">
-                      <label for="mobile">NADEAN NO. <span class="login-danger">*</span></label>
-                      <input class="form-control" type="text" required placeholder="NADEAN Number" />
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-6 col-xl-6">
-                    <div class="form-group local-forms">
-                      <label for="Timezone">Service Level <span class="login-danger">*</span></label>
-                      <mat-select class="form-control select" placeholder="Select Timezone"
-                        formControlName="Service Level">
-                        <!-- <mat-option *ngFor="let t of Timezone" [value]="t.value">
-                          {{t.value}}
-                        </mat-option> -->
-                      </mat-select>
-
-                    </div>
-                  </div>
-
-                  <div class="col-12 col-md-6 col-xl-4">
-                    <div class="form-group local-forms">
-                      <label for="
-                      AuthorizedPrescriberAgents">
-                        Authorized Prescriber Agents <span class="login-danger">*</span></label>
-                      <mat-select [(ngModel)]="selectedValue" [ngModelOptions]="{ standalone: true } " disabled
-                        class="form-control select" placeholder="
-                        Authorized Prescriber Agents">
-                        <!-- <mat-option *ngFor="let data of selectedList1" [value]="data.value">
-                          {{ data.value }}
-                        </mat-option> -->
-                      </mat-select>
-                    </div>
-                  </div>
-
-
-                  <!-- <div class="col-12 col-sm-12">
-                      <div class="form-group local-forms">
-                        <label for="biography">Start Biography
-                          <span class="login-danger">*</span></label>
-                        <textarea class="form-control" rows="3" cols="30"></textarea>
-                      </div>
-                    </div> -->
-
-                  <!-- <div class="col-12 col-md-6 col-xl-6">
-                    <div class="form-group select-gender">
-                      <label for="Status" class="gen-label">Status <span class="login-danger">*</span></label>
-                      <div class="form-check-inline">
-                        <label class="form-check-label">
-                          <input type="radio" name="gender" class="form-check-input" />Active
-                        </label>
-                      </div>
-                      <div class="form-check-inline">
-                        <label class="form-check-label">
-                          <input type="radio" name="gender" class="form-check-input" />In Active
-                        </label>
+                      <div class="text-danger" *ngIf="validationForm.controls['Timezone'].touched">
+                        <span *ngIf="validationForm.controls['Timezone'].errors?.['required']">Select
+                          timezone</span>
                       </div>
                     </div>
                   </div> -->
-
                   <div class="col-12">
                     <div class="doctor-submit text-end">
-                      <button type="submit" class="btn btn-primary submit-form me-2" (click)="backToTable()">
+                      <button type="submit" class="btn btn-primary submit-form me-2"
+                        [disabled]="validationForm.invalid">
                         Submit
                       </button>
-                      <button type="submit" class="btn btn-primary cancel-form" (click)="backToTable()">
+                      <button type="submit" class="btn btn-primary cancel-form">
                         Cancel
                       </button>
                     </div>

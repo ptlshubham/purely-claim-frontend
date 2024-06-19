@@ -91,8 +91,8 @@
                 </div>
 
                 <div class="col-6 doctor-submit text-start" *ngIf="isUpdate==false">
-                  <button type="submit" class="btn btn-primary submit-form me-2"
-                    (click)="saveSpeciality()">Submit</button>
+                  <button type="submit" class="btn btn-primary submit-form me-2" (click)="saveSpeciality()"
+                    [disabled]="specialityForm.invalid">Submit</button>
                 </div>
               </div>
             </form>

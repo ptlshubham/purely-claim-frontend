@@ -100,6 +100,10 @@ export class routes {
   public static get employeefacility(): string {
     return this.baseUrl + '/employee/employee-facility';
   }
+
+  public static get addPatient(): string {
+    return this.baseUrl + '/patient/add-patient';
+  }
   public static get editAsset(): string {
     return this.baseUrl + '/assets/edit-asset';
   }
@@ -258,9 +262,6 @@ export class routes {
   }
   public static get viewInvoice(): string {
     return this.baseUrl + '/invoice/view-invoice';
-  }
-  public static get addPatient(): string {
-    return this.baseUrl + '/patient/add-patient';
   }
   public static get editPatient(): string {
     return this.baseUrl + '/patient/edit-patient';

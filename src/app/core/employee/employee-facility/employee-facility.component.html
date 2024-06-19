@@ -6,12 +6,12 @@
                 <div class="col-sm-12">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item">
-                            <a [routerLink]="routes.employeefacility">Employees</a>
+                            <a [routerLink]="routes.employeefacility">User</a>
                         </li>
                         <li class="breadcrumb-item">
                             <i class="feather icon-chevron-right"></i>
                         </li>
-                        <li class="breadcrumb-item active">Employee List</li>
+                        <li class="breadcrumb-item active">User List</li>
                     </ul>
                 </div>
             </div>
@@ -30,13 +30,14 @@
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-6">
                                     <div class="form-group local-forms">
-                                        <label for="Ename">Employee Name <span class="login-danger">*</span></label>
-                                        <input class="form-control" type="text" placeholder="Employee Name"
+                                        <label for="Ename">User Name <span class="login-danger">*</span></label>
+                                        <input class="form-control" type="text" placeholder="User Name"
                                             formControlName="Ename"
                                             [ngClass]="{'is-invalid': employeefacility.controls['Ename'].touched && employeefacility.controls['Ename'].errors }">
-                                        <div class="invalid-feedback" *ngIf="employeefacility.controls['Ename'].touched">
+                                        <div class="invalid-feedback"
+                                            *ngIf="employeefacility.controls['Ename'].touched">
                                             <span *ngIf="employeefacility.controls['Ename'].errors?.['required']">Enter
-                                                Employee
+                                                User
                                                 name</span>
                                         </div>
                                     </div>
@@ -56,8 +57,8 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="doctor-submit text-end">
-                                        <button type="submit" class="btn btn-primary submit-form me-2"
-                                            (submit)="send()">Submit</button>
+                                        <button type="submit" class="btn btn-primary submit-form me-2" (submit)="send()"
+                                            [disabled]="employeefacility.invalid">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +107,7 @@
                                                 </div>
                                             </td>
                                             <td>{{s.name}}</td>
-                                           
+
                                         </tr>
                                     </tbody>
                                 </table>

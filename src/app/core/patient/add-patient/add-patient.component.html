@@ -1,0 +1,359 @@
+<div class="page-wrapper">
+    <div class="content">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a [routerLink]="routes.addPatient">Patient </a></li>
+                        <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
+                        <li class="breadcrumb-item active">Add Patient</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="isOpen==false">
+            <div class="col-sm-12">
+                <div class="card card-table show-entire">
+                    <div class="card-body">
+                        <!-- Table Header -->
+                        <div class="page-table-header mb-2">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <div class="doctor-table-blk">
+                                        <h3>Patient List</h3>
+                                        <div class="doctor-search-blk">
+                                            <div class="top-nav-search table-search-blk">
+                                                <input class="form-control" placeholder="Search here"
+                                                    [(ngModel)]="searchDataValue"
+                                                    (ngModelChange)="searchData(searchDataValue)" />
+                                                <a class="btn"><img src="assets/img/icons/search-normal.svg"
+                                                        alt="" /></a>
+                                            </div>
+                                            <div class="add-group">
+                                                <a class="btn btn-primary add-pluss ms-2" (click)="addPatient()"><img
+                                                        src="assets/img/icons/plus.svg" alt="" /></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Table Header -->
+
+                        <div class="table-responsive">
+                            <table matSort (matSortChange)="sortData($event)"
+                                class="table border-0 custom-table comman-table datatable mb-0">
+                                <thead>
+                                    <tr>
+                                        <th mat-sort-header="checkbox">
+                                            <div class="form-check check-tables">
+                                                <input class="form-check-input" type="checkbox" value="something" />
+                                            </div>
+                                        </th>
+                                        <th mat-sort-header="name">Patient Name</th>
+                                        <th mat-sort-header="specialization">Gender</th>
+                                        <th mat-sort-header="joiningDate">Contact Number</th>
+                                        <th mat-sort-header="joiningDate">Medical Condition </th>
+                                        <th mat-sort-header="joiningDate">Email </th>
+
+
+                                        <div>
+                                            <th mat-sort-header=" add-facilities">
+                                                <a>
+                                                    <i class="fa fa-trash" aria-hidden="true"> </i>
+                                                </a>
+                                            </th>
+                                            <th mat-sort-header="add-facilities ">
+                                                <a>
+                                                    <i class="fa-solid fa-pen-to-square "></i>
+                                                </a>
+                                            </th>
+                                        </div>
+
+                                    </tr>
+                                </thead>
+                                <!-- <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="form-check check-tables">
+                                                <input class="form-check-input" type="checkbox" value="something" />
+                                            </div>
+                                        </td>
+
+
+                                        <td class="text-end">
+                                            <div class="dropdown dropdown-action">
+                                                <a href="javascript:void(0);" class="action-icon dropdown-toggle"
+                                                    data-bs-toggle="dropdown" aria-expanded="false"><i
+                                                        class="fa fa-ellipsis-v"></i></a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                                    <a class="dropdown-item" href="javascript:void(0);"><i
+                                                            class="fa fa-trash-o m-r-5"></i>
+                                                        Delete</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody> -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row" *ngIf="isOpen==true">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form [formGroup]="ValidationForm">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-heading d-flex justify-content-between">
+                                        <h4>Add Patient</h4>
+                                        <button type="submit" class="btn btn-primary submit-form mb-4 doctor-submit"
+                                            (click)="BackToTable()">Back</button>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="FirstName">First Name <span class="login-danger">*</span></label>
+                                        <input class="form-control" type="text" placeholder="Enter First Name"
+                                            formControlName="FirstName"
+                                            [ngClass]="{'is-invalid': ValidationForm.controls['FirstName'].touched && ValidationForm.controls['FirstName'].errors }">
+                                        <div class="invalid-feedback"
+                                            *ngIf="ValidationForm.controls['FirstName'].touched">
+                                            <span *ngIf="ValidationForm.controls['FirstName'].errors?.['required']">
+                                                First Name Required*</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="LastName">Last Name <span class="login-danger">*</span></label>
+                                        <input class="form-control" type="text" placeholder="Enter Last Name"
+                                            formControlName="LastName"
+                                            [ngClass]="{'is-invalid': ValidationForm.controls['LastName'].touched && ValidationForm.controls['LastName'].errors }">
+                                        <div class="invalid-feedback"
+                                            *ngIf="ValidationForm.controls['LastName'].touched">
+                                            <span *ngIf="ValidationForm.controls['LastName'].errors?.['required']">
+                                                Last Name Required*</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="Facility">Facility <span class="login-danger">*</span></label>
+                                        <mat-select class="form-control select" placeholder="Select Facility"
+                                            formControlName="Facility"
+                                            [ngClass]="{'is-invalid': ValidationForm.controls['Facility'].touched && ValidationForm.controls['Facility'].errors}">
+                                            <mat-option *ngFor="let data of FacilityList" [value]="data.value">
+                                                {{ data.value }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <div class="text-danger" *ngIf="ValidationForm.controls['Facility'].touched">
+                                            <span *ngIf="ValidationForm.controls['Facility'].errors?.['required']">
+                                                Facility Required*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="date">Date Of Birth <span class="login-danger">*</span></label>
+                                        <input class="form-control datetimepicker" type="text" matInput
+                                            [matDatepicker]="picker" formControlName="DateOfBirth"
+                                            placeholder="Date Of Birth"
+                                            [ngClass]="{'is-invalid': ValidationForm.controls['DateOfBirth'].touched && ValidationForm.controls['DateOfBirth'].errors }">
+                                        <mat-datepicker #picker></mat-datepicker>
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <div class="invalid-feedback"
+                                            *ngIf="ValidationForm.controls['DateOfBirth'].touched">
+                                            <span *ngIf="ValidationForm.controls['DateOfBirth'].errors?.['required']">
+                                                Date of
+                                                Birth Required*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group select-gender">
+                                        <label for="gender" class="gen-label">Gender<span
+                                                class="login-danger">*</span></label>
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" name="gender" class="form-check-input"
+                                                    formControlName="gender" value="male" />Male
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" name="gender" class="form-check-input"
+                                                    formControlName="gender" value="female" />Female
+                                            </label>
+                                        </div>
+                                        <div class="text-danger"
+                                            *ngIf="ValidationForm.controls['gender'].touched && ValidationForm.controls['gender'].errors">
+                                            <span *ngIf="ValidationForm.controls['gender'].errors?.['required']"> Please
+                                                select a
+                                                gender</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="Contact">Contact Number <span class="login-danger">*</span></label>
+                                        <input class="form-control" type="number" placeholder="Contact Number"
+                                            formControlName="contact"
+                                            [ngClass]="{'is-invalid': ValidationForm.controls['contact'].touched && ValidationForm.controls['contact'].errors}">
+                                        <div class="text-danger" *ngIf="ValidationForm.controls['contact'].touched">
+                                            <span *ngIf="ValidationForm.controls['contact'].errors?.['required']">
+                                                Contact Number Required*</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="Full">Email <span class="login-danger">*</span></label>
+                                        <input class="form-control" type="email" placeholder="Enter Email "
+                                            [ngClass]="{'is-invalid': f['email'].touched && f['email'].errors}"
+                                            formControlName="email" id="email" />
+                                        <div *ngIf=" f['email'].touched || f['email'].invalid || f['email'].pristine"
+                                            class="invalid-feedback">
+                                            <div *ngIf="f['email'].errors?.['required']">
+                                                Email is required.
+                                            </div>
+                                            <div *ngIf="f['email'].errors?.['email']">
+                                                Please enter a valid email address.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="Contact">Age <span class="login-danger">*</span></label>
+                                        <input class="form-control" type="number" placeholder="Enter Patient Age "
+                                            formControlName="Age"
+                                            [ngClass]="{'is-invalid': ValidationForm.controls['Age'].touched && ValidationForm.controls['Age'].errors}">
+                                        <div class="text-danger" *ngIf="ValidationForm.controls['Age'].touched">
+                                            <span *ngIf="ValidationForm.controls['Age'].errors?.['required']">
+                                                Patient Age Required*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="Name">Medical Condition <span class="login-danger">*</span></label>
+                                        <input class="form-control" type="text" placeholder="Medical Condition"
+                                            formControlName="medicalCondition"
+                                            [ngClass]="{'is-invalid': ValidationForm.controls['medicalCondition'].touched && ValidationForm.controls['medicalCondition'].errors}">
+                                        <div class="text-danger"
+                                            *ngIf="ValidationForm.controls['medicalCondition'].touched">
+                                            <span
+                                                *ngIf="ValidationForm.controls['medicalCondition'].errors?.['required']">
+                                                Medical Condition Required*</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="country">Country <span class="login-danger">*</span></label>
+                                        <mat-select class="form-control select" placeholder="Select Country"
+                                            formControlName="Country"
+                                            [ngClass]="{'is-invalid': ValidationForm.controls['Country'].touched && ValidationForm.controls['Country'].errors}"
+                                            (selectionChange)="onCountryChange($event.value)">
+                                            <mat-option *ngFor="let country of countries" [value]="country">
+                                                {{ country }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <div class="text-danger" *ngIf="ValidationForm.controls['Country'].touched">
+                                            <span *ngIf="ValidationForm.controls['Country'].errors?.['required']">Enter
+                                                country*</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="state">State/Province <span class="login-danger">*</span></label>
+                                        <mat-select class="form-control select" placeholder="Select State"
+                                            formControlName="State"
+                                            [ngClass]="{'is-invalid': ValidationForm.controls['State'].touched && ValidationForm.controls['State'].errors}"
+                                            (selectionChange)="onStateChange($event.value)">
+                                            <mat-option *ngFor="let state of states" [value]="state">
+                                                {{ state }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <div class="text-danger" *ngIf="ValidationForm.controls['State'].touched">
+                                            <span *ngIf="ValidationForm.controls['State'].errors?.['required']">Select
+                                                state*</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="city">City <span class="login-danger">*</span></label>
+                                        <mat-select class="form-control select" placeholder="Select City"
+                                            formControlName="City"
+                                            [ngClass]="{'is-invalid': ValidationForm.controls['City'].touched && ValidationForm.controls['City'].errors}">
+                                            <mat-option *ngFor="let city of cities" [value]="city.name">
+                                                {{ city.name }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <div class="text-danger" *ngIf="ValidationForm.controls['City'].touched">
+                                            <span *ngIf="ValidationForm.controls['City'].errors?.['required']">Select
+                                                city*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+
+                                    <div class="form-group local-forms">
+                                        <label for="address">Address <span class="login-danger">*</span></label>
+                                        <textarea class="form-control" rows="3" cols="30" formControlName="Address"
+                                            [ngClass]="{'is-invalid': ValidationForm.controls['Address'].touched && ValidationForm.controls['Address'].errors}"
+                                            placeholder="Enter Address"></textarea>
+                                        <div class="text-danger" *ngIf="ValidationForm.controls['Address'].touched">
+                                            <span *ngIf="ValidationForm.controls['Address'].errors?.['required']">
+                                                Address Required*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="postalcode">Postal Code <span class="login-danger">*</span></label>
+                                        <input class="form-control" type="text" placeholder="Postal Code"
+                                            formControlName="Postal"
+                                            [ngClass]="{'is-invalid': ValidationForm.controls['Postal'].touched && ValidationForm.controls['Postal'].errors}">
+                                        <div class="text-danger" *ngIf="ValidationForm.controls['Postal'].touched">
+                                            <span *ngIf="ValidationForm.controls['Postal'].errors?.['required']">
+                                                postal code Required*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="doctor-submit text-end">
+                                        <button type="submit" class="btn btn-primary submit-form me-2"
+                                            [disabled]="ValidationForm.invalid">
+                                            Submit
+                                        </button>
+                                        <button type="submit" class="btn btn-primary cancel-form">
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>

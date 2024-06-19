@@ -37,7 +37,10 @@ export class ClinicComponent {
     { value: 'Anchorage (GMT-8)' },
     { value: 'Honolulu (GMT-10)' }
   ]
-
+  PlaceOfService: data[] = [
+    { value: 'Home' },
+    { value: 'Office' }
+  ]
   public ClinicForm: FormGroup;
 
   public sortData(sort: Sort): void {
@@ -76,7 +79,7 @@ export class ClinicComponent {
     this.ClinicForm = new FormGroup({
       Name: new FormControl('', Validators.required),
       Timezone: new FormControl('', Validators.required),
-      Speciality: new FormControl(),
+      Speciality: new FormControl('', Validators.required),
       Email: new FormControl('', Validators.required),
       Contact: new FormControl('', Validators.required),
       Address: new FormControl('', Validators.required),
@@ -84,8 +87,10 @@ export class ClinicComponent {
       State: new FormControl('', Validators.required),
       City: new FormControl('', Validators.required),
       Postal: new FormControl('', Validators.required),
-      clientid: new FormControl('', Validators.required),
-      ShortCode: new FormControl('', Validators.required)
+      NPI: new FormControl('', Validators.required),
+      pos: new FormControl('', Validators.required),
+      Taxid: new FormControl('', Validators.required),
+      Avatar: new FormControl('', Validators.required)
     });
 
 
