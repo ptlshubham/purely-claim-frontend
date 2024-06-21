@@ -22,6 +22,26 @@
                   <h3>Specialty</h3>
                 </div>
               </div>
+              <div class="col-md-4 text-end">
+                <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="isDeleted">
+                  <div class="text-start">
+                    Speciality Deleted Successfully.
+                  </div>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                    (click)="isDeleted = false">
+                    <span aria-hidden="true"> </span>
+                  </button>
+                </div>
+                <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="isAdded">
+                  <div class="text-start">
+                    Speciality Added Successfully.
+                  </div>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                    (click)="isAdded = false">
+                    <span aria-hidden="true"> </span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
           <br>
@@ -29,7 +49,7 @@
           <div>
             <form [formGroup]="specialityForm">
               <div class="row">
-                <div class="col-6 col-md-6 col-xl-6">
+                <div class="col-12 col-md-6 col-xl-6">
                   <div class="form-group local-forms">
                     <label for="Name">Specialty Name:</label>
                     <input class="form-control" type="text" placeholder="Speciality Name" formControlName="name"
@@ -89,10 +109,11 @@
                       placeholder="Enter Notes">
                   </div>
                 </div>
-
-                <div class="col-6 doctor-submit text-start" *ngIf="isUpdate==false">
-                  <button type="submit" class="btn btn-primary submit-form me-2" (click)="saveSpeciality()"
-                    [disabled]="specialityForm.invalid">Submit</button>
+                <div class="col-12">
+                  <div class="doctor-submit text-end">
+                    <button type="submit" class="btn btn-primary submit-form me-2" (click)="saveSpeciality()"
+                      [disabled]="specialityForm.invalid">Submit</button>
+                  </div>
                 </div>
               </div>
             </form>
@@ -156,11 +177,34 @@
                       <td>{{data.taxonomycode}}</td>
                       <td>{{data.detail}}</td>
                       <td>{{data.notes}}</td>
-
                       <td class="text-right">
-                        <a class="facTypeIcon" (click)="removeSpeciality(data.id)"><i class="fa fa-trash"
-                            aria-hidden="true"></i></a>
+                        <a href="javascript:void(0);" [attr.data-bs-target]="'#delete_patient_' + data.id"
+                          data-bs-toggle="modal">
+                          <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
                       </td>
+
+                      <!-- The modal dialog box -->
+                      <div [id]="'delete_patient_' + data.id" class="modal fade delete-modal" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered">
+                          <div class="modal-content">
+                            <div class="modal-body text-center">
+                              <img src="assets/img/sent.png" alt="" width="50" height="46">
+                              <h3>Are you sure want to delete this?</h3>
+                              <div class="m-t-20">
+                                <a href="javascript:void(0);" class="btn btn-white me-1"
+                                  data-bs-dismiss="modal">Close</a>
+                                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal"
+                                  (click)="removeSpeciality(data.id)">Delete</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Success alert -->
+
+
                     </tr>
                   </tbody>
                 </table>

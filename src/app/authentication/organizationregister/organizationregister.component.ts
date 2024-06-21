@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { environment, facilityList } from 'src/app/shared/models/models';
 import { FacilitiesService } from 'src/app/shared/services/facilities.services';
+import { UserProfileService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-organizationregister',
@@ -20,13 +21,12 @@ export class OrganizationregisterComponent implements OnInit {
   submitted = false;
   routes: any;
 
-  registermodel: any;
-
+  registrationModel: any = {}
 
   constructor(
     private formBuilder: UntypedFormBuilder,
     private facilitiesService: FacilitiesService,
-
+    private userProfileService: UserProfileService,
     private router: Router
   ) { }
 
@@ -49,8 +49,13 @@ export class OrganizationregisterComponent implements OnInit {
     debugger;
     this.facilitiesService.getAllSpecialityDetails().subscribe((res: any) => {
       this.specialityList = res;
-
-
     });
+  }
+  saveRegistration(): void {
+    this.userProfileService.saveregistartion(this.registrationModel).subscribe((data: any) => {
+      if (data = 'success') {
+        this.router.navigate(['/login']);
+      }
+    })
   }
 }

@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 // import { CompanyComponent } from './company/company.component';
 // import { AssetsComponent } from './assets/assets.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { ModelComponent } from './model/model.component';
 //import { EmployeeListComponent } from './employee-list/employee-list.component';
 //import { ModalComponent } from './modal/modal.component';
 
@@ -21,6 +22,7 @@ import { EmployeeComponent } from './employee/employee.component';
     // CompanyComponent,
     // AssetsComponent,
     EmployeeComponent,
+    ModelComponent,
     
   ],
   imports: [

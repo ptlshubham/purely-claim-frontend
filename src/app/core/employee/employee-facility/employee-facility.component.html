@@ -36,9 +36,8 @@
                                             [ngClass]="{'is-invalid': employeefacility.controls['Ename'].touched && employeefacility.controls['Ename'].errors }">
                                         <div class="invalid-feedback"
                                             *ngIf="employeefacility.controls['Ename'].touched">
-                                            <span *ngIf="employeefacility.controls['Ename'].errors?.['required']">Enter
-                                                User
-                                                name</span>
+                                            <span *ngIf="employeefacility.controls['Ename'].errors?.['required']">
+                                                User Name Required*</span>
                                         </div>
                                     </div>
                                 </div>
@@ -49,9 +48,8 @@
                                             formControlName="Name"
                                             [ngClass]="{'is-invalid': employeefacility.controls['Name'].touched && employeefacility.controls['Name'].errors }">
                                         <div class="invalid-feedback" *ngIf="employeefacility.controls['Name'].touched">
-                                            <span *ngIf="employeefacility.controls['Name'].errors?.['required']">Enter
-                                                Facilities
-                                                name</span>
+                                            <span *ngIf="employeefacility.controls['Name'].errors?.['required']">
+                                                Facilities Name Required*</span>
                                         </div>
                                     </div>
                                 </div>

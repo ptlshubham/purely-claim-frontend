@@ -93,4 +93,9 @@ export class UserProfileService {
     getUserData(id: any) {
         return this.http.get(ApiService.getUserDataByIdURL + id);
     }
+
+    saveregistartion(data: any): Observable<any> {
+        debugger
+        return this.http.post<any>(ApiService.saveRegistrationDetailsURL, data);
+    }
 }

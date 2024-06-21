@@ -29,7 +29,7 @@
                     <input class="form-control" placeholder="Enter First Name" type="text" [ngClass]="{
                         'is-invalid':
                           f['firstname'].touched && f['firstname'].errors
-                      }" formControlName="firstname" id="firstname" />
+                      }" formControlName="firstname" id="firstname" [(ngModel)]="registrationModel.firstname" />
                     <div *ngIf="f['firstname'].touched && f['firstname'].errors" class="invalid-feedback">
                       <div *ngIf="f['firstname'].errors?.['required']">
                         Firstname is required
@@ -42,7 +42,7 @@
                     <input class="form-control" type="text" placeholder="Enter Last Name" [ngClass]="{
                         'is-invalid':
                           f['lastname'].touched && f['lastname'].errors
-                      }" formControlName="lastname" id="lastname" />
+                      }" formControlName="lastname" id="lastname" [(ngModel)]="registrationModel.lastname" />
                     <div *ngIf="f['lastname'].touched && f['lastname'].errors" class="invalid-feedback">
                       <div *ngIf="f['lastname'].errors?.['required']">
                         Last Name is required
@@ -54,7 +54,7 @@
                     <label for="Full">Email <span class="login-danger">*</span></label>
                     <input class="form-control" type="email" placeholder="Enter Email "
                       [ngClass]="{'is-invalid': f['email'].touched && f['email'].errors}" formControlName="email"
-                      id="email" />
+                      id="email" [(ngModel)]="registrationModel.email" />
                     <div *ngIf=" f['email'].touched || f['email'].invalid || f['email'].pristine"
                       class="invalid-feedback">
                       <div *ngIf="f['email'].errors?.['required']">
@@ -70,7 +70,7 @@
                     <label for="Full">Contact No. <span class="login-danger">*</span></label>
                     <input class="form-control" type="text" placeholder="Enter Contact Number"
                       [ngClass]="{'is-invalid':f['phoneno'].touched && f['phoneno'].errors}" formControlName="phoneno"
-                      required />
+                      required [(ngModel)]="registrationModel.contact" />
 
                     <div *ngIf=" f['phoneno'].touched || f['phoneno'].invalid || f['phoneno'].pristine "
                       class="invalid-feedback">
@@ -85,7 +85,8 @@
                   <div class="form-group local-forms">
                     <label for="Speciality">Speciality <span class="login-danger">*</span></label>
                     <mat-select class="form-control select" placeholder="Select Speciality" formControlName="Speciality"
-                      [ngClass]="{'is-invalid': signupForm.controls['Speciality'].touched && signupForm.controls['Speciality'].errors}">
+                      [ngClass]="{'is-invalid': signupForm.controls['Speciality'].touched && signupForm.controls['Speciality'].errors}"
+                      [(ngModel)]="registrationModel.speciality">
                       <mat-option *ngFor="let data of specialityList" [value]="data.specialityname">
                         {{data.specialityname}}
                       </mat-option>
@@ -96,7 +97,8 @@
                     </div>
                   </div>
                   <div class="form-group login-btn">
-                    <button class="btn btn-primary btn-block" type="submit" [disabled]="!signupForm.valid">
+                    <button class="btn btn-primary btn-block" type="submit" [disabled]="!signupForm.valid"
+                      (click)="saveRegistration()">
                       Sign up
                     </button>
                   </div>

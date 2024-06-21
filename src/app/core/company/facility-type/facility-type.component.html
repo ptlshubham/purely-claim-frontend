@@ -23,14 +23,28 @@
                                     <h3>Add Facility Type</h3>
                                 </div>
                             </div>
-                            <!-- <div class="col-auto text-end float-end ms-auto download-grp">
-                                <div class="doctor-search-blk">
-                                    <div class="add-group">
-                                        <a class="btn btn-primary add-pluss ms-2" (click)="backToTable()"><i
-                                                class="fa-solid fa-arrow-left"></i></a>
+                            <div class="col-md-4 text-end">
+                                <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                    *ngIf="isDeleted">
+                                    <div class="text-start">
+                                        Facility Type Deleted Successfully.
                                     </div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                                        (click)="isDeleted = false">
+                                        <span aria-hidden="true"> </span>
+                                    </button>
                                 </div>
-                            </div> -->
+                                <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                    *ngIf="isAdded">
+                                    <div class="text-start">
+                                        Facility Added Successfully.
+                                    </div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                                        (click)="isAdded = false">
+                                        <span aria-hidden="true"> </span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <br>
@@ -54,7 +68,7 @@
                                 </form>
                             </div>
                             <div class="col-6 doctor-submit text-start">
-                                <button type="submit" class="btn btn-primary submit-form me-2" (click)="onSubmit()"
+                                <button type="submit" class="btn btn-primary submit-form me-2" (click)="SaveFacility()"
                                     [disabled]="ValidationForm.invalid">Submit</button>
                             </div>
                         </div>
@@ -113,11 +127,34 @@
                                                 </div>
                                             </td>
                                             <td>{{s.name}}</td>
-                                            <td>
-                                                <a (click)="removeFacilityType(s.id)" class="facTypeIcon ">
-                                                    <i class="fa fa-trash " aria-hidden="true"></i>
+                                            <td class="text-right">
+                                                <a href="javascript:void(0);"
+                                                    [attr.data-bs-target]="'#delete_patient_' + s.id"
+                                                    data-bs-toggle="modal">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
                                                 </a>
                                             </td>
+
+                                            <!-- The modal dialog box -->
+                                            <div [id]="'delete_patient_' + s.id" class="modal fade delete-modal"
+                                                role="dialog">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body text-center">
+                                                            <img src="assets/img/sent.png" alt="" width="50"
+                                                                height="46">
+                                                            <h3>Are you sure want to delete this?</h3>
+                                                            <div class="m-t-20">
+                                                                <a href="javascript:void(0);" class="btn btn-white me-1"
+                                                                    data-bs-dismiss="modal">Close</a>
+                                                                <button type="submit" class="btn btn-danger"
+                                                                    data-bs-dismiss="modal"
+                                                                    (click)="removeFacilityType(s.id)">Delete</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </tr>
                                     </tbody>
                                 </table>

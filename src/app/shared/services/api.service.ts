@@ -10,6 +10,7 @@ export class ApiService {
       'Content-Type': 'application/json'
     })
   }
+  public static saveRegistrationDetailsURL: string = ApiService.HOST_URL + '/admin/SaveRegistartion';
   public static saveFacilityTypeURL: string = ApiService.HOST_URL + '/admin/SaveFacilityType';
   public static getAllServicesURL: string = ApiService.HOST_URL + '/admin/GetAllServices';
   public static removeFacilityTypeURL: string = ApiService.HOST_URL + '/admin/RemoveFacilityType/';

@@ -1,3 +1,6 @@
 .facTypeIcon:hover{
     color: red;
 }
+.alert.fade {
+    transition: opacity 2s; /* adjust the duration to your liking */
+  }

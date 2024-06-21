@@ -112,8 +112,8 @@
                                             formControlName="Name"
                                             [ngClass]="{'is-invalid': FacilityForm.controls['Name'].touched && FacilityForm.controls['Name'].errors }">
                                         <div class="invalid-feedback" *ngIf="FacilityForm.controls['Name'].touched">
-                                            <span *ngIf="FacilityForm.controls['Name'].errors?.['required']">Enter
-                                                name</span>
+                                            <span *ngIf="FacilityForm.controls['Name'].errors?.['required']">Facility
+                                                Name Required*</span>
                                         </div>
                                     </div>
                                 </div>
@@ -130,7 +130,7 @@
                                         </mat-select>
                                         <div class="text-danger" *ngIf="FacilityForm.controls['Timezone'].touched">
                                             <span *ngIf="FacilityForm.controls['Timezone'].errors?.['required']">Select
-                                                timezone</span>
+                                                timezone*</span>
                                         </div>
                                     </div>
                                 </div>
@@ -143,7 +143,7 @@
                                             formControlName="NPI">
                                         <div class="invalid-feedback" *ngIf="FacilityForm.controls['NPI'].touched">
                                             <span *ngIf="FacilityForm.controls['NPI'].errors?.['required']">
-                                                NPI Number Required</span>
+                                                NPI Number Required*</span>
                                         </div>
                                     </div>
                                 </div>
@@ -179,7 +179,7 @@
                                         <div class="text-danger" *ngIf="FacilityForm.controls['Speciality'].touched">
                                             <span
                                                 *ngIf="FacilityForm.controls['Speciality'].errors?.['required']">Select
-                                                Speciality</span>
+                                                Speciality*</span>
                                         </div>
                                     </div>
                                 </div>
@@ -192,7 +192,7 @@
                                             [ngClass]="{'is-invalid': FacilityForm.controls['Taxid'].touched && FacilityForm.controls['Taxid'].errors }">
                                         <div class="invalid-feedback" *ngIf="FacilityForm.controls['Taxid'].touched">
                                             <span *ngIf="FacilityForm.controls['Taxid'].errors?.['required']">Text Id
-                                                Requied</span>
+                                                Requied*</span>
                                         </div>
                                     </div>
                                 </div>
@@ -203,8 +203,8 @@
                                         <input class="form-control" type="email" placeholder="Email"
                                             formControlName="Email">
                                         <div class="text-danger" *ngIf="FacilityForm.controls['Email'].touched">
-                                            <span *ngIf="FacilityForm.controls['Email'].errors?.['required']">Enter
-                                                email</span>
+                                            <span *ngIf="FacilityForm.controls['Email'].errors?.['required']">
+                                                Email Required*</span>
                                         </div>
                                     </div>
                                 </div>
@@ -214,8 +214,8 @@
                                         <input class="form-control" type="number" placeholder="Contact Number"
                                             formControlName="Contact">
                                         <div class="text-danger" *ngIf="FacilityForm.controls['Contact'].touched">
-                                            <span *ngIf="FacilityForm.controls['Contact'].errors?.['required']">Enter
-                                                contact</span>
+                                            <span *ngIf="FacilityForm.controls['Contact'].errors?.['required']">
+                                                Contact Number Required*</span>
                                         </div>
                                     </div>
                                 </div>
@@ -244,8 +244,8 @@
                                             [ngClass]="{'is-invalid': FacilityForm.controls['Address'].touched && FacilityForm.controls['Address'].errors}"
                                             placeholder="Enter Address"></textarea>
                                         <div class="text-danger" *ngIf="FacilityForm.controls['Address'].touched">
-                                            <span *ngIf="FacilityForm.controls['Address'].errors?.['required']">Enter
-                                                address</span>
+                                            <span *ngIf="FacilityForm.controls['Address'].errors?.['required']">
+                                                Address Required*</span>
                                         </div>
                                     </div>
                                 </div>
@@ -264,7 +264,7 @@
                                         </mat-select>
                                         <div class="text-danger" *ngIf="FacilityForm.controls['Country'].touched">
                                             <span *ngIf="FacilityForm.controls['Country'].errors?.['required']">Select
-                                                country</span>
+                                                Country*</span>
                                         </div>
                                     </div>
                                 </div>
@@ -282,7 +282,7 @@
                                         </mat-select>
                                         <div class="text-danger" *ngIf="FacilityForm.controls['State'].touched">
                                             <span *ngIf="FacilityForm.controls['State'].errors?.['required']">Select
-                                                state</span>
+                                                State*</span>
                                         </div>
                                     </div>
                                 </div>
@@ -299,7 +299,7 @@
                                         </mat-select>
                                         <div class="text-danger" *ngIf="FacilityForm.controls['City'].touched">
                                             <span *ngIf="FacilityForm.controls['City'].errors?.['required']">Select
-                                                city</span>
+                                                City*</span>
                                         </div>
                                     </div>
                                 </div>
@@ -311,7 +311,7 @@
                                             [ngClass]="{'is-invalid': FacilityForm.controls['Postal'].touched && FacilityForm.controls['Postal'].errors}">
                                         <div class="text-danger" *ngIf="FacilityForm.controls['Postal'].touched">
                                             <span *ngIf="FacilityForm.controls['Postal'].errors?.['required']">Enter
-                                                postal code</span>
+                                                Postal Code*</span>
                                         </div>
                                     </div>
                                 </div>

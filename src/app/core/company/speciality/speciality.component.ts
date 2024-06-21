@@ -6,7 +6,6 @@ import { SpecialityList, apiResultFormat, pageSelection } from 'src/app/shared/m
 import { routes } from 'src/app/shared/routes/routes';
 import { FacilitiesService } from 'src/app/shared/services/facilities.services';
 import { ToastrService } from 'ngx-toastr';
-
 import Swal from 'sweetalert2';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -27,7 +26,8 @@ export class SpecialityComponent {
   selectedList: any = [];
   taxonomyDetail: any = [];
   SpecialityList: any = []
-
+  isDeleted: boolean = false;
+  isAdded: boolean = false
   public showFilter = false;
   public searchDataValue = '';
   public lastIndex = 0;
@@ -41,7 +41,6 @@ export class SpecialityComponent {
   public pageNumberArray: Array<number> = [];
   public pageSelection: Array<pageSelection> = [];
   public totalPages = 0;
-  isUpdate: boolean = false;
   specialityForm!: UntypedFormGroup;
   dataSource!: MatTableDataSource<SpecialityList>;
 
@@ -211,6 +210,7 @@ export class SpecialityComponent {
 
           this.specialityModel = {};
           this.specialityForm.markAsUntouched();
+          this.showAddedMsg();
         }
       })
       this.getAllSpeciality();
@@ -219,7 +219,6 @@ export class SpecialityComponent {
 
 
   getAllSpeciality() {
-    debugger;
     this.facilitiesService.getAllSpecialityDetails().subscribe((res: any) => {
       this.SpecialityList = res;
       this.getTableData();
@@ -228,22 +227,24 @@ export class SpecialityComponent {
   }
   removeSpeciality(id: any): void {
     debugger
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You won\'t be able to revert this!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#34c38f',
-      cancelButtonColor: '#f46a6a',
-      confirmButtonText: 'Yes, delete it!'
-    }).then(result => {
-      if (result.value) {
-        this.facilitiesService.removeSpecialtyDetails(id).subscribe(() => {
-        })
-        this.getAllSpeciality();
-        Swal.fire('Deleted!', 'Speciality  details has been deleted.', 'success');
-      }
-    });
+    this.facilitiesService.removeSpecialtyDetails(id).subscribe(() => {
+      this.isDeleted = true;
+      this.showDeleteMsg()
+      this.getAllSpeciality();
+
+    })
   }
 
+  showDeleteMsg() {
+    this.isDeleted = true;
+    setTimeout(() => {
+      this.isDeleted = false;
+    }, 3000); // or 5000 for 5 seconds
+  }
+  showAddedMsg() {
+    this.isAdded = true;
+    setTimeout(() => {
+      this.isAdded = false;
+    }, 3000);
+  }
 }

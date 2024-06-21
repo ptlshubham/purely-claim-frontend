@@ -40,8 +40,8 @@ export class FacilityTypeComponent implements OnInit {
   submitted = false;
   searchQuery: string = '';
   filterfacilityList: any = []
-
-
+  isDeleted: boolean = false
+  isAdded: boolean = false
   get fa() { return this.ValidationForm.controls; }
 
   constructor(
@@ -151,43 +151,29 @@ export class FacilityTypeComponent implements OnInit {
 
   // public facType: FormGroup;
 
-  public onSubmit(): void {
-    this.submitted = true;
-    if (this.ValidationForm.invalid) {
-      return;
-    }
-    else {
-      this.facilityTypeModel.isactive = true;
-      this.facilitiesService.saveFacilityType(this.facilityTypeModel).subscribe((data: any) => {
-        if (data = 'success') {
-          this.getAllfacilityType();
-          this.isOpen = false;
-          this.facilityTypeModel = {};
-          this.ValidationForm.markAsUntouched();
-        }
-      })
 
-    }
-  }
+
 
 
   removeFacilityType(id: any): void {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You won\'t be able to revert this!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#34c38f',
-      cancelButtonColor: '#f46a6a',
-      confirmButtonText: 'Yes, delete it!'
-    }).then(result => {
-      if (result.value) {
-        this.facilitiesService.removeFacilityType(id).subscribe(() => {
-        })
+    this.facilitiesService.removeFacilityType(id).subscribe(() => {
+      this.showDeleteMsg();
+      this.getAllfacilityType();
+
+    })
+  }
+
+  SaveFacility() {
+    this.facilityTypeModel.isactive = true;
+    this.facilitiesService.saveFacilityType(this.facilityTypeModel).subscribe((data: any) => {
+      if (data = 'success') {
         this.getAllfacilityType();
-        Swal.fire('Deleted!', 'registration  details has been deleted.', 'success');
+        this.isOpen = false;
+        this.facilityTypeModel = {};
+        this.showAddedMsg()
+        this.ValidationForm.markAsUntouched();
       }
-    });
+    })
   }
   getAllfacilityType() {
     this.facilitiesService.getAllFacilityTypeList().subscribe((res: any) => {
@@ -203,4 +189,18 @@ export class FacilityTypeComponent implements OnInit {
     );
 
   }
+
+  showDeleteMsg() {
+    this.isDeleted = true;
+    setTimeout(() => {
+      this.isDeleted = false;
+    }, 3000); // or 5000 for 5 seconds
+  }
+  showAddedMsg() {
+    this.isAdded = true;
+    setTimeout(() => {
+      this.isAdded = false;
+    }, 3000); // or 5000 for 5 seconds
+  }
+
 }
