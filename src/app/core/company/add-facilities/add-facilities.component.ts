@@ -38,14 +38,8 @@ export class AddFacilitiesComponent {
   states: any[] = [];
   cities: any[] = [];
   allData: any = [];
-  selectedList5: data[] = [
-    { value: 'Chicago (GMT-5)' },
-    { value: 'Denver (GMT-6)' },
-    { value: 'Phoenix (GMT-7)' },
-    { value: 'Los Angeles (GMT-7)' },
-    { value: 'Anchorage (GMT-8)' },
-    { value: 'Honolulu (GMT-10)' }
-  ]
+  selectedList5: data[] = [];
+  timezones: any[] = []
 
   PlaceOfService: data[] = [
     { value: 'Home' },
@@ -68,6 +62,9 @@ export class AddFacilitiesComponent {
   ngOnInit(): void {
     this.validateForm();
     this.getAllSpeciality();
+    this.gettimezones();
+
+
   }
 
   private validateForm(): void {
@@ -87,6 +84,13 @@ export class AddFacilitiesComponent {
       City: new FormControl('', Validators.required),
       Postal: new FormControl('', Validators.required),
     })
+  }
+  gettimezones() {
+    debugger
+    this.ClinicService.getData().subscribe((data: any) => {
+      this.selectedList5 = data;
+      console.log(data)
+    });
   }
   onCountryChange(country: string) {
     this.states = [...new Set(this.allData.filter((item: any) => item.country === country).map((item: any) => item.subcountry))];

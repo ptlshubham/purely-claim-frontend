@@ -124,8 +124,8 @@
                                         <mat-select class="form-control select" placeholder="Select Timezone"
                                             formControlName="Timezone"
                                             [ngClass]="{'is-invalid': FacilityForm.controls['Timezone'].touched && FacilityForm.controls['Timezone'].errors}">
-                                            <mat-option *ngFor="let t of selectedList5" [value]="t.value">
-                                                {{t.value}}
+                                            <mat-option *ngFor="let timezone of selectedList5" [value]="timezone">
+                                                {{timezone}}
                                             </mat-option>
                                         </mat-select>
                                         <div class="text-danger" *ngIf="FacilityForm.controls['Timezone'].touched">
@@ -220,7 +220,6 @@
                                     </div>
                                 </div>
 
-
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-top-form">
                                         <label for="avator" class="local-top">Facility Image</label>
@@ -237,21 +236,9 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12 col-sm-12">
-                                    <div class="form-group local-forms">
-                                        <label for="address">Address <span class="login-danger">*</span></label>
-                                        <textarea class="form-control" rows="3" cols="30" formControlName="Address"
-                                            [ngClass]="{'is-invalid': FacilityForm.controls['Address'].touched && FacilityForm.controls['Address'].errors}"
-                                            placeholder="Enter Address"></textarea>
-                                        <div class="text-danger" *ngIf="FacilityForm.controls['Address'].touched">
-                                            <span *ngIf="FacilityForm.controls['Address'].errors?.['required']">
-                                                Address Required*</span>
-                                        </div>
-                                    </div>
-                                </div>
 
 
-                                <div class="col-12 col-md-6 col-xl-3">
+                                <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label for="country">Country <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select Country"
@@ -269,7 +256,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12 col-md-6 col-xl-3">
+                                <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label for="state">State/Province <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select State"
@@ -287,7 +274,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12 col-md-6 col-xl-3">
+                                <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label for="city">City <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select City"
@@ -303,6 +290,18 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="address">Address <span class="login-danger">*</span></label>
+                                        <textarea class="form-control" rows="3" cols="30" formControlName="Address"
+                                            [ngClass]="{'is-invalid': FacilityForm.controls['Address'].touched && FacilityForm.controls['Address'].errors}"
+                                            placeholder="Enter Address"></textarea>
+                                        <div class="text-danger" *ngIf="FacilityForm.controls['Address'].touched">
+                                            <span *ngIf="FacilityForm.controls['Address'].errors?.['required']">
+                                                Address Required*</span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-12 col-md-6 col-xl-3">
                                     <div class="form-group local-forms">
                                         <label for="postalcode">Postal Code <span class="login-danger">*</span></label>
@@ -315,6 +314,7 @@
                                         </div>
                                     </div>
                                 </div>
+
 
 
                                 <!-- <div class="col-12 col-md-6 col-xl-6">  

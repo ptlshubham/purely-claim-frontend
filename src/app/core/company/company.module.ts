@@ -5,6 +5,7 @@ import { CompanyRoutingModule } from './company-routing.module';
 import { CompanyComponent } from './company.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     CommonModule,
     CompanyRoutingModule,
     SharedModule,
-    NgSelectModule
+    NgSelectModule,
+    NgxMatSelectSearchModule
   ]
 })
 export class CompanyModule { }

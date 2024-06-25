@@ -104,7 +104,7 @@
                                         <label for="Name">Primary Facility Name <span
                                                 class="login-danger">*</span></label>
                                         <input class="form-control" type="text" placeholder="Primary Facility Name"
-                                            formControlName="Name"
+                                            formControlName="Name" [(ngModel)]="primaryFacilityModel.name"
                                             [ngClass]="{'is-invalid': ClinicForm.controls['Name'].touched && ClinicForm.controls['Name'].errors }">
                                         <div class="invalid-feedback" *ngIf="ClinicForm.controls['Name'].touched">
                                             <span *ngIf="ClinicForm.controls['Name'].errors?.['required']">Enter
@@ -117,10 +117,10 @@
                                     <div class="form-group local-forms">
                                         <label for="Timezone">Timezone <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select Timezone"
-                                            formControlName="Timezone"
+                                            formControlName="Timezone" [(ngModel)]="primaryFacilityModel.timezone"
                                             [ngClass]="{'is-invalid': ClinicForm.controls['Timezone'].touched && ClinicForm.controls['Timezone'].errors}">
-                                            <mat-option *ngFor="let t of selectedList5" [value]="t.value">
-                                                {{t.value}}
+                                            <mat-option *ngFor="let timezone of selectedList5" [value]="timezone">
+                                                {{timezone}}
                                             </mat-option>
                                         </mat-select>
                                         <div class="text-danger" *ngIf="ClinicForm.controls['Timezone'].touched">
@@ -135,7 +135,7 @@
                                         <input class="form-control" type="number"
                                             placeholder="Enter National Provider Information" formControlName="NPI"
                                             [ngClass]="{'is-invalid': ClinicForm.controls['NPI'].touched && ClinicForm.controls['NPI'].errors}"
-                                            formControlName="NPI">
+                                            formControlName="NPI" [(ngModel)]="primaryFacilityModel.npi">
                                         <div class="invalid-feedback" *ngIf="ClinicForm.controls['NPI'].touched">
                                             <span *ngIf="ClinicForm.controls['NPI'].errors?.['required']">
                                                 NPI Number Required</span>
@@ -147,7 +147,7 @@
                                     <div class="form-group local-forms">
                                         <label for="pos">Place of service <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select Place Of Service"
-                                            formControlName="pos"
+                                            formControlName="pos" [(ngModel)]="primaryFacilityModel.pos"
                                             [ngClass]="{'is-invalid': ClinicForm.controls['pos'].touched && ClinicForm.controls['pos'].errors}">
                                             <mat-option *ngFor="let t of PlaceOfService" [value]="t.value">
                                                 {{t.value}}
@@ -164,7 +164,7 @@
                                     <div class="form-group local-forms">
                                         <label for="Speciality">Speciality </label>
                                         <mat-select class="form-control select" placeholder="Select Speciality"
-                                            formControlName="Speciality"
+                                            formControlName="Speciality" [(ngModel)]="primaryFacilityModel.speciaity"
                                             [ngClass]="{'is-invalid': ClinicForm.controls['Speciality'].touched && ClinicForm.controls['Speciality'].errors}">
                                             <mat-option *ngFor="let data of SpecialityList"
                                                 [value]="data.specialityname">
@@ -181,7 +181,7 @@
                                     <div class="form-group local-forms">
                                         <label for="TaxId">Tax ID </label>
                                         <input class="form-control" type="text" placeholder="Tax ID"
-                                            formControlName="Taxid"
+                                            formControlName="Taxid" [(ngModel)]="primaryFacilityModel.taxid"
                                             [ngClass]="{'is-invalid': ClinicForm.controls['Taxid'].touched && ClinicForm.controls['Taxid'].errors }">
                                         <div class="invalid-feedback" *ngIf="ClinicForm.controls['Taxid'].touched">
                                             <span *ngIf="ClinicForm.controls['Taxid'].errors?.['required']">Text Id
@@ -218,7 +218,7 @@
                                     <div class="form-group local-forms">
                                         <label for="Email">Email <span class="login-danger">*</span> </label>
                                         <input class="form-control" type="email" placeholder="Enter Email Id"
-                                            formControlName="Email">
+                                            formControlName="Email" [(ngModel)]="primaryFacilityModel.email">
                                         <div class="text-danger" *ngIf="ClinicForm.controls['Email'].touched">
                                             <span *ngIf="ClinicForm.controls['Email'].errors?.['required']">
                                                 Email required*</span>
@@ -229,7 +229,7 @@
                                     <div class="form-group local-forms">
                                         <label for="Contact">Contact <span class="login-danger">*</span></label>
                                         <input class="form-control" type="number" placeholder="Contact Number"
-                                            formControlName="Contact">
+                                            formControlName="Contact" [(ngModel)]="primaryFacilityModel.contact">
                                         <div class="text-danger" *ngIf="ClinicForm.controls['Contact'].touched">
                                             <span *ngIf="ClinicForm.controls['Contact'].errors?.['required']">
                                                 Contact Number Required*</span>
@@ -241,7 +241,9 @@
                                         <label for="avator" class="local-top">Facility Image</label>
                                         <div class="settings-btn upload-files-avator">
                                             <input type="file" accept="image/*" name="image" id="file"
-                                                onchange="loadFile(event)" class="hide-input" formControlName="Avatar">
+                                                class="hide-input" formControlName="Avatar"
+                                                (change)="uploadFile($event)"
+                                                [(ngModel)]="primaryFacilityModel.facilityimage">
                                             <label for="file" class="upload">Choose File</label>
                                         </div>
                                         <div class="text-danger"
@@ -257,7 +259,7 @@
                                     <div class="form-group local-forms">
                                         <label for="country">Country <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select Country"
-                                            formControlName="Country"
+                                            formControlName="Country" [(ngModel)]="primaryFacilityModel.country"
                                             [ngClass]="{'is-invalid': ClinicForm.controls['Country'].touched && ClinicForm.controls['Country'].errors}"
                                             (selectionChange)="onCountryChange($event.value)">
                                             <mat-option *ngFor="let country of countries" [value]="country">
@@ -275,7 +277,7 @@
                                     <div class="form-group local-forms">
                                         <label for="state">State/Province <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select State"
-                                            formControlName="State"
+                                            formControlName="State" [(ngModel)]="primaryFacilityModel.state"
                                             [ngClass]="{'is-invalid': ClinicForm.controls['State'].touched && ClinicForm.controls['State'].errors}"
                                             (selectionChange)="onStateChange($event.value)">
                                             <mat-option *ngFor="let state of states" [value]="state">
@@ -293,7 +295,7 @@
                                     <div class="form-group local-forms">
                                         <label for="city">City <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select City"
-                                            formControlName="City"
+                                            formControlName="City" [(ngModel)]="primaryFacilityModel.city"
                                             [ngClass]="{'is-invalid': ClinicForm.controls['City'].touched && ClinicForm.controls['City'].errors}">
                                             <mat-option *ngFor="let city of cities" [value]="city.name">
                                                 {{ city.name }}
@@ -309,7 +311,7 @@
                                     <div class="form-group local-forms">
                                         <label for="address">Address <span class="login-danger">*</span></label>
                                         <textarea class="form-control" rows="3" cols="30" formControlName="Address"
-                                            placeholder="Enter Address"
+                                            placeholder="Enter Address" [(ngModel)]="primaryFacilityModel.address"
                                             [ngClass]="{'is-invalid': ClinicForm.controls['Address'].touched && ClinicForm.controls['Address'].errors}"></textarea>
                                         <div class="text-danger" *ngIf="ClinicForm.controls['Address'].touched">
                                             <span *ngIf="ClinicForm.controls['Address'].errors?.['required']">
@@ -321,7 +323,7 @@
                                     <div class="form-group local-forms">
                                         <label for="postalcode">Postal Code <span class="login-danger">*</span></label>
                                         <input class="form-control" type="text" placeholder="Postal Code"
-                                            formControlName="Postal"
+                                            formControlName="Postal" [(ngModel)]="primaryFacilityModel.postalcode"
                                             [ngClass]="{'is-invalid': ClinicForm.controls['Postal'].touched && ClinicForm.controls['Postal'].errors}">
                                         <div class="text-danger" *ngIf="ClinicForm.controls['Postal'].touched">
                                             <span *ngIf="ClinicForm.controls['Postal'].errors?.['required']">
@@ -332,7 +334,8 @@
 
                                 <div class="col-12">
                                     <div class="doctor-submit text-end">
-                                        <button type="submit" class="btn btn-primary submit-form me-2" (submit)="send()"
+                                        <button type="submit" class="btn btn-primary submit-form me-2"
+                                            (click)="SavePrimaryFacilityDeatails()"
                                             [disabled]="ClinicForm.invalid">Submit</button>
                                         <button type="submit" class="btn btn-primary cancel-form"
                                             (click)="backToTable()">Cancel</button>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ClinicRoutingModule } from './clinic-routing.module';
 import { ClinicComponent } from './clinic.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { ClinicComponent } from './clinic.component';
   imports: [
     CommonModule,
     ClinicRoutingModule,
-    SharedModule
+    SharedModule,
+    MatAutocompleteModule
   ]
 })
 export class ClinicModule { }

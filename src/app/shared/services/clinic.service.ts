@@ -25,4 +25,15 @@ export class ClinicService {
     constructor(
         private httpClient: HttpClient
     ) { }
+    private apiUrl = 'https://worldtimeapi.org/api/timezone';
+    getData(): Observable<any> {
+        return this.httpClient.get(this.apiUrl);
+    }
+    uploadFacilityImage(img: any): Observable<any> {
+        return this.httpClient.post<any>(ApiService.UploadPrimaryFacilityImageURL, img);
+    }
+    savePrimaryFacility(data: any): Observable<any> {
+        debugger
+        return this.httpClient.post<any>(ApiService.savePrimaryFacilityURL, data);
+    }
 }

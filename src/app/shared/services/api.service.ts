@@ -18,6 +18,8 @@ export class ApiService {
   public static getAllSpecialityDetailsURL: string = ApiService.HOST_URL + '/admin/GetAllSpecialityDetails';
   public static RemoveSpecialtyDetailsURL: string = ApiService.HOST_URL + '/admin/RemoveSpecialtyDetails/';
   public static updateSpecialityDetailsURL: string = ApiService.HOST_URL + '/admin/UpdateSpecialityDetails/';
+  public static UploadPrimaryFacilityImageURL: string = ApiService.HOST_URL + '/admin/UploadPrimaryFacilityImage';
+  public static savePrimaryFacilityURL: string = ApiService.HOST_URL + '/admin/SavePrimaryFacility';
 
 
 

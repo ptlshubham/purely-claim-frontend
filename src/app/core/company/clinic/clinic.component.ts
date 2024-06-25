@@ -28,19 +28,19 @@ export class ClinicComponent {
   cities: any[] = [];
   allData: any = [];
   isOpen: boolean = false;
-
-  selectedList5: data[] = [
-    { value: 'Chicago (GMT-5)' },
-    { value: 'Denver (GMT-6)' },
-    { value: 'Phoenix (GMT-7)' },
-    { value: 'Los Angeles (GMT-7)' },
-    { value: 'Anchorage (GMT-8)' },
-    { value: 'Honolulu (GMT-10)' }
-  ]
+  timezones: any[] = []
+  primaryFacilityModel: any = {}
+  selectedList5: data[] = [];
+  primaryfacilityList: any = []
   PlaceOfService: data[] = [
     { value: 'Home' },
     { value: 'Office' }
   ]
+  primaryFacilityimg: any
+  imageUrl: any = "assets/images/file-upload-image.jpg";
+  cardImageBase64: any;
+  clogo: any = null;
+  editFile: boolean = true;
   public ClinicForm: FormGroup;
 
   public sortData(sort: Sort): void {
@@ -68,13 +68,20 @@ export class ClinicComponent {
   ngOnInit(): void {
     this.validateForm();
     this.getAllSpeciality();
+    this.gettimezones();
 
     // this.validationForm = this.formBuilder.group({
     //   name: ['', [Validators.required]]
     // });
   }
   // get f() { return this.validationForm.controls; }
-
+  gettimezones() {
+    debugger
+    this.ClinicService.getData().subscribe((data: any) => {
+      this.selectedList5 = data;
+      console.log(data)
+    });
+  }
   private validateForm(): void {
     this.ClinicForm = new FormGroup({
       Name: new FormControl('', Validators.required),
@@ -117,14 +124,44 @@ export class ClinicComponent {
     this.isOpen = true;
   }
   getAllSpeciality() {
-    debugger;
     this.FacilitiesService.getAllSpecialityDetails().subscribe((res: any) => {
       this.SpecialityList = res;
     });
   }
-  public searchData(value: any): void {
+  searchData(value: any): void {
   }
   BackToTabel() {
     this.isOpen = false;
+  }
+  uploadFile(event: any) {
+    debugger
+    let reader = new FileReader();
+    let file = event.target.files[0];
+    const img = new Image();
+    img.src = window.URL.createObjectURL(file);
+    img.onload = () => {
+      if (event.target.files && event.target.files[0]) {
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          this.imageUrl = reader.result;
+          const imgBase64Path = reader.result;
+          this.cardImageBase64 = imgBase64Path;
+          const formdata = new FormData();
+          formdata.append('file', file);
+          this.ClinicService.uploadFacilityImage(formdata).subscribe((response) => {
+            this.primaryFacilityimg = response;
+            debugger
+          });
+        }
+      }
+    };
+  }
+  SavePrimaryFacilityDeatails() {
+    this.primaryFacilityModel.facilityimage = this.primaryFacilityimg
+    debugger
+    this.ClinicService.savePrimaryFacility(this.primaryFacilityModel).subscribe((data: any) => {
+      this.primaryfacilityList = data;
+      this.primaryFacilityModel = {};
+    })
   }
 }
