@@ -4,6 +4,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { clientApprovalList, pageSelection } from 'src/app/shared/models/models';
 import { Sort } from '@angular/material/sort';
 import { ClinicService } from 'src/app/shared/services/clinic.service';
+import { LoginService } from 'src/app/shared/services/login.service';
+import Locals from 'ngx-editor/lib/Locals';
 @Component({
   selector: 'app-client-approval-request',
   templateUrl: './client-approval-request.component.html',
@@ -27,10 +29,12 @@ export class ClientApprovalRequestComponent {
   public pageSelection: Array<pageSelection> = [];
   public totalPages = 0;
   isAdded: boolean = false
-
+  salonid: any = localStorage.getItem('salonid')
+  email: any = localStorage.getItem('email')
 
   constructor(
     private ClinicService: ClinicService,
+    private loginService: LoginService
   ) {
   }
   ngOnInit(): void {
@@ -38,7 +42,25 @@ export class ClientApprovalRequestComponent {
 
   }
 
+  // approveFacility(data: any) {
+  //   debugger
+  //   const sendData = {
+  //     email: data.email,
+  //     facilityId: data.id
+  //   };
+  //   // Call the API to send the approval email
+  //   this.loginService.sendApprovalEmail(sendData).subscribe(response => {
+  //     console.log(response);
+  //     // Show a success message or update the UI accordingly
+  //   });
+  // }
 
+  getAllRegistrationList() {
+    this.ClinicService.getAllRegistration().subscribe((res: any) => {
+      this.clientApprovalList = res;
+      this.getTableData();
+    });
+  }
   public searchData(value: any): void {
     if (this.dataSource) {
       this.dataSource.filter = value.trim().toLowerCase();
@@ -61,13 +83,7 @@ export class ClientApprovalRequestComponent {
   }
 
 
-  getAllRegistrationList() {
-    this.ClinicService.getAllRegistration().subscribe((res: any) => {
-      this.clientApprovalList = res;
-      this.getTableData();
 
-    });
-  }
 
   private calculateTotalPages(totalData: number, pageSize: number): void {
     this.pageNumberArray = [];

@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="morning-user">
-                        <h2>Good Morning, <span>Daniel Bruk</span></h2>
+                        <h2>Good Morning, <span>{{userName}}</span></h2>
                         <p>Have a nice day at work</p>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
 
         <div class="row">
 
-            <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+            <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3" *ngIf="role==='user'">
                 <div class="dash-widget">
                     <div class="dash-boxs comman-flex-center">
                         <img src="assets/img/icons/profile-add.svg" alt="">
@@ -52,10 +52,23 @@
                         <img src="assets/img/icons/scissor.svg" alt="">
                     </div>
                     <div class="dash-content dash-count">
-                        <h4>Medical Claims</h4>
+                        <h4>Total Facility List</h4>
                         <h2><span class="counter-up" [countUp]="56" [options]="{duration: 10}">56</span></h2>
-                        <p><span class="negative-view"><i class="feather icon-arrow-down-right me-1"></i>15%</span> vs
+                        <p><span class="passive-view"><i class="feather icon-arrow-up-right me-1"></i>15%</span> vs
                             last month</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+                <div class="dash-widget">
+                    <div class="dash-boxs comman-flex-center">
+                        <img src="assets/img/icons/scissor.svg" alt="">
+                    </div>
+                    <div class="dash-content dash-count">
+                        <h4>Total Medical Claims</h4>
+                        <h2><span class="counter-up" [countUp]="80" [options]="{duration: 10}">56</span></h2>
+                        <p><span class="passive-view"><i class="feather icon-arrow-up-right me-1"></i>30%</span> vs last
+                            month</p>
                     </div>
                 </div>
             </div>
@@ -78,26 +91,14 @@
                         <img src="assets/img/icons/calendar.svg" alt="">
                     </div>
                     <div class="dash-content dash-count">
-                        <h4>Claims Denied</h4>
+                        <h4>Total Rejcted Claims</h4>
                         <h2><span class="counter-up" [countUp]="10" [options]="{duration: 10}">200</span></h2>
                         <p><span class="passive-view"><i class="feather icon-arrow-up-right me-1"></i>40%</span> vs last
                             month</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-                <div class="dash-widget">
-                    <div class="dash-boxs comman-flex-center">
-                        <img src="assets/img/icons/calendar.svg" alt="">
-                    </div>
-                    <div class="dash-content dash-count">
-                        <h4>Not Eligible Clients</h4>
-                        <h2><span class="counter-up" [countUp]="5" [options]="{duration: 10}">200</span></h2>
-                        <p><span class="passive-view"><i class="feather icon-arrow-up-right me-1"></i>40%</span> vs last
-                            month</p>
-                    </div>
-                </div>
-            </div>
+
             <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
                 <div class="dash-widget">
                     <div class="dash-boxs comman-flex-center">
@@ -182,7 +183,7 @@
             <div class="col-12 col-md-6 col-xl-6">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h4 class="card-title d-inline-block">Patient List</h4> <a [routerLink]="routes.patientsList"
+                        <h4 class="card-title d-inline-block">Facility List</h4> <a [routerLink]="routes.patientsList"
                             class="float-end patient-views">show all</a>
                     </div>
                     <div class="card-block table-dash">
@@ -247,7 +248,7 @@
             <div class="col-12 col-md-6 col-xl-6">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h4 class="card-title d-inline-block">User List </h4> <a [routerLink]="routes.patientsList"
+                        <h4 class="card-title d-inline-block">Patient List </h4> <a [routerLink]="routes.patientsList"
                             class="float-end patient-views">show all</a>
                     </div>
                     <div class="card-block table-dash">

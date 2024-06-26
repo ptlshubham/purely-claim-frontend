@@ -12,7 +12,7 @@ import {
   ApexFill,
   ApexGrid,
   ApexStroke,
-  
+
 } from 'ng-apexcharts';
 import { Sort } from '@angular/material/sort';
 import { DataService } from 'src/app/shared/data/data.service';
@@ -20,15 +20,15 @@ import { recentPatients, upcomingAppointments } from 'src/app/shared/models/mode
 export type ChartOptions = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   series: ApexAxisChartSeries | any;
-   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   chart: ApexChart | any;
-   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dataLabels: ApexDataLabels | any;
-   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   plotOptions: ApexPlotOptions | any;
-   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   responsive: ApexResponsive[] | any;
-   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   xaxis: ApexXAxis | any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   legend: ApexLegend | any;
@@ -45,7 +45,7 @@ export type ChartOptions = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 };
 interface data {
-  value: string ;
+  value: string;
 }
 
 @Component({
@@ -55,15 +55,17 @@ interface data {
 })
 export class AdminDashboardComponent {
   public routes = routes;
-  public selectedValue ! : string  ;
+  public selectedValue !: string;
+  userName: any = localStorage.getItem('UserName');
+  role: any = localStorage.getItem('role')
   @ViewChild('chart') chart!: ChartComponent;
   public chartOptionsOne: Partial<ChartOptions>;
   public chartOptionsTwo: Partial<ChartOptions>;
 
   public recentPatients: Array<recentPatients> = [];
   public upcomingAppointments: Array<upcomingAppointments> = [];
- 
-  constructor(public data : DataService) {
+
+  constructor(public data: DataService) {
     this.chartOptionsOne = {
       chart: {
         height: 230,
@@ -72,21 +74,21 @@ export class AdminDashboardComponent {
         toolbar: {
           show: false,
         },
-      
+
       },
       grid: {
-        show: true, 
+        show: true,
         xaxis: {
           lines: {
             show: false
-           }
-         },  
-        yaxis: {
-          lines: { 
-            show: true 
-           }
-         },   
+          }
         },
+        yaxis: {
+          lines: {
+            show: true
+          }
+        },
+      },
       responsive: [
         {
           breakpoint: 480,
@@ -135,10 +137,10 @@ export class AdminDashboardComponent {
           'Nov',
           'Dec',
         ],
-          axisBorder: {
-            show: false, // set to false to hide the vertical gridlines
-          },
+        axisBorder: {
+          show: false, // set to false to hide the vertical gridlines
         },
+      },
     };
     this.chartOptionsTwo = {
       series: [44, 55, 41, 17],
@@ -155,29 +157,29 @@ export class AdminDashboardComponent {
       },
       plotOptions: {
         bar: {
-            horizontal: false,
-            columnWidth: '50%'
+          horizontal: false,
+          columnWidth: '50%'
         },
-    },
+      },
       dataLabels: {
         enabled: false,
       },
       responsive: [{
         breakpoint: 480,
         options: {
-            chart: {
-                width: 200
-            },
-            legend: {
-              show: false
-            }
+          chart: {
+            width: 200
+          },
+          legend: {
+            show: false
+          }
         }
-    }],
+      }],
     };
     this.recentPatients = this.data.recentPatients;
     this.upcomingAppointments = this.data.upcomingAppointments;
   }
-  
+
   public sortData(sort: Sort) {
     const data = this.recentPatients.slice();
     const datas = this.upcomingAppointments.slice();
@@ -195,18 +197,18 @@ export class AdminDashboardComponent {
         return (aValue < bValue ? -1 : 1) * (sort.direction === 'asc' ? 1 : -1);
       });
       this.upcomingAppointments = datas.sort((a, b) => {
-         // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const aValue = (a as any)[sort.active];
-         // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const bValue = (b as any)[sort.active];
         return (aValue < bValue ? -1 : 1) * (sort.direction === 'asc' ? 1 : -1);
       });
     }
   }
   selecedList: data[] = [
-    {value: '2022'},
-    {value: '2021'},
-    {value: '2020'},
-    {value: '2019'},
+    { value: '2022' },
+    { value: '2021' },
+    { value: '2020' },
+    { value: '2019' },
   ];
 }

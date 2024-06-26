@@ -11,10 +11,12 @@ import { SideBarService } from 'src/app/shared/side-bar/side-bar.service';
 export class HeaderComponent {
   public routes = routes;
   public openBox = false;
-  public miniSidebar  = false;
+  public miniSidebar = false;
   public addClass = false;
+  userName: any = localStorage.getItem('UserName')
+  role: any = localStorage.getItem('role')
 
-  constructor(public router: Router,private sideBar: SideBarService) {
+  constructor(public router: Router, private sideBar: SideBarService) {
     this.sideBar.toggleSideBar.subscribe((res: string) => {
       if (res == 'true') {
         this.miniSidebar = true;
@@ -40,21 +42,21 @@ export class HeaderComponent {
   }
   public toggleMobileSideBar(): void {
     this.sideBar.switchMobileSideBarPosition();
-    
-      this.addClass = !this.addClass;
-      /* eslint no-var: off */
-      var root = document.getElementsByTagName( 'html' )[0];
-      /* eslint no-var: off */
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      var sidebar:any = document.getElementById('sidebar')
-  
-      if (this.addClass) {
-        root.classList.add('menu-opened');
-        sidebar.classList.add('opened');
-      }
-      else {
-        root.classList.remove('menu-opened');
-        sidebar.classList.remove('opened');
-      }
+
+    this.addClass = !this.addClass;
+    /* eslint no-var: off */
+    var root = document.getElementsByTagName('html')[0];
+    /* eslint no-var: off */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    var sidebar: any = document.getElementById('sidebar')
+
+    if (this.addClass) {
+      root.classList.add('menu-opened');
+      sidebar.classList.add('opened');
+    }
+    else {
+      root.classList.remove('menu-opened');
+      sidebar.classList.remove('opened');
     }
   }
+}

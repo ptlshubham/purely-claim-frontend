@@ -22,7 +22,7 @@ export class ApiService {
   public static UploadPrimaryFacilityImageURL: string = ApiService.HOST_URL + '/admin/UploadPrimaryFacilityImage';
   public static savePrimaryFacilityURL: string = ApiService.HOST_URL + '/admin/SavePrimaryFacility';
   public static getAllRegistrationURL: string = ApiService.HOST_URL + '/admin/GetAllRegisrationList';
-
+  // public static sendApprovalEmailURL: string = ApiService.HOST_URL + '/admin/SendApprovalEmail';
 
 
 

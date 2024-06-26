@@ -15,38 +15,35 @@ export class OrganizationloginComponent implements OnInit {
 
 
   public selectedValue !: string;
-  public loginModel: any = {};
 
   org: UntypedFormGroup;
   submitted: false;
   routes: any;
-  registermodel: any;
 
   constructor(private formBuilder: UntypedFormBuilder,
     private loginService: LoginService,
     private router: Router,
-    private apiService: ApiService
   ) { }
 
   ngOnInit(): void {
     localStorage.clear();
+    debugger
     this.org = this.formBuilder.group({
 
-      email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]],
-      password: ['', Validators.required],
+      email: ['admin@gmail.com', [Validators.required, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]],
+      password: ['123456', Validators.required],
     });
   }
   login() {
-    this.loginModel
-    debugger
-    this.loginService.login(this.loginModel).subscribe(data => {
+    this.loginService.login(this.org.value).subscribe(data => {
       debugger
-      // if (data[0].role == 'Admin') {
-
-      // localStorage.setItem('lastOutTime', data[0].last_login);//{ encrypt: true }// // "mÆk¬�k§m®À½½°¹¿¯..."
-      // localStorage.setItem('lastInTime', data[0].last_login,); //{ encrypt: true }//
-      localStorage.setItem('UserName', data[0].firstname + '' + data[0].lastname);//{ encrypt: true }//
+      localStorage.setItem('UserName', data[0].firstname + ' ' + data[0].lastname);//{ encrypt: true }//
       localStorage.setItem('role', data[0].role);//{ encrypt: true }//
+      localStorage.setItem('authenticationToken', data[0].token);//{ encrypt: true }//
+      localStorage.setItem('salonid', data[0].salonid);//{ encrypt: true }//
+      localStorage.setItem('email', data[0].email);//{ encrypt: true }//
+
+
       this.router.navigate(['/dashboard']);
       // }
     })
