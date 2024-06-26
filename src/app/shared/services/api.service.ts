@@ -10,6 +10,7 @@ export class ApiService {
       'Content-Type': 'application/json'
     })
   }
+  public static loginOrganizationUserURL: string = ApiService.HOST_URL + '/admin/LoginOrganizationUser';
   public static saveRegistrationDetailsURL: string = ApiService.HOST_URL + '/admin/SaveRegistartion';
   public static saveFacilityTypeURL: string = ApiService.HOST_URL + '/admin/SaveFacilityType';
   public static getAllServicesURL: string = ApiService.HOST_URL + '/admin/GetAllServices';
@@ -20,6 +21,7 @@ export class ApiService {
   public static updateSpecialityDetailsURL: string = ApiService.HOST_URL + '/admin/UpdateSpecialityDetails/';
   public static UploadPrimaryFacilityImageURL: string = ApiService.HOST_URL + '/admin/UploadPrimaryFacilityImage';
   public static savePrimaryFacilityURL: string = ApiService.HOST_URL + '/admin/SavePrimaryFacility';
+  public static getAllRegistrationURL: string = ApiService.HOST_URL + '/admin/GetAllRegisrationList';
 
 
 
@@ -137,7 +139,7 @@ export class ApiService {
   public static getCustomerByIdURL: string = ApiService.HOST_URL + '/admin/GetCustomerById';
   public static getUsedServicesByCustomerURL: string = ApiService.HOST_URL + '/admin/GetUsedServicesByCustomer';
   public static getAllCompletedServicesURL: string = ApiService.HOST_URL + '/admin/GetAllCompletedServices';
-  public static saveAdminLoginURL: string = ApiService.HOST_URL + '/admin/login';
+  // public static saveAdminLoginURL: string = ApiService.HOST_URL + '/admin/login';
   public static ChackForPasswordURL: string = ApiService.HOST_URL + '/admin/ChackForPassword';
   public static saveModeOfPayment: string = ApiService.HOST_URL + '/admin/SaveModeOfPayment';
   public static getMonthlyPayment: string = ApiService.HOST_URL + '/admin/GetMonthlyPayment';
@@ -217,7 +219,7 @@ export class ApiService {
   public static updatePurchaseMembershipStatusURL: string = ApiService.HOST_URL + '/admin/UpdatePurchaseMembershipStatusURL/';
   // Organization Apis
   public static saveRegistrationListURL: string = ApiService.HOST_URL + '/admin/SaveRegistrationList';
-  public static getAllRegistrationURL: string = ApiService.HOST_URL + '/admin/GetAllRegistrationList/';
+  // public static getAllRegistrationURL: string = ApiService.HOST_URL + '/admin/GetAllRegistrationList/';
   public static updateUserDetailsURL: string = ApiService.HOST_URL + '/admin/UpdateUserDetails';
   public static updateCompaniesDetailsURL: string = ApiService.HOST_URL + '/admin/UpdateCompaniesDetails';
   public static updateRegistrationListURL: string = ApiService.HOST_URL + '/admin/updateRegistrationList';

@@ -32,7 +32,7 @@
                                                 <a class="btn"><img src="assets/img/icons/search-normal.svg"
                                                         alt="" /></a>
                                             </div>
-                                            <div class="add-group">
+                                            <div class="add-group" data-bs-tooltip="tooltip" title="Add Facility">
                                                 <a class="btn btn-primary add-pluss ms-2" (click)="addFacilities()"><img
                                                         src="assets/img/icons/plus.svg" alt="" /></a>
                                             </div>
@@ -94,6 +94,7 @@
                                     <div class="form-heading d-flex justify-content-between">
                                         <h4>Add Facilities</h4>
                                         <button type="submit" class="btn btn-primary submit-form mb-4 doctor-submit"
+                                            data-bs-tooltip="tooltip" title=" Facility-list"
                                             (click)="BackToTabel()">Back</button>
                                     </div>
                                 </div>
@@ -326,9 +327,11 @@
 
                                 <div class="col-12">
                                     <div class="doctor-submit text-end">
-                                        <button type="submit" class="btn btn-primary submit-form me-2" (submit)="send()"
+                                        <button type="submit" class="btn btn-primary submit-form me-2"
+                                            data-bs-tooltip="tooltip" title="Submit" (submit)="send()"
                                             [disabled]="FacilityForm.invalid">Submit</button>
-                                        <button type="submit" class="btn btn-primary cancel-form">Cancel</button>
+                                        <button type="submit" class="btn btn-primary cancel-form"
+                                            data-bs-tooltip="tooltip" title="Cancel">Cancel</button>
                                     </div>
                                 </div>
                             </div>

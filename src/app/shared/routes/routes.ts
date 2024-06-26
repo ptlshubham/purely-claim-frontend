@@ -104,6 +104,9 @@ export class routes {
   public static get addPatient(): string {
     return this.baseUrl + '/patient/add-patient';
   }
+  public static get clientApprovalList(): string {
+    return this.baseUrl + '/clients/client-approval-request';
+  }
   public static get editAsset(): string {
     return this.baseUrl + '/assets/edit-asset';
   }

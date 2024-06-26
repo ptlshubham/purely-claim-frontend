@@ -182,13 +182,13 @@ export class FacilityTypeComponent implements OnInit {
 
     });
   }
-  applySearchFilter() {
-    debugger
-    this.facilityList = this.filterfacilityList.filter((facility: any) =>
-      (facility.name).toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
+  // applySearchFilter() {
+  //   debugger
+  //   this.facilityList = this.filterfacilityList.filter((facility: any) =>
+  //     (facility.name).toLowerCase().includes(this.searchQuery.toLowerCase())
+  //   );
 
-  }
+  // }
 
   showDeleteMsg() {
     this.isDeleted = true;

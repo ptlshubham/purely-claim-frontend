@@ -34,7 +34,7 @@
                           (ngModelChange)="searchData(searchDataValue)" />
                         <a class="btn"><img src="assets/img/icons/search-normal.svg" alt="" /></a>
                       </div>
-                      <div class="add-group">
+                      <div class="add-group" data-bs-tooltip="tooltip" title=" Add Employee">
                         <a class="btn btn-primary add-pluss ms-2" (click)="addToList()"><img
                             src="assets/img/icons/plus.svg" alt="" /></a>
                       </div>
@@ -144,7 +144,7 @@
                     <div class="form-heading d-flex justify-content-between">
                       <h4 name="EmployeeDetails">Demographics</h4>
                       <button type="submit" class="btn btn-primary submit-form mb-4 doctor-submit"
-                        (click)="backToTable()">Back</button>
+                        data-bs-tooltip="tooltip" title=" Back User-List" (click)="backToTable()">Back</button>
 
                     </div>
                   </div>
@@ -448,11 +448,12 @@
                   </div> -->
                   <div class="col-12">
                     <div class="doctor-submit text-end">
-                      <button type="submit" class="btn btn-primary submit-form me-2"
-                        [disabled]="validationForm.invalid">
+                      <button type="submit" class="btn btn-primary submit-form me-2" [disabled]="validationForm.invalid"
+                        data-bs-tooltip="tooltip" title="Submit ">
                         Submit
                       </button>
-                      <button type="submit" class="btn btn-primary cancel-form">
+                      <button type="submit" class="btn btn-primary cancel-form" data-bs-tooltip="tooltip"
+                        title=" Cancel registration">
                         Cancel
                       </button>
                     </div>

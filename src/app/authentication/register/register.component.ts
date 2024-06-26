@@ -11,11 +11,10 @@ import { routes } from 'src/app/shared/routes/routes';
 })
 export class RegisterComponent {
   public routes = routes;
-  public CustomControler!: number | string | boolean ;
-  public passwordClass  = false;
-  public confirmPasswordClass  = false
+  public CustomControler!: number | string | boolean;
+  public passwordClass = false;
+  public confirmPasswordClass = false
   public isValidConfirmPassword = false;
-
   form = new FormGroup({
     fullName: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -27,9 +26,9 @@ export class RegisterComponent {
     return this.form.controls;
   }
 
-  constructor(private router:Router,private auth: AuthService) { }
+  constructor(private router: Router, private auth: AuthService) { }
 
-  
+
   submit() {
     if (this.form.value.password != this.form.value.confirmPassword) {
       this.isValidConfirmPassword = true;
@@ -38,10 +37,10 @@ export class RegisterComponent {
       this.auth.login();
     }
   }
-  passwordFunc(){
+  passwordFunc() {
     this.passwordClass = !this.passwordClass
   }
-  confirmPasswordFunc(){
+  confirmPasswordFunc() {
     this.confirmPasswordClass = !this.confirmPasswordClass
   }
 }

@@ -110,7 +110,7 @@
                   </div>
                 </div>
                 <div class="col-12">
-                  <div class="doctor-submit text-end">
+                  <div class="doctor-submit text-end" data-bs-tooltip="tooltip" title="Submit">
                     <button type="submit" class="btn btn-primary submit-form me-2" (click)="saveSpeciality()"
                       [disabled]="specialityForm.invalid">Submit</button>
                   </div>
@@ -160,7 +160,7 @@
                       <th mat-sort-header="taxonomyCode">Taxonomy Code</th>
                       <th mat-sort-header="detail">Detail</th>
                       <th mat-sort-header="notes">Notes</th>
-                      <th mat-sort-header="specialization">
+                      <th mat-sort-header="specialization" data-bs-tooltip="tooltip" title="Delete Speciality">
                         <a><i class="fa fa-trash" aria-hidden="true"></i></a>
                       </th>
                     </tr>
@@ -179,7 +179,7 @@
                       <td>{{data.notes}}</td>
                       <td class="text-right">
                         <a href="javascript:void(0);" [attr.data-bs-target]="'#delete_patient_' + data.id"
-                          data-bs-toggle="modal">
+                          data-bs-toggle="modal" data-bs-tooltip="tooltip" title="Delete Speciality">
                           <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
                       </td>

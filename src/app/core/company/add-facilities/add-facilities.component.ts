@@ -31,7 +31,7 @@ export class AddFacilitiesComponent {
   public selectedValue !: string;
   // validationForm!: FormGroup;
   // submitted = false;
-  facilityList: [];
+  // facilityList: [];
   isOpen: boolean = false;
   specialityList: any = []
   countries: any[] = [];
@@ -115,7 +115,7 @@ export class AddFacilitiesComponent {
     console.log(coun);
   }
   public sortData(sort: Sort): void {
-    const data = this.facilityList.slice();
+    const data = this.FacilityList.slice();
     if (!sort.active || sort.direction === '') {
       this.FacilityList = data;
     } else {

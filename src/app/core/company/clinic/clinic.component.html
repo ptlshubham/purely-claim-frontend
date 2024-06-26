@@ -32,7 +32,8 @@
                                                         alt="" /></a>
                                             </div>
 
-                                            <div class="add-group">
+                                            <div class="add-group" data-bs-tooltip="tooltip"
+                                                title="Add Primary Facility">
                                                 <a class="btn btn-primary add-pluss ms-2" (click)="addclinic()"><img
                                                         src="assets/img/icons/plus.svg" alt="" /></a>
 
@@ -96,7 +97,7 @@
                                     <div class="form-heading d-flex justify-content-between">
                                         <h4>Add Primary Facility</h4>
                                         <button type="submit" class="btn btn-primary submit-form mb-4 doctor-submit"
-                                            (click)="BackToTabel()">Back</button>
+                                            data-bs-tooltip="tooltip" title="Back" (click)="BackToTabel()">Back</button>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
@@ -236,7 +237,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-xl-4">
+                                <!-- <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-top-form">
                                         <label for="avator" class="local-top">Facility Image</label>
                                         <div class="settings-btn upload-files-avator">
@@ -252,7 +253,7 @@
                                                 choose a file</span>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
 
                                 <div class="col-12 col-md-6 col-xl-4">
@@ -331,13 +332,25 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="profile-img-wrap">
+                                        <img class="inline-block" src="assets/img/user.jpg" alt="user">
+                                        <div class="fileupload btn">
+                                            <span class="btn-text">edit</span>
+                                            <input class="upload" type="file" formControlName="Avatar"
+                                                [(ngModel)]="primaryFacilityModel.facilityimage"
+                                                (change)="uploadFile($event)">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-12">
                                     <div class="doctor-submit text-end">
+
                                         <button type="submit" class="btn btn-primary submit-form me-2"
-                                            (click)="SavePrimaryFacilityDeatails()"
-                                            [disabled]="ClinicForm.invalid">Submit</button>
+                                            (click)="SavePrimaryFacilityDeatails()" data-bs-tooltip="tooltip"
+                                            title="Submit" [disabled]="ClinicForm.invalid">Submit</button>
                                         <button type="submit" class="btn btn-primary cancel-form"
+                                            data-bs-tooltip="tooltip" title="Cancel"
                                             (click)="backToTable()">Cancel</button>
                                     </div>
                                 </div>

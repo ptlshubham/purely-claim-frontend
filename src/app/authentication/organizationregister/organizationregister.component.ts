@@ -20,6 +20,7 @@ export class OrganizationregisterComponent implements OnInit {
   signupForm!: FormGroup;
   submitted = false;
   routes: any;
+  isRegister: boolean = false
 
   registrationModel: any = {}
 
@@ -53,9 +54,16 @@ export class OrganizationregisterComponent implements OnInit {
   }
   saveRegistration(): void {
     this.userProfileService.saveregistartion(this.registrationModel).subscribe((data: any) => {
-      if (data = 'success') {
-        this.router.navigate(['/login']);
-      }
+      this.showAddedMsg();
+      // this.router.navigate(['/login']);
     })
+  }
+
+  showAddedMsg() {
+    debugger
+    this.isRegister = true;
+    setTimeout(() => {
+      this.isRegister = false;
+    }, 3000); // or 5000 for 5 seconds
   }
 }

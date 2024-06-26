@@ -31,7 +31,7 @@
                                                 <a class="btn"><img src="assets/img/icons/search-normal.svg"
                                                         alt="" /></a>
                                             </div>
-                                            <div class="add-group">
+                                            <div class="add-group" data-bs-tooltip="tooltip" title="Add patient">
                                                 <a class="btn btn-primary add-pluss ms-2" (click)="addPatient()"><img
                                                         src="assets/img/icons/plus.svg" alt="" /></a>
                                             </div>
@@ -117,7 +117,7 @@
                                     <div class="form-heading d-flex justify-content-between">
                                         <h4>Add Patient</h4>
                                         <button type="submit" class="btn btn-primary submit-form mb-4 doctor-submit"
-                                            (click)="BackToTable()">Back</button>
+                                            data-bs-tooltip="tooltip" title="Back" (click)="BackToTable()">Back</button>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 col-xl-4">
@@ -342,10 +342,12 @@
                                 <div class="col-12">
                                     <div class="doctor-submit text-end">
                                         <button type="submit" class="btn btn-primary submit-form me-2"
-                                            [disabled]="ValidationForm.invalid">
+                                            [disabled]="ValidationForm.invalid" data-bs-tooltip="tooltip"
+                                            title="Submit">
                                             Submit
                                         </button>
-                                        <button type="submit" class="btn btn-primary cancel-form">
+                                        <button type="submit" class="btn btn-primary cancel-form"
+                                            data-bs-tooltip="tooltip" title="Cancel">
                                             Cancel
                                         </button>
                                     </div>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '../shared/gaurd/auth.guard';
 import { CoreComponent } from './core.component';
+import { AuthGuard } from '../shared/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -102,6 +102,12 @@ const routes: Routes = [
         path: 'patient',
         loadChildren: () =>
           import('./patient/patient.module').then((m) => m.PatientModule),
+      },
+
+      {
+        path: 'clients',
+        loadChildren: () =>
+          import('./clients/clients.module').then((m) => m.ClientsModule),
       },
 
       // {

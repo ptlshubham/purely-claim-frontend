@@ -338,6 +338,21 @@ export class DataService {
 
           ],
         },
+        {
+          menuValue: 'clients',
+          hasSubRoute: true,
+          showSubRoute: false,
+          base: 'clients',
+          route: 'clients',
+          img: 'assets/img/icons/menu-icon-01.svg',
+          subMenus: [
+            {
+              menuValue: 'Facility-request',
+              route: routes.clientApprovalList,
+              base: routes.clientApprovalList,
+            },
+          ],
+        },
         // {
         //   menuValue: 'Clinic',
         //   hasSubRoute: true,

@@ -36,4 +36,7 @@ export class ClinicService {
         debugger
         return this.httpClient.post<any>(ApiService.savePrimaryFacilityURL, data);
     }
+    getAllRegistration(): Observable<any> {
+        return this.httpClient.get<any>(ApiService.getAllRegistrationURL);
+    }
 }

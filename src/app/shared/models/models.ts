@@ -33,6 +33,8 @@ export interface staffleave {
   status: string;
   img: string;
 }
+export interface clientApprovalList {
+}
 
 export interface patientList {
 

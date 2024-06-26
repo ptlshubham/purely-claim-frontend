@@ -69,6 +69,7 @@
                             </div>
                             <div class="col-6 doctor-submit text-start">
                                 <button type="submit" class="btn btn-primary submit-form me-2" (click)="SaveFacility()"
+                                    data-bs-tooltip="tooltip" title="Submit"
                                     [disabled]="ValidationForm.invalid">Submit</button>
                             </div>
                         </div>
@@ -111,7 +112,8 @@
                                             <th mat-sort-header="active">Active</th>
                                             <th mat-sort-header="name" style="width: 70%;">Name</th>
 
-                                            <th mat-sort-header="specialization">
+                                            <th mat-sort-header="specialization" data-bs-tooltip="tooltip"
+                                                title="Remove Facility-type">
                                                 <a>
                                                     <i class="fa fa-trash" aria-hidden="true"> </i>
                                                 </a>
@@ -127,7 +129,8 @@
                                                 </div>
                                             </td>
                                             <td>{{s.name}}</td>
-                                            <td class="text-right">
+                                            <td class="text-right" data-bs-tooltip="tooltip"
+                                                title="Remove Facility-type">
                                                 <a href="javascript:void(0);"
                                                     [attr.data-bs-target]="'#delete_patient_' + s.id"
                                                     data-bs-toggle="modal">

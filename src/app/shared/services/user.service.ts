@@ -29,26 +29,6 @@ export class UserProfileService {
     //     return this.http.get<any[]>('assets/json/state-city.json');
     // }
 
-    login(credentials: any): Observable<any> {
-        if (credentials.role == 'admin') {
-            const data = {
-                email: credentials.email,
-                password: credentials.password,
-            };
-
-            return this.http.post<any>(ApiService.saveAdminLoginURL, data);
-        }
-        else {
-            const data = {
-                email: credentials.email,
-                password: credentials.password,
-                role: credentials.role
-            };
-            return this.http.post<any>(ApiService.saveLoginUserURL, data);
-        }
-
-
-    }
     userLogin(email: any, pass: any): Observable<any> {
 
         const data = {

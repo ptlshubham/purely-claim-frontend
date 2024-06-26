@@ -4,3 +4,11 @@
 .alert.fade {
     transition: opacity 2s; /* adjust the duration to your liking */
   }
+
+  .delete-modal {
+    background-color: rgba(0, 0, 0, 0.5); /* adjust the opacity value to your liking */
+  }
+  .delete-modal {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px); /* adjust the blur value to your liking */
+  }
