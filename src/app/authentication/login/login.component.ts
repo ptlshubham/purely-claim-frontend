@@ -24,8 +24,10 @@ export class LoginComponent implements OnInit {
     return this.form.controls;
   }
 
-  constructor(public auth: AuthService) {}
+  constructor(public auth: AuthService) { }
   ngOnInit(): void {
+    localStorage.clear();
+
     if (localStorage.getItem('authenticated')) {
       localStorage.removeItem('authenticated');
     }

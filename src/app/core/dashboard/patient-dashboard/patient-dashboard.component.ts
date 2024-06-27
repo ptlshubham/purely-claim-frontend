@@ -22,7 +22,7 @@ import { Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { pageSelection, apiResultFormat, patientDashboard } from 'src/app/shared/models/models';
 interface data {
-  value: string ;
+  value: string;
 }
 export type ChartOptions = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -75,11 +75,12 @@ export class PatientDashboardComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public carousel2: any = [];
   selected!: Date | null;
-  public selectedValue ! : string ;
-  slideConfig = { slidesToShow: 3, slidesToScroll: 3, centerMode: true, centerPadding: '30px'
-};
+  public selectedValue !: string;
+  slideConfig = {
+    slidesToShow: 3, slidesToScroll: 3, centerMode: true, centerPadding: '30px'
+  };
 
- 
+
   public patientDashboard: Array<patientDashboard> = [];
   dataSource!: MatTableDataSource<patientDashboard>;
 
@@ -110,18 +111,18 @@ export class PatientDashboardComponent implements OnInit {
         },
       },
       grid: {
-        show: true, 
+        show: true,
         xaxis: {
           lines: {
             show: false
-           }
-         },  
-        yaxis: {
-          lines: { 
-            show: true 
-           }
-         },   
+          }
         },
+        yaxis: {
+          lines: {
+            show: true
+          }
+        },
+      },
       dataLabels: {
         enabled: false,
       },
@@ -161,18 +162,18 @@ export class PatientDashboardComponent implements OnInit {
         },
       },
       grid: {
-        show: true, 
+        show: true,
         xaxis: {
           lines: {
             show: false
-           }
-         },  
-        yaxis: {
-          lines: { 
-            show: true 
-           }
-         },   
+          }
         },
+        yaxis: {
+          lines: {
+            show: true
+          }
+        },
+      },
       dataLabels: {
         enabled: false,
       },
@@ -200,18 +201,18 @@ export class PatientDashboardComponent implements OnInit {
         },
       },
       grid: {
-        show: true, 
+        show: true,
         xaxis: {
           lines: {
             show: false
-           }
-         },  
-        yaxis: {
-          lines: { 
-            show: true 
-           }
-         },   
+          }
         },
+        yaxis: {
+          lines: {
+            show: true
+          }
+        },
+      },
       responsive: [
         {
           breakpoint: 480,
@@ -264,18 +265,18 @@ export class PatientDashboardComponent implements OnInit {
         },
       },
       grid: {
-        show: true, 
+        show: true,
         xaxis: {
           lines: {
             show: false
-           }
-         },  
-        yaxis: {
-          lines: { 
-            show: true 
-           }
-         },   
+          }
         },
+        yaxis: {
+          lines: {
+            show: true
+          }
+        },
+      },
       plotOptions: {
         bar: {
           horizontal: false,
@@ -319,18 +320,18 @@ export class PatientDashboardComponent implements OnInit {
         },
       },
       grid: {
-        show: true, 
+        show: true,
         xaxis: {
           lines: {
             show: false
-           }
-         },  
-        yaxis: {
-          lines: { 
-            show: true 
-           }
-         },   
+          }
         },
+        yaxis: {
+          lines: {
+            show: true
+          }
+        },
+      },
       dataLabels: {
         enabled: false,
       },
@@ -349,7 +350,7 @@ export class PatientDashboardComponent implements OnInit {
       },
     };
   }
-  
+
   ngOnInit() {
     this.getTableData();
   }
@@ -362,7 +363,7 @@ export class PatientDashboardComponent implements OnInit {
       data.data.map((res: patientDashboard, index: number) => {
         const serialNumber = index + 1;
         if (index >= this.skip && serialNumber <= this.limit) {
-          
+
           this.patientDashboard.push(res);
           this.serialNumberArray.push(serialNumber);
         }
@@ -444,11 +445,11 @@ export class PatientDashboardComponent implements OnInit {
     }
   }
 
-  
-selecedList: data[] = [
-  {value: '2022'},
-  {value: '2021'},
-  {value: '2020'},
-  {value: '2019'},
-];
+
+  selecedList: data[] = [
+    { value: '2022' },
+    { value: '2021' },
+    { value: '2020' },
+    { value: '2019' },
+  ];
 }
