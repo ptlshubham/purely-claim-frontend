@@ -6,6 +6,7 @@ import { Sort } from '@angular/material/sort';
 import { ClinicService } from 'src/app/shared/services/clinic.service';
 import { LoginService } from 'src/app/shared/services/login.service';
 import Locals from 'ngx-editor/lib/Locals';
+import { UserProfileService } from 'src/app/shared/services/user.service';
 @Component({
   selector: 'app-client-approval-request',
   templateUrl: './client-approval-request.component.html',
@@ -16,7 +17,7 @@ export class ClientApprovalRequestComponent {
   public searchDataValue = '';
   dataSource!: MatTableDataSource<clientApprovalList>;
   public ClientApprovalList: Array<clientApprovalList> = [];
-  clientApprovalList: any = []
+  clientApprovalList: any = [];
   public lastIndex = 0;
   public pageSize = 10;
   public totalData = 0;
@@ -31,15 +32,20 @@ export class ClientApprovalRequestComponent {
   isAdded: boolean = false
   salonid: any = localStorage.getItem('salonid')
   email: any = localStorage.getItem('email')
-
+  facilityRegistrationModel: any = {};
   constructor(
     private ClinicService: ClinicService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private UserProfileService: UserProfileService
   ) {
   }
   ngOnInit(): void {
     this.getAllRegistrationList();
 
+  }
+  saveUserDetails(data: any) {
+    this.UserProfileService.saveUserdata(data).subscribe((res: any) => {
+    })
   }
 
   // approveFacility(data: any) {

@@ -15,6 +15,14 @@ export class LoginService {
         }
         return this.http.post<any>(ApiService.loginOrganizationUserURL, value);
     }
+
+    UserLogin(data: any): Observable<any> {
+        let value = {
+            email: data.email,
+            password: data.password
+        }
+        return this.http.post<any>(ApiService.userLoginURl, value)
+    }
     // sendApprovalEmail(data: any): Observable<any> {
     //     debugger
     //     return this.http.post<any>(ApiService.sendApprovalEmailURL, data);

@@ -11,6 +11,7 @@ export class ApiService {
     })
   }
   public static loginOrganizationUserURL: string = ApiService.HOST_URL + '/admin/LoginOrganizationUser';
+  public static userLoginURl: string = ApiService.HOST_URL + '/admin/UserLogin'
   public static saveRegistrationDetailsURL: string = ApiService.HOST_URL + '/admin/SaveRegistartion';
   public static saveFacilityTypeURL: string = ApiService.HOST_URL + '/admin/SaveFacilityType';
   public static getAllServicesURL: string = ApiService.HOST_URL + '/admin/GetAllServices';
@@ -22,6 +23,7 @@ export class ApiService {
   public static UploadPrimaryFacilityImageURL: string = ApiService.HOST_URL + '/admin/UploadPrimaryFacilityImage';
   public static savePrimaryFacilityURL: string = ApiService.HOST_URL + '/admin/SavePrimaryFacility';
   public static getAllRegistrationURL: string = ApiService.HOST_URL + '/admin/GetAllRegisrationList';
+  public static saveUserdataURL: string = ApiService.HOST_URL + '/admin/SaveUserDetailes';
   // public static sendApprovalEmailURL: string = ApiService.HOST_URL + '/admin/SendApprovalEmail';
 
 

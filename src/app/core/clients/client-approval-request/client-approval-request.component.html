@@ -94,7 +94,6 @@
                                                 title="Approve Facility">
                                                 <i class="feather icon-check "></i>
                                             </a>
-
                                             <a class="btn btn-danger mx-1" href="javascript:void(0);"
                                                 [attr.data-bs-target]="'#rejected_facility' + data.id"
                                                 ngbTooltip="Reject" data-bs-toggle="modal" data-bs-tooltip="tooltip"
@@ -116,7 +115,8 @@
                                                             <a href="javascript:void(0);" class="btn btn-white me-1"
                                                                 data-bs-dismiss="modal">Close</a>
                                                             <button type="submit" class="btn btn-danger"
-                                                                data-bs-dismiss="modal">Submit</button>
+                                                                data-bs-dismiss="modal"
+                                                                (click)="saveUserDetails(data)">Submit</button>
                                                         </div>
                                                     </div>
                                                 </div>

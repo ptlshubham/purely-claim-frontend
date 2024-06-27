@@ -49,7 +49,6 @@ export class UserProfileService {
     //     return this.http.post<any>(ApiService.getOneTimePasswordURL, admin)
     // }
     updatePassword(admin: any): Observable<any> {
-
         return this.http.post<any>(ApiService.updatePasswordURL, admin);
     }
     changePassword(admin: any) {
@@ -59,7 +58,6 @@ export class UserProfileService {
         return this.http.post(ApiService.ChackForPasswordURL, data);
     }
     UpdateLogout(data: any) {
-
         return this.http.post(ApiService.updateLogoutDetailsURL, data);
     }
     UnlockScreen(pass: any, values: any): Observable<any> {
@@ -67,7 +65,6 @@ export class UserProfileService {
             id: values.uid,
             password: pass
         }
-
         return this.http.post<any>(ApiService.UnlockScreenLockURL, data);
     }
     getUserData(id: any) {
@@ -77,5 +74,15 @@ export class UserProfileService {
     saveregistartion(data: any): Observable<any> {
         debugger
         return this.http.post<any>(ApiService.saveRegistrationDetailsURL, data);
+    }
+    saveUserdata(userData: any): Observable<any> {
+        debugger
+        const staticData = {
+            email: userData.email,
+            clinicId: userData.id,
+            password: '123456',
+            role: 'SubAdmin'
+        };
+        return this.http.post<any>(ApiService.saveUserdataURL, staticData);
     }
 }
