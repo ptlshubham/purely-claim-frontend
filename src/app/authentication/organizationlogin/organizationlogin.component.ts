@@ -15,6 +15,8 @@ export class OrganizationloginComponent implements OnInit {
 
 
   public selectedValue !: string;
+  public passwordClass = false;
+  passwordType: string = 'password';
 
   org: UntypedFormGroup;
   submitted: false;
@@ -48,7 +50,11 @@ export class OrganizationloginComponent implements OnInit {
       // }
     })
   }
+  togglePassword() {
+    this.passwordClass = !this.passwordClass;
+    this.passwordType = this.passwordClass ? 'text' : 'password';
 
+  }
 
 
 

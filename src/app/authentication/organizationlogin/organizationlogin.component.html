@@ -41,15 +41,19 @@
                   <div class="form-group">
                     <label for="Password">Password <span class="login-danger">*</span></label>
                     <input class="form-control pass-input" [ngClass]="{
-                        'is-invalid':
-                          f['password'].touched && f['password'].errors
-                      }" formControlName="password" placeholder="Enter Password " />
+                      'is-invalid':
+                        f['password'].touched && f['password'].errors
+                    }" formControlName="password" [type]="passwordType" placeholder="Enter Password " />
                     <div *ngIf="f['password'].touched && f['password'].errors" class="invalid-feedback">
                       <div *ngIf="f['password'].errors?.['required']">
                         Password is required
                       </div>
                     </div>
+                    <span (click)="togglePassword()" (keyup.enter)="togglePassword()"
+                      [ngClass]="passwordClass? 'feather icon-eye' : 'feather icon-eye-off'"
+                      class="profile-views toggle-password" tabindex="0"></span>
                   </div>
+
 
                   <div class="form-group login-btn">
                     <button class="btn btn-primary btn-block" type="submit" (click)="login()">

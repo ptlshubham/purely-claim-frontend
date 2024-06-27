@@ -276,7 +276,7 @@ export class DataService {
           showSubRoute: false,
           base: 'employee',
           route: 'employee',
-          img: 'assets/img/icons/menu-icon-01.svg',
+          img: 'assets/img/icons/menu-icon-08.svg',
           subMenus: [
             {
               menuValue: 'User-list',
@@ -295,7 +295,7 @@ export class DataService {
           menuValue: 'Facility',
           hasSubRoute: true,
           showSubRoute: false,
-          icon: 'fa-cube',
+          icon: 'fas fa-home',
           base: 'facility',
           faIcon: true,
           subMenus: [
@@ -326,7 +326,7 @@ export class DataService {
           menuValue: 'Patient',
           hasSubRoute: true,
           showSubRoute: false,
-          icon: 'fa-cube',
+          icon: 'fa-solid fa-bed-pulse',
           base: 'Patient',
           faIcon: true,
           subMenus: [
@@ -339,12 +339,12 @@ export class DataService {
           ],
         },
         {
-          menuValue: 'clients',
+          menuValue: 'Facility-Request',
           hasSubRoute: true,
           showSubRoute: false,
           base: 'clients',
           route: 'clients',
-          img: 'assets/img/icons/menu-icon-01.svg',
+          img: 'assets/img/icons/menu-icon-03.svg',
           subMenus: [
             {
               menuValue: 'Facility-request',
