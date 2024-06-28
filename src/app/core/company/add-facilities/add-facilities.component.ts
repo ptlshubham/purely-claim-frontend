@@ -7,9 +7,10 @@ import { Sort } from '@angular/material/sort';
 import { facilityList } from 'src/app/shared/models/models';
 import { MatTableDataSource } from '@angular/material/table';
 import { FacilitiesService } from 'src/app/shared/services/facilities.services';
-
+import * as moment from 'moment-timezone';
 interface data {
   value: string;
+  label: string;
 }
 interface coun {
   value: any;
@@ -38,13 +39,20 @@ export class AddFacilitiesComponent {
   states: any[] = [];
   cities: any[] = [];
   allData: any = [];
+  // selectedList5: data[] = [];
+  // timezones: any[] = []
   selectedList5: data[] = [];
-  timezones: any[] = []
-
   PlaceOfService: data[] = [
-    { value: 'Home' },
-    { value: 'Office' },
+    {
+      value: 'Home',
+      label: ''
+    },
+    {
+      value: 'Office',
+      label: ''
+    },
   ]
+
   public FacilityList: Array<facilityList> = [];
   dataSource!: MatTableDataSource<facilityList>;
   public searchDataValue = '';
@@ -53,6 +61,9 @@ export class AddFacilitiesComponent {
     private ClinicService: ClinicService,
     private facilitiesService: FacilitiesService
   ) {
+    moment.tz.names().forEach((timezone: any) => {
+      this.selectedList5.push({ value: timezone, label: timezone });
+    });
     this.ClinicService.getAllAddressData().then((data: any) => {
       this.allData = data;
       this.countries = [...new Set(data.map((item: any) => item.country))];
@@ -62,9 +73,7 @@ export class AddFacilitiesComponent {
   ngOnInit(): void {
     this.validateForm();
     this.getAllSpeciality();
-    this.gettimezones();
-
-
+    // this.gettimezones();
   }
 
   private validateForm(): void {
@@ -85,13 +94,14 @@ export class AddFacilitiesComponent {
       Postal: new FormControl('', Validators.required),
     })
   }
-  gettimezones() {
-    debugger
-    this.ClinicService.getData().subscribe((data: any) => {
-      this.selectedList5 = data;
-      console.log(data)
-    });
-  }
+
+  // gettimezones() {
+  //   debugger
+  //   this.ClinicService.getData().subscribe((data: any) => {
+  //     this.selectedList5 = data;
+  //     console.log(data)
+  //   });
+  // }
   onCountryChange(country: string) {
     this.states = [...new Set(this.allData.filter((item: any) => item.country === country).map((item: any) => item.subcountry))];
     this.cities = [];

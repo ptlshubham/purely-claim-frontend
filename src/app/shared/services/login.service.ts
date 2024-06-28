@@ -23,8 +23,4 @@ export class LoginService {
         }
         return this.http.post<any>(ApiService.userLoginURl, value)
     }
-    // sendApprovalEmail(data: any): Observable<any> {
-    //     debugger
-    //     return this.http.post<any>(ApiService.sendApprovalEmailURL, data);
-    // }
 }

@@ -42,7 +42,6 @@ export class OrganizationloginComponent implements OnInit {
       localStorage.setItem('UserName', data[0].firstname + ' ' + data[0].lastname);//{ encrypt: true }//
       localStorage.setItem('role', data[0].role);//{ encrypt: true }//
       localStorage.setItem('authenticationToken', data[0].token);//{ encrypt: true }//
-      localStorage.setItem('salonid', data[0].salonid);//{ encrypt: true }//
       localStorage.setItem('email', data[0].email);//{ encrypt: true }//
 
 

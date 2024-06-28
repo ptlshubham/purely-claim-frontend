@@ -256,16 +256,16 @@ export class DataService {
               route: routes.adminDashboard,
               base: routes.adminDashboard,
             },
-            {
-              menuValue: 'Doctor Dashboard',
-              route: routes.doctorDashboard,
-              base: routes.doctorDashboard,
-            },
-            {
-              menuValue: 'Patient Dashboard',
-              route: routes.patientDashboard,
-              base: routes.patientDashboard,
-            },
+            // {
+            //   menuValue: 'Doctor Dashboard',
+            //   route: routes.doctorDashboard,
+            //   base: routes.doctorDashboard,
+            // },
+            // {
+            //   menuValue: 'Patient Dashboard',
+            //   route: routes.patientDashboard,
+            //   base: routes.patientDashboard,
+            // },
           ],
         },
 
@@ -408,7 +408,7 @@ export class DataService {
         //       base: routes.editDoctor,
         //     },
         //     {
-        //       menuValue: 'Doctor Profile',
+        //       menuValue: 'Doctor Profile',a
         //       route: routes.doctorProfile,
         //       base: routes.doctorProfile,
         //     },
