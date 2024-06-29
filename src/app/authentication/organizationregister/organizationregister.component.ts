@@ -16,12 +16,10 @@ export class OrganizationregisterComponent implements OnInit {
   specialityList: any = [];
   public selectedValue !: string;
   dataSource!: MatTableDataSource<facilityList>;
-
   signupForm!: FormGroup;
   submitted = false;
   routes: any;
   isRegister: boolean = false
-
   registrationModel: any = {}
 
   constructor(
@@ -47,7 +45,6 @@ export class OrganizationregisterComponent implements OnInit {
     })
   }
   getAllSpeciality() {
-    debugger;
     this.facilitiesService.getAllSpecialityDetails().subscribe((res: any) => {
       this.specialityList = res;
     });

@@ -48,18 +48,7 @@ export class ClientApprovalRequestComponent {
     })
   }
 
-  // approveFacility(data: any) {
-  //   debugger
-  //   const sendData = {
-  //     email: data.email,
-  //     facilityId: data.id
-  //   };
-  //   // Call the API to send the approval email
-  //   this.loginService.sendApprovalEmail(sendData).subscribe(response => {
-  //     console.log(response);
-  //     // Show a success message or update the UI accordingly
-  //   });
-  // }
+
 
   getAllRegistrationList() {
     this.ClinicService.getAllRegistration().subscribe((res: any) => {

@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
   loginFormSubmit() {
     this.loginService.UserLogin(this.form.value).subscribe(data => {
       debugger
+      localStorage.setItem('UserName', data[0].firstname + ' ' + data[0].lastname);//{ encrypt: true }//
       localStorage.setItem('email', data[0].email);//{ encrypt: true }//
       localStorage.setItem('role', data[0].role);//{ encrypt: true }//
       localStorage.setItem('authenticationToken', data[0].token);//{ encrypt: true }//

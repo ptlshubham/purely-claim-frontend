@@ -76,12 +76,13 @@ export class UserProfileService {
         return this.http.post<any>(ApiService.saveRegistrationDetailsURL, data);
     }
     saveUserdata(userData: any): Observable<any> {
-        debugger
         const staticData = {
+            firstname: userData.firstname,
+            lastname: userData.lastname,
             email: userData.email,
             clinicId: userData.id,
             password: '123456',
-            role: 'SubAdmin'
+            role: 'SubAdmin',
         };
         return this.http.post<any>(ApiService.saveUserdataURL, staticData);
     }
