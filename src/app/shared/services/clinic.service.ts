@@ -8,6 +8,12 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class ClinicService {
+    countries: any[] = [];
+    states: any[] = [];
+    cities: any[] = [];
+    constructor(
+        private httpClient: HttpClient
+    ) { }
     async getAllAddressData() {
         const apiUrl = 'https://pkgstore.datahub.io/core/world-cities/world-cities_json/data/5b3dd46ad10990bca47b04b4739a02ba/world-cities_json.json';
         try {
@@ -22,18 +28,13 @@ export class ClinicService {
             console.error('Error fetching the data:', error);
         }
     }
-    constructor(
-        private httpClient: HttpClient
-    ) { }
-    private apiUrl = 'https://worldtimeapi.org/api/timezone';
-    getData(): Observable<any> {
-        return this.httpClient.get(this.apiUrl);
+    public getTimeZone(): Observable<any[]> {
+        return this.httpClient.get<any[]>('assets/json/timezone.json');
     }
     uploadFacilityImage(img: any): Observable<any> {
         return this.httpClient.post<any>(ApiService.UploadPrimaryFacilityImageURL, img);
     }
     savePrimaryFacility(data: any): Observable<any> {
-        debugger
         return this.httpClient.post<any>(ApiService.savePrimaryFacilityURL, data);
     }
     getAllRegistration(): Observable<any> {

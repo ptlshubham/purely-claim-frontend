@@ -31,7 +31,7 @@ export class FacilitiesService {
         return this.httpClient.post<any>(ApiService.saveFacilityTypeURL, data);
     }
     getAllFacilityTypeList(): Observable<any> {
-        return this.httpClient.get<any>(ApiService.getAllServicesURL);
+        return this.httpClient.get<any>(ApiService.getAllFacilityURL);
     }
     removeFacilityType(id: any): Observable<any> {
         debugger
@@ -50,5 +50,8 @@ export class FacilitiesService {
     }
     updateSpecialityDetails(admin: any): Observable<any> {
         return this.httpClient.post<any>(ApiService.updateSpecialityDetailsURL, admin);
+    }
+    getAllPrimaryFacility(): Observable<any> {
+        return this.httpClient.get<any>(ApiService.getAllPrimaryFacility);
     }
 }

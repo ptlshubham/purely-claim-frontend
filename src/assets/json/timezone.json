@@ -1,5 +1,4 @@
 {
-    "USA": {
       "Alabama": "usa/alabama",
       "Alaska": "usa/alaska",
       "Arizona": "usa/arizona",
@@ -51,4 +50,3 @@
       "Wisconsin": "usa/wisconsin",
       "Wyoming": "usa/wyoming"
     }
-  }

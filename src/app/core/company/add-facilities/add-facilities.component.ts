@@ -7,7 +7,6 @@ import { Sort } from '@angular/material/sort';
 import { facilityList } from 'src/app/shared/models/models';
 import { MatTableDataSource } from '@angular/material/table';
 import { FacilitiesService } from 'src/app/shared/services/facilities.services';
-import * as moment from 'moment-timezone';
 interface data {
   value: string;
   label: string;
@@ -39,6 +38,7 @@ export class AddFacilitiesComponent {
   states: any[] = [];
   cities: any[] = [];
   allData: any = [];
+  facilityList: any = [];
   // selectedList5: data[] = [];
   // timezones: any[] = []
   selectedList5: data[] = [];
@@ -61,18 +61,12 @@ export class AddFacilitiesComponent {
     private ClinicService: ClinicService,
     private facilitiesService: FacilitiesService
   ) {
-    moment.tz.names().forEach((timezone: any) => {
-      this.selectedList5.push({ value: timezone, label: timezone });
-    });
-    this.ClinicService.getAllAddressData().then((data: any) => {
-      this.allData = data;
-      this.countries = [...new Set(data.map((item: any) => item.country))];
-    });
   }
 
   ngOnInit(): void {
     this.validateForm();
     this.getAllSpeciality();
+    this.getAllfacilityType();
     // this.gettimezones();
   }
 
@@ -83,6 +77,7 @@ export class AddFacilitiesComponent {
       NPI: new FormControl('', Validators.required),
       pos: new FormControl('', Validators.required),
       Speciality: new FormControl('', Validators.required),
+      facilitytype: new FormControl('', Validators.required),
       Taxid: new FormControl('', Validators.required),
       Email: new FormControl('', Validators.required),
       Contact: new FormControl('', Validators.required),
@@ -95,13 +90,6 @@ export class AddFacilitiesComponent {
     })
   }
 
-  // gettimezones() {
-  //   debugger
-  //   this.ClinicService.getData().subscribe((data: any) => {
-  //     this.selectedList5 = data;
-  //     console.log(data)
-  //   });
-  // }
   onCountryChange(country: string) {
     this.states = [...new Set(this.allData.filter((item: any) => item.country === country).map((item: any) => item.subcountry))];
     this.cities = [];
@@ -145,6 +133,12 @@ export class AddFacilitiesComponent {
     debugger;
     this.facilitiesService.getAllSpecialityDetails().subscribe((res: any) => {
       this.specialityList = res;
+    });
+  }
+  getAllfacilityType() {
+    this.facilitiesService.getAllFacilityTypeList().subscribe((res: any) => {
+      this.facilityList = res;
+
     });
   }
 }

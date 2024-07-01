@@ -56,29 +56,85 @@
                                             </div>
                                         </th>
                                         <th mat-sort-header="name">Primary Facility Name</th>
-                                        <th mat-sort-header="specialization">Specialization</th>
+                                        <th mat-sort-header="FacilityType">Facility Type</th>
+                                        <th mat-sort-header="specialization">Speciality</th>
                                         <th mat-sort-header="mobile">Contact</th>
                                         <th mat-sort-header="email">Email</th>
-                                        <div>
-                                            <th mat-sort-header=" add-facilities">
-                                                <a>
-                                                    <i class="fa fa-trash" aria-hidden="true"> </i>
-                                                </a>
-                                            </th>
-                                            <th mat-sort-header="add-facilities ">
-                                                <a>
-                                                    <i class="fa-solid fa-pen-to-square "></i>
-                                                </a>
-                                            </th>
-                                        </div>
+                                        <th mat-sort-header=" add-facilities">
+                                            <a>
+                                                <i class="fa fa-trash" aria-hidden="true"> </i>
+                                            </a>
+                                        </th>
+                                        <th mat-sort-header="add-facilities ">
+                                            <a>
+                                                <i class="fa-solid fa-pen-to-square "></i>
+                                            </a>
+                                        </th>
                                     </tr>
                                 </thead>
-
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                    <a class="dropdown-item" href="javascript:void(0);"><i
-                                            class="fa fa-trash-o m-r-5"></i> Delete</a>
-                                </div>
+                                <tbody>
+                                    <tr *ngFor="let data of primaryfacility">
+                                        <td>
+                                            <!-- [(ngModel)]="specialityModel.isactive" -->
+                                            <div class="form-check check-tables">
+                                                <input class="form-check-input" type="checkbox" checked>
+                                            </div>
+                                        </td>
+                                        <td>{{data.name}}</td>
+                                        <td>{{data.facilitytype}}</td>
+                                        <td>{{data.speciaity}}</td>
+                                        <td>{{data.contact}}</td>
+                                        <td>{{data.email}}</td>
+                                        <td class="text-right" data-bs-tooltip="tooltip" title="Remove Facility-type">
+                                            <a href="javascript:void(0);"
+                                                [attr.data-bs-target]="'#deletePrimaryFacility' + data.id"
+                                                data-bs-toggle="modal">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                        <td class="text-right" data-bs-tooltip="tooltip" title="Remove Facility-type">
+                                            <a href="javascript:void(0);"
+                                                [attr.data-bs-target]="'#delete_patient_' + data.id"
+                                                data-bs-toggle="modal">
+                                                <i class="fa fa-pen-to-square" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                        <div [id]="'deletePrimaryFacility' + data.id" class="modal fade delete-modal"
+                                            role="dialog">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-body text-center">
+                                                        <img src="assets/img/sent.png" alt="" width="50" height="46">
+                                                        <h3>Are you sure want to delete this?</h3>
+                                                        <div class="m-t-20">
+                                                            <a href="javascript:void(0);" class="btn btn-white me-1"
+                                                                data-bs-dismiss="modal">Close</a>
+                                                            <button type="submit" class="btn btn-danger"
+                                                                data-bs-dismiss="modal">Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div [id]="'delete_patient_' + data.id" class="modal fade delete-modal"
+                                            role="dialog">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-body text-center">
+                                                        <img src="assets/img/sent.png" alt="" width="50" height="46">
+                                                        <h3>Are you sure want to delete this?</h3>
+                                                        <div class="m-t-20">
+                                                            <a href="javascript:void(0);" class="btn btn-white me-1"
+                                                                data-bs-dismiss="modal">Close</a>
+                                                            <button type="submit" class="btn btn-danger"
+                                                                data-bs-dismiss="modal">Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -119,10 +175,10 @@
                                     <div class="form-group local-forms">
                                         <label for="Timezone">Timezone <span class="login-danger">*</span></label>
                                         <mat-select class="form-control select" placeholder="Select Timezone"
-                                            formControlName="Timezone" [(ngModel)]="primaryFacilityModel.timezone"
-                                            [ngClass]="{'is-invalid': ClinicForm.controls['Timezone'].touched && ClinicForm.controls['Timezone'].errors}">
-                                            <mat-option *ngFor="let timezone of selectedList5" [value]="timezone">
-                                                {{timezone}}
+                                            formControlName="Timezone" [(ngModel)]="primaryFacilityModel.timezone">
+                                            <mat-option *ngFor="let stateData of selectedList5"
+                                                [value]="stateData.value">
+                                                {{ stateData.value }}
                                             </mat-option>
                                         </mat-select>
                                         <div class="text-danger" *ngIf="ClinicForm.controls['Timezone'].touched">
@@ -176,6 +232,24 @@
                                         <div class="text-danger" *ngIf="ClinicForm.controls['Speciality'].touched">
                                             <span *ngIf="ClinicForm.controls['Speciality'].errors?.['required']">Select
                                                 Speciality*</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="facilitytype">Facility Type </label>
+                                        <mat-select class="form-control select" placeholder="Select Facility Type"
+                                            formControlName="facilitytype"
+                                            [(ngModel)]="primaryFacilityModel.facilitytype"
+                                            [ngClass]="{'is-invalid': ClinicForm.controls['facilitytype'].touched && ClinicForm.controls['facilitytype'].errors}">
+                                            <mat-option *ngFor="let data of facilityList" [value]="data.name">
+                                                {{data.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <div class="text-danger" *ngIf="ClinicForm.controls['facilitytype'].touched">
+                                            <span
+                                                *ngIf="ClinicForm.controls['facilitytype'].errors?.['required']">Select
+                                                Facility Type*</span>
                                         </div>
                                     </div>
                                 </div>
@@ -292,7 +366,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">
                                         <label for="city">City <span class="login-danger">*</span></label>
@@ -339,14 +412,13 @@
                                         <div class="fileupload btn">
                                             <span class="btn-text">edit</span>
                                             <input class="upload" type="file" formControlName="Avatar"
-                                                [(ngModel)]="primaryFacilityModel.facilityimage"
                                                 (change)="uploadFile($event)">
+                                            <!-- [(ngModel)]="primaryFacilityModel.facilityimage" -->
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="doctor-submit text-end">
-
                                         <button type="submit" class="btn btn-primary submit-form me-2"
                                             (click)="SavePrimaryFacilityDeatails()" data-bs-tooltip="tooltip"
                                             title="Submit" [disabled]="ClinicForm.invalid">Submit</button>

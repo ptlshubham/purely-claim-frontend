@@ -14,7 +14,7 @@ export class ApiService {
   public static userLoginURl: string = ApiService.HOST_URL + '/admin/UserLogin'
   public static saveRegistrationDetailsURL: string = ApiService.HOST_URL + '/admin/SaveRegistartion';
   public static saveFacilityTypeURL: string = ApiService.HOST_URL + '/admin/SaveFacilityType';
-  public static getAllServicesURL: string = ApiService.HOST_URL + '/admin/GetAllServices';
+  public static getAllFacilityURL: string = ApiService.HOST_URL + '/admin/GetAllFacility';
   public static removeFacilityTypeURL: string = ApiService.HOST_URL + '/admin/RemoveFacilityType/';
   public static saveSpecialityURL: string = ApiService.HOST_URL + '/admin/SaveSpeciality';
   public static getAllSpecialityDetailsURL: string = ApiService.HOST_URL + '/admin/GetAllSpecialityDetails';
@@ -24,6 +24,7 @@ export class ApiService {
   public static savePrimaryFacilityURL: string = ApiService.HOST_URL + '/admin/SavePrimaryFacility';
   public static getAllRegistrationURL: string = ApiService.HOST_URL + '/admin/GetAllRegisrationList';
   public static saveUserdataURL: string = ApiService.HOST_URL + '/admin/SaveUserDetailes';
+  public static getAllPrimaryFacility: string = ApiService.HOST_URL + '/admin/GetPrimaryFacility';
   // public static sendApprovalEmailURL: string = ApiService.HOST_URL + '/admin/SendApprovalEmail';
 
 

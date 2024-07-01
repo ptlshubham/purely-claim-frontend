@@ -12,7 +12,7 @@ export class employeeService {
         private httpClient: HttpClient
     ) { }
     getAllEmployeeTypeList(): Observable<any> {
-        return this.httpClient.get<any>(ApiService.getAllServicesURL);
+        return this.httpClient.get<any>(ApiService.getAllFacilityURL);
     }
     removeFacilityType(id: any): Observable<any> {
         debugger

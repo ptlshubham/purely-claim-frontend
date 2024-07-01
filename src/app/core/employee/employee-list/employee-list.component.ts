@@ -108,10 +108,10 @@ export class EmployeeListComponent implements OnInit {
   constructor(
     private clinicService: ClinicService
   ) {
-    this.clinicService.getAllAddressData().then((data: any) => {
-      this.allData = data;
-      this.countries = [...new Set(data.map((item: any) => item.country))];
-    });
+    // this.clinicService.getAllAddressData().then((data: any) => {
+    //   this.allData = data;
+    //   this.countries = [...new Set(data.map((item: any) => item.country))];
+    // });
   }
   get f() { return this.validationForm.controls; }
 

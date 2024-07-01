@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { getTimezonesForCountry } from 'countries-and-timezones';
+import { getTimezonesForCountry, getAllTimezones } from 'countries-and-timezones';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { routes } from 'src/app/shared/routes/routes';
 import { Sort } from '@angular/material/sort';
@@ -11,8 +11,6 @@ interface data {
 }
 
 let coun: any;
-coun = getTimezonesForCountry('US');
-console.log(coun);
 @Component({
   selector: 'app-clinic',
   templateUrl: './clinic.component.html',
@@ -41,8 +39,15 @@ export class ClinicComponent {
   cardImageBase64: any;
   clogo: any = null;
   editFile: boolean = true;
-  public ClinicForm: FormGroup;
-
+  ClinicForm: FormGroup;
+  facilityList: any = []
+  clinicid: any = localStorage.getItem('clinicid');
+  userid: any = localStorage.getItem('userid');
+  role: any = localStorage.getItem('role');
+  stateData: any = []
+  primaryfacility: any = []
+  selectedCountry: string = '';
+  statesByCountry: { [country: string]: Set<string> } = {};
   public sortData(sort: Sort): void {
     const data = this.ClinicList.slice();
     if (!sort.active || sort.direction === '') {
@@ -56,30 +61,34 @@ export class ClinicComponent {
     }
   }
   constructor(
-    private ClinicService: ClinicService,
-    private FacilitiesService: FacilitiesService
+    private clinicService: ClinicService,
+    private facilitiesService: FacilitiesService,
 
   ) {
-    this.ClinicService.getAllAddressData().then((data: any) => {
+    this.clinicService.getAllAddressData().then((data: any) => {
       this.allData = data;
+      // Remove duplicate countries
       this.countries = [...new Set(data.map((item: any) => item.country))];
+      // Prepare data with unique states and cities
+      this.statesByCountry = {};
+      this.allData.forEach((item: any) => {
+        if (!this.statesByCountry[item.country]) {
+          this.statesByCountry[item.country] = new Set();
+        }
+        this.statesByCountry[item.country].add(item.subcountry);
+      });
     });
   }
   ngOnInit(): void {
     this.validateForm();
     this.getAllSpeciality();
-    this.gettimezones();
-
-    // this.validationForm = this.formBuilder.group({
-    //   name: ['', [Validators.required]]
-    // });
+    this.getAllfacilityType();
+    this.getStateList();
+    this.getAllPrimaryFacilityList();
   }
-  // get f() { return this.validationForm.controls; }
-  gettimezones() {
-    debugger
-    this.ClinicService.getData().subscribe((data: any) => {
-      this.selectedList5 = data;
-      console.log(data)
+  getStateList() {
+    this.clinicService.getTimeZone().subscribe((res: any) => {
+      this.selectedList5 = Object.keys(res).map(key => ({ value: `usa/${key.toLowerCase()}`, label: key }));
     });
   }
   private validateForm(): void {
@@ -87,6 +96,7 @@ export class ClinicComponent {
       Name: new FormControl('', Validators.required),
       Timezone: new FormControl('', Validators.required),
       Speciality: new FormControl('', Validators.required),
+      facilitytype: new FormControl('', Validators.required),
       Email: new FormControl('', Validators.required),
       Contact: new FormControl('', Validators.required),
       Address: new FormControl('', Validators.required),
@@ -103,14 +113,23 @@ export class ClinicComponent {
 
   }
   onCountryChange(country: string) {
-    this.states = this.allData.filter((item: any) => item.country === country).map((item: any) => item.subcountry);
-    this.cities = [];
+    this.selectedCountry = country;
+    if (this.statesByCountry[country]) {
+      this.states = [...this.statesByCountry[country]];
+    } else {
+      this.states = [];
+    }
+    this.cities = []; // Clear cities when country changes
     this.ClinicForm.controls['State'].reset();
     this.ClinicForm.controls['City'].reset();
   }
 
   onStateChange(state: string) {
-    this.cities = this.allData.filter((item: any) => item.subcountry === state);
+    if (state && this.selectedCountry) {
+      this.cities = this.allData.filter((item: any) => item.subcountry === state && item.country === this.selectedCountry);
+    } else {
+      this.cities = [];
+    }
     this.ClinicForm.controls['City'].reset();
   }
 
@@ -124,7 +143,7 @@ export class ClinicComponent {
     this.isOpen = true;
   }
   getAllSpeciality() {
-    this.FacilitiesService.getAllSpecialityDetails().subscribe((res: any) => {
+    this.facilitiesService.getAllSpecialityDetails().subscribe((res: any) => {
       this.SpecialityList = res;
     });
   }
@@ -148,7 +167,7 @@ export class ClinicComponent {
           this.cardImageBase64 = imgBase64Path;
           const formdata = new FormData();
           formdata.append('file', file);
-          this.ClinicService.uploadFacilityImage(formdata).subscribe((response) => {
+          this.clinicService.uploadFacilityImage(formdata).subscribe((response) => {
             this.primaryFacilityimg = response;
             debugger
           });
@@ -157,11 +176,23 @@ export class ClinicComponent {
     };
   }
   SavePrimaryFacilityDeatails() {
-    this.primaryFacilityModel.facilityimage = this.primaryFacilityimg
-    debugger
-    this.ClinicService.savePrimaryFacility(this.primaryFacilityModel).subscribe((data: any) => {
+    this.primaryFacilityModel.userid = this.userid;
+    this.primaryFacilityModel.clinicid = this.clinicid;
+    this.primaryFacilityModel.facilityimage = this.primaryFacilityimg;
+    this.clinicService.savePrimaryFacility(this.primaryFacilityModel).subscribe((data: any) => {
       this.primaryfacilityList = data;
       this.primaryFacilityModel = {};
     })
+  }
+  getAllfacilityType() {
+    this.facilitiesService.getAllFacilityTypeList().subscribe((res: any) => {
+      this.facilityList = res;
+
+    });
+  }
+  getAllPrimaryFacilityList() {
+    this.facilitiesService.getAllPrimaryFacility().subscribe((res: any) => {
+      this.primaryfacility = res;
+    });
   }
 }

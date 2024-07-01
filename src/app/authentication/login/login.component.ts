@@ -50,7 +50,9 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('email', data[0].email);//{ encrypt: true }//
       localStorage.setItem('role', data[0].role);//{ encrypt: true }//
       localStorage.setItem('authenticationToken', data[0].token);//{ encrypt: true }//
-      // localStorage.setItem('salonid', data[0].salonid);//{ encrypt: true }//
+      localStorage.setItem('clinicid', data[0].clinicid);//{ encrypt: true }//
+      localStorage.setItem('userid', data[0].userid);//{ encrypt: true }//
+
       // localStorage.setItem('email', data[0].email);//{ encrypt: true }//
       this.router.navigate(['/company/add-facilities']);
       // }

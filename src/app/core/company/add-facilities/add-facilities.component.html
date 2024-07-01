@@ -184,6 +184,23 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="facilitytype">Facility Type </label>
+                                        <mat-select class="form-control select" placeholder="Select Facility Type"
+                                            formControlName="facilitytype"
+                                            [ngClass]="{'is-invalid': FacilityForm.controls['facilitytype'].touched && FacilityForm.controls['facilitytype'].errors}">
+                                            <mat-option *ngFor="let data of facilityList" [value]="data.name">
+                                                {{data.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <div class="text-danger" *ngIf="FacilityForm.controls['facilitytype'].touched">
+                                            <span
+                                                *ngIf="FacilityForm.controls['facilitytype'].errors?.['required']">Select
+                                                Facility Type*</span>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="col-12 col-md-6 col-xl-4">
                                     <div class="form-group local-forms">

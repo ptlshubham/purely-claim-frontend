@@ -56,10 +56,10 @@ export class AddPatientComponent {
   constructor(
     private ClinicService: ClinicService,
   ) {
-    this.ClinicService.getAllAddressData().then((data: any) => {
-      this.allData = data;
-      this.countries = [...new Set(data.map((item: any) => item.country))];
-    });
+    // this.ClinicService.getAllAddressData().then((data: any) => {
+    //   this.allData = data;
+    //   this.countries = [...new Set(data.map((item: any) => item.country))];
+    // });
   }
   onCountryChange(country: string) {
     this.states = this.allData.filter((item: any) => item.country === country).map((item: any) => item.subcountry);
